@@ -1,0 +1,19 @@
+{
+  "name": "@dfyne/liquid",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "tsx src/build.ts",
+    "test": "vitest run",
+    "clean": "echo 'nothing to clean'"
+  },
+  "dependencies": {
+    "@dfyne/tokens": "workspace:*"
+  },
+  "devDependencies": {
+    "tsx": "^4",
+    "typescript": "^5",
+    "vitest": "^3"
+  }
+}
