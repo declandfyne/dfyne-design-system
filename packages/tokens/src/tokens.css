@@ -1,0 +1,154 @@
+:root {
+  /* ------------------------------------------------------------------ */
+  /*  Colors — Backgrounds                                               */
+  /* ------------------------------------------------------------------ */
+  --color-bg-primary: #ffffff;
+  --color-bg-subtle: #f5f5f5;
+  --color-bg-muted: #f4f4f4;
+  --color-bg-soft: #f6f6f6;
+  --color-bg-wash: #f9f9f9;
+  --color-bg-input: #fcfcfc;
+  --color-bg-inverse: #0a0a0a;
+  --color-bg-dark: #333333;
+
+  /* ------------------------------------------------------------------ */
+  /*  Colors — Text                                                      */
+  /* ------------------------------------------------------------------ */
+  --color-text-primary: #0a0a0a;
+  --color-text-body: #1c1d1d;
+  --color-text-secondary: #555555;
+  --color-text-muted: #888888;
+  --color-text-disabled: #bbbbbb;
+  --color-text-subtle: #6a6a6a;
+  --color-text-inverse: #ffffff;
+
+  /* ------------------------------------------------------------------ */
+  /*  Colors — Borders                                                   */
+  /* ------------------------------------------------------------------ */
+  --color-border-default: #e7e7e7;
+  --color-border-soft: #f0f0f0;
+  --color-border-medium: #cccccc;
+  --color-border-strong: #d9d9d9;
+  --color-border-footer: #e8e8e1;
+  --color-border-input: #dddddd;
+
+  /* ------------------------------------------------------------------ */
+  /*  Colors — Overlays                                                  */
+  /* ------------------------------------------------------------------ */
+  --color-overlay-light: rgba(0, 0, 0, 0.12);
+  --color-overlay-medium: rgba(0, 0, 0, 0.20);
+  --color-overlay-heavy: rgba(0, 0, 0, 0.55);
+  --color-overlay-bottom: rgba(0, 0, 0, 0.60);
+
+  /* ------------------------------------------------------------------ */
+  /*  Typography — Font Family                                           */
+  /* ------------------------------------------------------------------ */
+  --font-body: "Raleway", Arial, Helvetica, sans-serif;
+  --font-display: "Raleway", Arial, Helvetica, sans-serif;
+
+  /* ------------------------------------------------------------------ */
+  /*  Typography — Font Size                                             */
+  /* ------------------------------------------------------------------ */
+  --text-2xs: 7px;
+  --text-xs: 8px;
+  --text-sm: 9px;
+  --text-base: 10px;
+  --text-md: 11px;
+  --text-lg: 12px;
+  --text-xl: 13px;
+  --text-2xl: 14px;
+  --text-3xl: 18px;
+  --text-display-sm: 34px;
+  --text-display-md: 46px;
+  --text-display-lg: 70px;
+  --text-display-xl: 84px;
+
+  /* ------------------------------------------------------------------ */
+  /*  Typography — Font Weight                                           */
+  /* ------------------------------------------------------------------ */
+  --weight-normal: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+
+  /* ------------------------------------------------------------------ */
+  /*  Typography — Letter Spacing                                        */
+  /* ------------------------------------------------------------------ */
+  --tracking-tight: 0.02em;
+  --tracking-normal: 0.3px;
+  --tracking-wide: 1.2px;
+  --tracking-wider: 1.5px;
+  --tracking-widest: 2.8px;
+
+  /* ------------------------------------------------------------------ */
+  /*  Spacing                                                            */
+  /* ------------------------------------------------------------------ */
+  --space-1: 2px;
+  --space-2: 4px;
+  --space-3: 6px;
+  --space-4: 8px;
+  --space-5: 10px;
+  --space-6: 12px;
+  --space-7: 14px;
+  --space-8: 16px;
+  --space-9: 20px;
+  --space-10: 24px;
+  --space-11: 28px;
+  --space-12: 32px;
+  --space-13: 36px;
+  --space-14: 40px;
+
+  /* ------------------------------------------------------------------ */
+  /*  Border Radius                                                      */
+  /* ------------------------------------------------------------------ */
+  --radius-none: 0px;
+  --radius-xs: 1px;
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 8px;
+  --radius-xl: 14px;
+  --radius-pill: 65px;
+  --radius-button: 89px;
+  --radius-full: 999px;
+
+  /* ------------------------------------------------------------------ */
+  /*  Shadows                                                            */
+  /* ------------------------------------------------------------------ */
+  --shadow-xs: 0 1px 0 rgba(0, 0, 0, 0.06);
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.12);
+  --shadow-lg: 0 12px 24px rgba(10, 10, 10, 0.08);
+  --shadow-xl: 0 18px 38px rgba(0, 0, 0, 0.12);
+  --shadow-arrow: 0 10px 24px rgba(0, 0, 0, 0.14);
+  --shadow-drawer-left: 4px 0 24px -4px rgba(0, 0, 0, 0.15);
+  --shadow-drawer-right: -4px 0 24px -4px rgba(0, 0, 0, 0.15);
+
+  /* ------------------------------------------------------------------ */
+  /*  Breakpoints (reference values — use in JS, not CSS)                */
+  /* ------------------------------------------------------------------ */
+  --bp-sm: 640px;
+  --bp-md: 768px;
+  --bp-lg: 1024px;
+  --bp-xl: 1280px;
+  --bp-2xl: 1536px;
+
+  /* ------------------------------------------------------------------ */
+  /*  Z-Index                                                            */
+  /* ------------------------------------------------------------------ */
+  --z-content: 10;
+  --z-dropdown: 20;
+  --z-overlay: 40;
+  --z-header: 50;
+  --z-drawer: 101;
+  --z-skip: 200;
+
+  /* ------------------------------------------------------------------ */
+  /*  Animation                                                          */
+  /* ------------------------------------------------------------------ */
+  --duration-fast: 200ms;
+  --duration-normal: 300ms;
+  --duration-slow: 500ms;
+  --duration-slower: 700ms;
+  --ease-default: ease-out;
+  --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
+}
