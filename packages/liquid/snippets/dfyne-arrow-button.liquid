@@ -1,0 +1,18 @@
+{%- comment -%}
+  Renders a DFYNE arrow button for carousel navigation.
+  Usage: {% render 'dfyne-arrow-button', direction: 'left', rail_id: 'product-rail' %}
+  Params: direction ('left'|'right'), rail_id (string)
+{%- endcomment -%}
+
+<button
+  type="button"
+  class="dfyne-arrow-button"
+  aria-label="Scroll {{ direction }}"
+  {% if direction == 'left' %}data-dfyne-carousel-prev="{{ rail_id }}"{% else %}data-dfyne-carousel-next="{{ rail_id }}"{% endif %}
+>
+  {% if direction == 'left' %}
+    {% render 'dfyne-icon', name: 'arrow-left', size: '14' %}
+  {% else %}
+    {% render 'dfyne-icon', name: 'arrow-right', size: '14' %}
+  {% endif %}
+</button>

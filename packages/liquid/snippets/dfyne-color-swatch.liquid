@@ -1,0 +1,25 @@
+{%- comment -%}
+  Renders a DFYNE color swatch button.
+  Usage: {% render 'dfyne-color-swatch', image_url: variant.featured_image | image_url: width: 200, label: variant.option1, selected: true %}
+  Params: image_url (string), label (string), selected (boolean), variant_id (string, optional)
+{%- endcomment -%}
+
+<button
+  type="button"
+  class="dfyne-color-swatch"
+  aria-pressed="{{ selected }}"
+  aria-label="{{ label | escape }}"
+  {%- if variant_id %} data-variant-id="{{ variant_id }}"{% endif -%}
+>
+  <div class="dfyne-color-swatch__image-wrap">
+    <img
+      src="{{ image_url }}"
+      alt="{{ label | escape }}"
+      class="dfyne-color-swatch__image"
+      loading="lazy"
+      width="66"
+      height="99"
+    >
+  </div>
+  <span class="dfyne-color-swatch__label">{{ label }}</span>
+</button>

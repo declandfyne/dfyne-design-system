@@ -1,0 +1,15 @@
+{%- comment -%}
+  Renders a DFYNE size button.
+  Usage: {% render 'dfyne-size-button', label: 'M', selected: false, sold_out: false %}
+  Params: label (string), selected (boolean), sold_out (boolean), variant_id (string, optional)
+{%- endcomment -%}
+
+<button
+  type="button"
+  class="dfyne-size-button"
+  aria-pressed="{{ selected }}"
+  {%- if sold_out %} disabled{% endif -%}
+  {%- if variant_id %} data-variant-id="{{ variant_id }}"{% endif -%}
+>
+  {{ label }}
+</button>

@@ -1,0 +1,79 @@
+<section class="dfyne-campaign-hero">
+  {%- if section.settings.image != blank -%}
+    <img
+      src="{{ section.settings.image | image_url: width: 2400 }}"
+      alt="{{ section.settings.heading | escape }}"
+      class="dfyne-campaign-hero__image"
+      loading="eager"
+    >
+  {%- endif -%}
+  <div class="dfyne-campaign-hero__gradient-top"></div>
+  <div class="dfyne-campaign-hero__gradient-bottom"></div>
+  <div class="dfyne-campaign-hero__content">
+    <p class="dfyne-campaign-hero__caption">{{ section.settings.caption }}</p>
+    <h1 class="dfyne-campaign-hero__heading">{{ section.settings.heading }}</h1>
+    {%- if section.settings.cta_label != blank -%}
+      <a href="{{ section.settings.cta_url }}" class="dfyne-campaign-hero__cta">
+        {{ section.settings.cta_label }}
+      </a>
+    {%- endif -%}
+    {%- if section.settings.secondary_cta_label != blank -%}
+      <a href="{{ section.settings.secondary_cta_url }}" class="dfyne-campaign-hero__cta dfyne-campaign-hero__cta--secondary">
+        {{ section.settings.secondary_cta_label }}
+      </a>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "DFYNE Campaign Hero",
+  "tag": "div",
+  "class": "dfyne-campaign-hero-section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Hero image"
+    },
+    {
+      "type": "text",
+      "id": "caption",
+      "label": "Caption",
+      "default": "NEW STYLES, NEW STRENGTH"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "IMPACT"
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "Button label",
+      "default": "SHOP NOW"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "Button link"
+    },
+    {
+      "type": "text",
+      "id": "secondary_cta_label",
+      "label": "Secondary button label"
+    },
+    {
+      "type": "url",
+      "id": "secondary_cta_url",
+      "label": "Secondary button link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "DFYNE Campaign Hero"
+    }
+  ]
+}
+{% endschema %}

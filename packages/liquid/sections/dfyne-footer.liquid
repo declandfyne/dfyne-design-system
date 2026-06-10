@@ -1,0 +1,55 @@
+<footer class="dfyne-footer">
+  <div class="dfyne-footer__grid">
+    {%- for block in section.blocks -%}
+      <div class="dfyne-footer__column" {{ block.shopify_attributes }}>
+        <h3 class="dfyne-footer__heading">{{ block.settings.heading }}</h3>
+        <ul class="dfyne-footer__list">
+          {%- if block.settings.menu != blank -%}
+            {%- for link in linklists[block.settings.menu].links -%}
+              <li><a href="{{ link.url }}" class="dfyne-footer__link">{{ link.title }}</a></li>
+            {%- endfor -%}
+          {%- endif -%}
+        </ul>
+      </div>
+    {%- endfor -%}
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "DFYNE Footer",
+  "tag": "div",
+  "class": "dfyne-footer-section",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "column",
+      "name": "Column",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Column heading",
+          "default": "Account"
+        },
+        {
+          "type": "link_list",
+          "id": "menu",
+          "label": "Menu"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "DFYNE Footer",
+      "blocks": [
+        { "type": "column", "settings": { "heading": "Account" } },
+        { "type": "column", "settings": { "heading": "About" } },
+        { "type": "column", "settings": { "heading": "Contact" } },
+        { "type": "column", "settings": { "heading": "Delivery & Returns" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

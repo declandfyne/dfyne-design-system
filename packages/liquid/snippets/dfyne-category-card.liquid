@@ -1,0 +1,28 @@
+{%- comment -%}
+  Renders a DFYNE category card with gradient overlay and chevron.
+  Usage: {% render 'dfyne-category-card', title: 'IMPACT', image: collection.image, url: collection.url %}
+  Params: title (string), image (image object or URL string), url (string), caption (string, optional)
+{%- endcomment -%}
+
+<a href="{{ url }}" class="dfyne-category-card">
+  <img
+    src="{{ image | image_url: width: 1200 }}"
+    alt="{{ title | escape }}"
+    class="dfyne-category-card__image"
+    loading="lazy"
+    width="600"
+    height="781"
+  >
+  <div class="dfyne-category-card__gradient"></div>
+  <div class="dfyne-category-card__content">
+    <div>
+      {%- if caption -%}
+        <p style="margin-bottom: 4px; font-size: 9px; font-weight: 500; text-transform: uppercase; letter-spacing: 1.2px; color: rgba(255,255,255,0.78);">{{ caption }}</p>
+      {%- endif -%}
+      <h3 class="dfyne-category-card__title">{{ title }}</h3>
+    </div>
+    <span class="dfyne-category-card__chevron">
+      {% render 'dfyne-icon', name: 'chevron-right', size: '14' %}
+    </span>
+  </div>
+</a>

@@ -1,0 +1,28 @@
+{%- comment -%}
+  Renders a DFYNE icon SVG.
+  Usage: {% render 'dfyne-icon', name: 'chevron-right', size: '14' %}
+  Params: name (string), size (string, default '16')
+{%- endcomment -%}
+
+{%- assign icon_size = size | default: '16' -%}
+
+{%- case name -%}
+  {%- when 'chevron-right' -%}
+    <svg aria-hidden="true" viewBox="0 0 18 18" width="{{ icon_size }}" height="{{ icon_size }}"><path d="M6.5 4.75 11 9l-4.5 4.25" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2"/></svg>
+  {%- when 'chevron-down' -%}
+    <svg aria-hidden="true" viewBox="0 0 16 16" width="{{ icon_size }}" height="{{ icon_size }}"><path d="M4 6l4 4 4-4" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.3"/></svg>
+  {%- when 'arrow-left' -%}
+    <svg aria-hidden="true" viewBox="0 0 18 18" width="{{ icon_size }}" height="{{ icon_size }}"><path d="M11 4.5 6.3 8.7a.4.4 0 0 0 0 .6L11 13.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.3"/></svg>
+  {%- when 'arrow-right' -%}
+    <svg aria-hidden="true" viewBox="0 0 18 18" width="{{ icon_size }}" height="{{ icon_size }}"><path d="M7 4.5l4.7 4.2a.4.4 0 0 1 0 .6L7 13.5" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.3"/></svg>
+  {%- when 'search' -%}
+    <svg aria-hidden="true" viewBox="0 0 28 28" width="{{ icon_size }}" height="{{ icon_size }}"><path d="M12.5 5a7.5 7.5 0 1 1 0 15 7.5 7.5 0 0 1 0-15ZM18.5 18.5 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.3"/></svg>
+  {%- when 'cart' -%}
+    <svg aria-hidden="true" viewBox="0 0 28 28" width="{{ icon_size }}" height="{{ icon_size }}"><path d="M8 4 5 8v16a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V8l-3-4ZM5 8h18M18 12a4 4 0 0 1-8 0" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.3"/></svg>
+  {%- when 'user' -%}
+    <svg aria-hidden="true" viewBox="0 0 28 28" width="{{ icon_size }}" height="{{ icon_size }}"><circle cx="14" cy="9.5" r="4.25" fill="none" stroke="currentColor" stroke-width="1.3"/><path d="M6.5 22c1.7-3.55 4.28-5.32 7.5-5.32S19.8 18.45 21.5 22" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.3"/></svg>
+  {%- when 'close' -%}
+    <svg aria-hidden="true" viewBox="0 0 28 28" width="{{ icon_size }}" height="{{ icon_size }}"><path d="M8 8l12 12M20 8 8 20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.3"/></svg>
+  {%- when 'menu' -%}
+    <svg aria-hidden="true" viewBox="0 0 24 24" width="{{ icon_size }}" height="{{ icon_size }}"><path d="M4 7h16M4 12h16M4 17h16" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.5"/></svg>
+{%- endcase -%}

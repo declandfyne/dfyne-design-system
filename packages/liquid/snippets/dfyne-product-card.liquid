@@ -1,0 +1,42 @@
+{%- comment -%}
+  Renders a DFYNE product card.
+  Usage: {% render 'dfyne-product-card', product: product %}
+  Params: product (Shopify product object)
+{%- endcomment -%}
+
+{%- assign current_variant = product.selected_or_first_available_variant -%}
+
+<article class="dfyne-product-card">
+  <div class="dfyne-product-card__image-wrap">
+    <a href="{{ product.url }}">
+      {%- if product.featured_image -%}
+        <img
+          src="{{ product.featured_image | image_url: width: 800 }}"
+          alt="{{ product.featured_image.alt | escape }}"
+          class="dfyne-product-card__image"
+          loading="lazy"
+          width="400"
+          height="500"
+        >
+      {%- endif -%}
+    </a>
+    {%- for tag in product.tags -%}
+      {%- if tag == 'new' or tag == 'NEW' -%}
+        <span class="dfyne-product-card__badge">
+          {% render 'dfyne-badge', text: 'NEW' %}
+        </span>
+      {%- endif -%}
+    {%- endfor -%}
+  </div>
+  <div class="dfyne-product-card__info">
+    <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 8px;">
+      <h3 class="dfyne-product-card__name">
+        <a href="{{ product.url }}" style="text-decoration: none; color: inherit;">{{ product.title }}</a>
+      </h3>
+    </div>
+    {%- if current_variant.option1 -%}
+      <p class="dfyne-product-card__color">{{ current_variant.option1 }}</p>
+    {%- endif -%}
+    <p class="dfyne-product-card__price">{{ current_variant.price | money }}</p>
+  </div>
+</article>

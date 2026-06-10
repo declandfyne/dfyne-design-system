@@ -1,0 +1,46 @@
+<div class="dfyne-announcement-bar" data-dfyne-announcement>
+  {%- for block in section.blocks -%}
+    <div data-dfyne-announcement-slide style="display: flex; align-items: center; gap: 8px;{% if forloop.first == false %} display: none;{% endif %}" {{ block.shopify_attributes }}>
+      <span class="dfyne-announcement-bar__text">{{ block.settings.text }}</span>
+      <span class="dfyne-announcement-bar__detail">{{ block.settings.detail }}</span>
+    </div>
+  {%- endfor -%}
+</div>
+
+{% schema %}
+{
+  "name": "DFYNE Announcement Bar",
+  "tag": "section",
+  "class": "dfyne-announcement-bar-section",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slide",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Heading",
+          "default": "HASSLE-FREE RETURNS"
+        },
+        {
+          "type": "text",
+          "id": "detail",
+          "label": "Detail",
+          "default": "100-day free returns"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "DFYNE Announcement Bar",
+      "blocks": [
+        { "type": "slide", "settings": { "text": "HASSLE-FREE RETURNS", "detail": "100-day free returns" } },
+        { "type": "slide", "settings": { "text": "FREE TRACKED DELIVERY", "detail": "On orders over £30" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

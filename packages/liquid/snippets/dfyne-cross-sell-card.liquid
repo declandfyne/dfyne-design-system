@@ -1,0 +1,33 @@
+{%- comment -%}
+  Renders a DFYNE cross-sell card for "Complete the Look".
+  Usage: {% render 'dfyne-cross-sell-card', product: product %}
+  Params: product (Shopify product object)
+{%- endcomment -%}
+
+{%- assign current_variant = product.selected_or_first_available_variant -%}
+
+<article class="dfyne-cross-sell-card">
+  <div class="dfyne-cross-sell-card__image-wrap">
+    <a href="{{ product.url }}">
+      {%- if product.featured_image -%}
+        <img
+          src="{{ product.featured_image | image_url: width: 400 }}"
+          alt="{{ product.title | escape }}"
+          class="dfyne-cross-sell-card__image"
+          loading="lazy"
+          width="123"
+          height="154"
+        >
+      {%- endif -%}
+    </a>
+  </div>
+  <div>
+    <h3 class="dfyne-cross-sell-card__name">
+      <a href="{{ product.url }}" style="text-decoration: none; color: inherit;">{{ product.title }}</a>
+    </h3>
+    {%- if current_variant.option1 -%}
+      <p class="dfyne-cross-sell-card__color">{{ current_variant.option1 }}</p>
+    {%- endif -%}
+    <p class="dfyne-cross-sell-card__price">{{ current_variant.price | money }}</p>
+  </div>
+</article>

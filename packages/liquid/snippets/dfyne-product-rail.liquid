@@ -1,0 +1,29 @@
+{%- comment -%}
+  Renders a DFYNE product rail (horizontal scrollable).
+  Usage: {% render 'dfyne-product-rail', collection: collection, title: 'NEW IN', eyebrow: 'JUST LANDED', rail_id: 'new-in-rail' %}
+  Params: collection (Shopify collection), title (string), eyebrow (string), rail_id (string)
+{%- endcomment -%}
+
+<section id="{{ rail_id }}">
+  <div style="display: flex; flex-direction: column; gap: 16px;">
+    <div style="padding-inline: 8px;">
+      <div class="dfyne-section-heading">
+        <p class="dfyne-section-heading__eyebrow">{{ eyebrow }}</p>
+        <h2 class="dfyne-section-heading__title">{{ title }}</h2>
+      </div>
+    </div>
+    <div style="position: relative;">
+      <div id="{{ rail_id }}-scroll" class="dfyne-rail">
+        <div style="display: flex;">
+          <div class="dfyne-rail__gutter" aria-hidden="true"></div>
+          <div class="dfyne-rail__track">
+            {%- for product in collection.products limit: 10 -%}
+              {% render 'dfyne-product-card', product: product %}
+            {%- endfor -%}
+          </div>
+          <div class="dfyne-rail__gutter" aria-hidden="true"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
