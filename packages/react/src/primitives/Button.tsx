@@ -1,29 +1,31 @@
 const variantClasses = {
   primary:
-    "bg-black text-white border-transparent hover:opacity-90",
+    "bg-[#111111] text-white border-transparent hover:opacity-90",
   secondary:
-    "bg-white text-black border-[#0a0a0a] hover:bg-black hover:text-white",
+    "bg-white text-black border-black hover:bg-[#111111] hover:text-white",
   outline:
-    "bg-transparent text-[#0a0a0a] border-[#0a0a0a] hover:bg-black hover:text-white",
+    "bg-transparent text-black border-[#e8e8e1] hover:border-black",
   ghost:
-    "bg-transparent text-black border-transparent hover:bg-black/5",
+    "bg-transparent text-white border-white hover:bg-white hover:text-black",
 } as const;
 
 const sizeClasses = {
-  sm: "h-[34px] px-4 text-[9px]",
-  md: "h-[42px] px-5 text-[9px]",
-  lg: "h-[48px] px-6 text-[9px]",
+  xs: "h-[34px] px-4 text-[9px] tracking-[2.4px]",
+  sm: "h-[39px] px-5 text-[10px] tracking-[1.5px]",
+  md: "h-[41px] px-5 text-[9px] tracking-[2.7px]",
+  lg: "h-[48px] px-5 text-[11px] tracking-[1.5px]",
 } as const;
 
 const radiusClasses = {
-  default: "rounded-[89px]",
+  default: "rounded-[50px]",
+  pill: "rounded-[140px]",
   full: "rounded-[999px]",
 } as const;
 
 export function Button({
   children,
   variant = "primary",
-  size = "lg",
+  size = "md",
   radius = "default",
   disabled = false,
   onClick,
@@ -44,7 +46,7 @@ export function Button({
       type={type}
       disabled={disabled}
       onClick={onClick}
-      className={`inline-flex items-center justify-center border font-bold uppercase tracking-[2.8px] transition-colors duration-200 disabled:cursor-not-allowed disabled:opacity-50 ${radiusClasses[radius]} ${variantClasses[variant]} ${sizeClasses[size]} ${className}`.trim()}
+      className={`inline-flex items-center justify-center border font-semibold uppercase transition-colors duration-200 disabled:cursor-not-allowed disabled:opacity-50 ${radiusClasses[radius]} ${variantClasses[variant]} ${sizeClasses[size]} ${className}`.trim()}
     >
       {children}
     </button>

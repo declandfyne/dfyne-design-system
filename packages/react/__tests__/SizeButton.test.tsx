@@ -21,8 +21,10 @@ describe("SizeButton", () => {
     expect(screen.getByRole("button")).toBeDisabled();
   });
 
-  it("shows selected state via aria-pressed", () => {
+  it("shows selected state with black bg", () => {
     render(<SizeButton label="L" selected soldOut={false} onClick={() => {}} />);
-    expect(screen.getByRole("button")).toHaveAttribute("aria-pressed", "true");
+    const btn = screen.getByRole("button");
+    expect(btn).toHaveAttribute("aria-pressed", "true");
+    expect(btn).toHaveClass("bg-black", "text-white");
   });
 });

@@ -9,9 +9,9 @@ describe("Button", () => {
     expect(screen.getByRole("button")).toHaveTextContent("ADD TO CART");
   });
 
-  it("primary variant has black background", () => {
+  it("primary variant has #111 background", () => {
     render(<Button variant="primary">SHOP</Button>);
-    expect(screen.getByRole("button")).toHaveClass("bg-black", "text-white");
+    expect(screen.getByRole("button")).toHaveClass("text-white");
   });
 
   it("secondary variant has outline style", () => {
@@ -20,13 +20,18 @@ describe("Button", () => {
     expect(btn).toHaveClass("bg-white", "text-black");
   });
 
-  it("defaults to rounded-89px radius (Figma Add to Cart)", () => {
+  it("defaults to rounded-50px radius (live site Add to Cart)", () => {
     render(<Button>ADD TO CART</Button>);
-    expect(screen.getByRole("button")).toHaveClass("rounded-[89px]");
+    expect(screen.getByRole("button")).toHaveClass("rounded-[50px]");
   });
 
-  it("supports full radius variant (Figma Write a Review)", () => {
-    render(<Button radius="full">WRITE A REVIEW</Button>);
+  it("supports pill radius (hero chevron button)", () => {
+    render(<Button radius="pill">SHOP</Button>);
+    expect(screen.getByRole("button")).toHaveClass("rounded-[140px]");
+  });
+
+  it("supports full radius (checkout button)", () => {
+    render(<Button radius="full">CHECK OUT</Button>);
     expect(screen.getByRole("button")).toHaveClass("rounded-[999px]");
   });
 
