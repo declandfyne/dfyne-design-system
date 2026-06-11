@@ -541,6 +541,47 @@ export default function PreviewPage() {
             ))}
           </div>
         </SubSection>
+
+        <SubSection title="Letter spacing">
+          <div className="overflow-hidden rounded-[8px] border border-[#e8e8e8]">
+            {[
+              { token: "--tracking-0", value: "0px", usage: "Body text, prices" },
+              { token: "--tracking-tight", value: "0.325px", usage: "Product titles, prices" },
+              { token: "--tracking-normal", value: "1px", usage: "Badges, small labels" },
+              { token: "--tracking-wide", value: "1.105px", usage: "Color/vendor text" },
+              { token: "--tracking-wider", value: "1.2px", usage: "Search pills, buttons, size labels" },
+              { token: "--tracking-widest", value: "1.5px", usage: "Section headings, nav items" },
+              { token: "--tracking-menu", value: "2px", usage: "Menu nav links" },
+              { token: "--tracking-hero", value: "2.6px", usage: "Announcement bar" },
+              { token: "--tracking-cta", value: "2.8px", usage: "CTA buttons (Add to Cart)" },
+              { token: "--tracking-nav", value: "3px", usage: "Desktop nav links" },
+            ].map((t, i) => (
+              <div
+                key={t.token}
+                className={`flex items-center gap-6 px-5 py-4 ${i > 0 ? "border-t border-[#e8e8e8]" : ""}`}
+              >
+                <code
+                  className="w-[160px] shrink-0 text-[12px] text-[#4a4a4a]"
+                  style={{ fontFamily: "ui-monospace, Menlo, monospace" }}
+                >
+                  {t.token}
+                </code>
+                <span className="w-[60px] shrink-0 text-[12px] text-[#8f8f8f]">{t.value}</span>
+                <span
+                  className="flex-1 text-[12px] uppercase text-[#1a1a1a]"
+                  style={{
+                    fontFamily: "Raleway, Arial, sans-serif",
+                    fontWeight: 600,
+                    letterSpacing: t.value,
+                  }}
+                >
+                  NEW IN WOMEN
+                </span>
+                <span className="shrink-0 text-[11px] text-[#a0a0a0]">{t.usage}</span>
+              </div>
+            ))}
+          </div>
+        </SubSection>
       </DocSection>
 
       {/* ================================================================== */}
