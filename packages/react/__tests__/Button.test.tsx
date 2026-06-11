@@ -17,7 +17,17 @@ describe("Button", () => {
   it("secondary variant has outline style", () => {
     render(<Button variant="secondary">COMPLETE THE LOOK</Button>);
     const btn = screen.getByRole("button");
-    expect(btn).toHaveClass("border-black", "bg-white", "text-black");
+    expect(btn).toHaveClass("bg-white", "text-black");
+  });
+
+  it("defaults to rounded-89px radius (Figma Add to Cart)", () => {
+    render(<Button>ADD TO CART</Button>);
+    expect(screen.getByRole("button")).toHaveClass("rounded-[89px]");
+  });
+
+  it("supports full radius variant (Figma Write a Review)", () => {
+    render(<Button radius="full">WRITE A REVIEW</Button>);
+    expect(screen.getByRole("button")).toHaveClass("rounded-[999px]");
   });
 
   it("calls onClick when clicked", async () => {

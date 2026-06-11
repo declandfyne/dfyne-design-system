@@ -10,11 +10,11 @@ export function Badge({
   const variantClasses =
     variant === "dark"
       ? "bg-black text-white"
-      : "bg-white text-black";
+      : "bg-white text-[#0a0a0a]";
 
   return (
     <span
-      className={`inline-flex h-[29px] items-center rounded-bl-[4px] px-[7px] text-[8.5px] font-semibold leading-none lg:px-[9px] lg:text-[11px] ${variantClasses} ${className}`.trim()}
+      className={`inline-flex h-[18px] items-center justify-center rounded-[2px] px-[6px] text-[10px] font-semibold leading-none tracking-[0px] ${variantClasses} ${className}`.trim()}
     >
       {text}
     </span>

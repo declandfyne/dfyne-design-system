@@ -2,9 +2,9 @@ const variantClasses = {
   primary:
     "bg-black text-white border-transparent hover:opacity-90",
   secondary:
-    "bg-white text-black border-black hover:bg-black hover:text-white",
+    "bg-white text-black border-[#0a0a0a] hover:bg-black hover:text-white",
   outline:
-    "bg-transparent text-black border-black/30 hover:border-black",
+    "bg-transparent text-[#0a0a0a] border-[#0a0a0a] hover:bg-black hover:text-white",
   ghost:
     "bg-transparent text-black border-transparent hover:bg-black/5",
 } as const;
@@ -15,10 +15,16 @@ const sizeClasses = {
   lg: "h-[48px] px-6 text-[9px]",
 } as const;
 
+const radiusClasses = {
+  default: "rounded-[89px]",
+  full: "rounded-[999px]",
+} as const;
+
 export function Button({
   children,
   variant = "primary",
   size = "lg",
+  radius = "default",
   disabled = false,
   onClick,
   className = "",
@@ -27,6 +33,7 @@ export function Button({
   children: React.ReactNode;
   variant?: keyof typeof variantClasses;
   size?: keyof typeof sizeClasses;
+  radius?: keyof typeof radiusClasses;
   disabled?: boolean;
   onClick?: () => void;
   className?: string;
@@ -37,7 +44,7 @@ export function Button({
       type={type}
       disabled={disabled}
       onClick={onClick}
-      className={`inline-flex items-center justify-center rounded-[89px] border font-bold uppercase tracking-[2.8px] transition-colors duration-200 disabled:cursor-not-allowed disabled:opacity-50 ${variantClasses[variant]} ${sizeClasses[size]} ${className}`.trim()}
+      className={`inline-flex items-center justify-center border font-bold uppercase tracking-[2.8px] transition-colors duration-200 disabled:cursor-not-allowed disabled:opacity-50 ${radiusClasses[radius]} ${variantClasses[variant]} ${sizeClasses[size]} ${className}`.trim()}
     >
       {children}
     </button>
