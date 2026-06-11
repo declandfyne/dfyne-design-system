@@ -1,20 +1,28 @@
 export function Badge({
   text,
   variant = "dark",
+  position = "top-right",
   className = "",
 }: {
   text: string;
   variant?: "dark" | "light";
+  position?: "top-right" | "inline";
   className?: string;
 }) {
   const variantClasses =
     variant === "dark"
-      ? "bg-black text-white"
+      ? "bg-[#111111] text-white"
       : "bg-white text-[#0a0a0a]";
+
+  const positionClasses =
+    position === "top-right"
+      ? "absolute top-0 right-0"
+      : "";
 
   return (
     <span
-      className={`inline-flex h-[18px] items-center justify-center rounded-[2px] px-[6px] text-[10px] font-semibold leading-none tracking-[0px] ${variantClasses} ${className}`.trim()}
+      className={`inline-flex items-center px-[7px] py-[7px] pl-[9px] text-[11.05px] font-semibold leading-none ${variantClasses} ${positionClasses} ${className}`.trim()}
+      style={{ borderRadius: "0px 4px" }}
     >
       {text}
     </span>

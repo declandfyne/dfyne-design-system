@@ -19,7 +19,7 @@ describe("ProductCard", () => {
 
   it("renders formatted price", () => {
     render(<ProductCard {...product} />);
-    expect(screen.getByText("$52.20")).toBeInTheDocument();
+    expect(screen.getByText("£52.20")).toBeInTheDocument();
   });
 
   it("renders color", () => {
@@ -27,9 +27,14 @@ describe("ProductCard", () => {
     expect(screen.getByText("Pebble Grey")).toBeInTheDocument();
   });
 
-  it("renders rating", () => {
+  it("renders rating stars", () => {
     render(<ProductCard {...product} />);
     expect(screen.getByLabelText(/Average rating 4.8/)).toBeInTheDocument();
+  });
+
+  it("renders review count", () => {
+    render(<ProductCard {...product} />);
+    expect(screen.getByText("(52,866)")).toBeInTheDocument();
   });
 
   it("renders badge when provided", () => {

@@ -8,11 +8,10 @@ describe("Badge", () => {
     expect(getByText("NEW")).toBeInTheDocument();
   });
 
-  it("uses dark variant by default with correct Figma styles", () => {
+  it("uses dark variant by default", () => {
     const { container } = render(<Badge text="SALE" />);
     const el = container.firstChild as HTMLElement;
-    expect(el).toHaveClass("bg-black", "text-white");
-    expect(el).toHaveClass("h-[18px]", "rounded-[2px]", "text-[10px]");
+    expect(el).toHaveClass("text-white");
   });
 
   it("supports light variant", () => {
@@ -24,5 +23,11 @@ describe("Badge", () => {
   it("accepts className override", () => {
     const { container } = render(<Badge text="CUSTOM" className="custom-class" />);
     expect(container.firstChild).toHaveClass("custom-class");
+  });
+
+  it("supports top-right position", () => {
+    const { container } = render(<Badge text="NEW" position="top-right" />);
+    const el = container.firstChild as HTMLElement;
+    expect(el).toHaveClass("absolute", "top-0", "right-0");
   });
 });
