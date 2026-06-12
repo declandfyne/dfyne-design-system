@@ -71,3 +71,5 @@ export { Footer } from "./sections/Footer";
 export { Slideshow } from "./sections/Slideshow";
 export type { Slide, SlideshowProps } from "./sections/Slideshow";
 export { PromoGrid } from "./sections/PromoGrid";
+export { MediaText } from "./sections/MediaText";
+export type { MediaTextProps } from "./sections/MediaText";
