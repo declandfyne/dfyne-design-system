@@ -190,13 +190,14 @@ export { Accordion, AccordionItem } from './disclosure/Accordion'
 export { Search } from './search/Search'
 ```
 
-### New icons needed
+### Icons
 
-Add to the Icon component:
-- `minus` — horizontal line (for QuantityInput)
-- `plus` — cross/plus sign (for QuantityInput)
+DFYNE uses **Phosphor Icons** (free library). All new components should use Phosphor for icons:
+- QuantityInput: `Minus` and `Plus` from `@phosphor-icons/react`
+- Accordion: `CaretDown` from `@phosphor-icons/react`
+- Search: `MagnifyingGlass` and `X` from `@phosphor-icons/react`
 
-These may already exist as part of the 21 icons — check before adding.
+Add `@phosphor-icons/react` as a dependency to `@dfyne/react` if not already installed.
 
 ### CLAUDE.md update
 
