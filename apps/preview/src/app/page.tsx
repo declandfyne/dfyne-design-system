@@ -257,6 +257,7 @@ function ColorGridRow({ rowLabel, steps, totalCols }: { rowLabel: string; steps:
 /* ------------------------------------------------------------------ */
 
 const navItems = [
+  { id: "glossary", label: "Glossary" },
   { id: "colors", label: "Colors" },
   { id: "typography", label: "Typography" },
   { id: "ratios", label: "Ratios" },
