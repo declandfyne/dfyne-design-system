@@ -112,10 +112,9 @@ export function Header({
     <header
       className={className}
       style={{
-        position: "fixed",
+        position: "sticky",
         top: 0,
-        left: 0,
-        right: 0,
+        width: "100%",
         background: "#fff",
         zIndex: 40,
         fontFamily: "Raleway, sans-serif",
