@@ -52,6 +52,8 @@ export { Header } from "./navigation/Header";
 export type { NavItem, HeaderProps } from "./navigation/Header";
 export { Breadcrumbs } from "./navigation/Breadcrumbs";
 export type { BreadcrumbItem, BreadcrumbsProps } from "./navigation/Breadcrumbs";
+export { Pagination } from "./navigation/Pagination";
+export type { PaginationProps } from "./navigation/Pagination";
 
 // Feedback
 export { Toast } from "./feedback/Toast";
