@@ -1320,4 +1320,155 @@ export const componentSpecs: ComponentSpecData[] = [
       },
     ],
   },
+
+  /* ------------------------------------------------------------------ */
+  /*  Collection Intro                                                   */
+  /* ------------------------------------------------------------------ */
+  {
+    name: "Collection Intro",
+    figmaPath: "Sections / Collection Intro",
+    liquidCode: `<div class="collection-intro">
+  <p class="collection-intro__category">WOMENS</p>
+  <h1 class="collection-intro__title">IMPACT</h1>
+  <div class="collection-intro__tags">
+    <span class="collection-intro__tag">Supportive</span>
+    <span class="collection-intro__tag">Mid to low waistband</span>
+    <span class="collection-intro__tag">Contour zones</span>
+  </div>
+  <p class="collection-intro__description">Built for your toughest sessions...</p>
+  <details class="collection-intro__expand">
+    <summary>Read more</summary>
+    <p>IMPACT features contour-enhancing seams...</p>
+  </details>
+</div>`,
+    reactCode: `import { CollectionIntro } from "@dfyne/react";
+
+<CollectionIntro
+  category="WOMENS"
+  title="IMPACT"
+  tags={["Supportive", "Mid to low waistband", "Contour zones"]}
+  description="Built for your toughest sessions, IMPACT offers the ultimate support so you can lift heavier and train harder."
+  expandedContent={<p>IMPACT features contour-enhancing seams...</p>}
+/>`,
+    variants: [
+      {
+        name: "Default",
+        specs: [
+          { group: "Category", property: "Font", value: "Raleway 10px / 600" },
+          { group: "Category", property: "Tracking", value: "1.5px" },
+          { group: "Category", property: "Transform", value: "uppercase" },
+          { group: "Title", property: "Font", value: "Raleway 14px / 600" },
+          { group: "Title", property: "Tracking", value: "1.5px" },
+          { group: "Title", property: "Transform", value: "uppercase" },
+          { group: "Tags", property: "Font", value: "Raleway 11px / 400" },
+          { group: "Tags", property: "Color", value: "rgba(0,0,0,0.6)" },
+          { group: "Description", property: "Font", value: "Raleway 13px / 400" },
+          { group: "Description", property: "Line Height", value: "1.6" },
+          { group: "Spacing", property: "Gap", value: "8px" },
+        ],
+      },
+    ],
+  },
+
+  /* ------------------------------------------------------------------ */
+  /*  Category Image Carousel                                            */
+  /* ------------------------------------------------------------------ */
+  {
+    name: "Category Image Carousel",
+    figmaPath: "Sections / Category Image Carousel",
+    liquidCode: `<div class="category-carousel">
+  <a class="category-carousel__item category-carousel__item--active" href="...">
+    <img src="..." alt="All" width="120" height="150" />
+    <span class="category-carousel__label">ALL PRODUCTS</span>
+  </a>
+  <a class="category-carousel__item" href="...">
+    <img src="..." alt="Flares" width="120" height="150" />
+    <span class="category-carousel__label">FLARES</span>
+  </a>
+</div>`,
+    reactCode: `import { CategoryImageCarousel } from "@dfyne/react";
+
+<CategoryImageCarousel items={[
+  { image: "...", alt: "All", label: "ALL PRODUCTS", href: "#", active: true },
+  { image: "...", alt: "Flares", label: "FLARES", href: "#" },
+  { image: "...", alt: "Leggings", label: "LEGGINGS", href: "#" },
+]} />`,
+    variants: [
+      {
+        name: "Default",
+        specs: [
+          { group: "Image", property: "Width", value: "120px" },
+          { group: "Image", property: "Height", value: "150px" },
+          { group: "Image", property: "Radius", value: "4px" },
+          { group: "Image", property: "Object Fit", value: "cover" },
+          { group: "Label", property: "Font", value: "Raleway 9px / 600" },
+          { group: "Label", property: "Tracking", value: "1.5px" },
+          { group: "Label", property: "Transform", value: "uppercase" },
+          { group: "Active", property: "Border", value: "2px solid #111111" },
+          { group: "Layout", property: "Scroll", value: "horizontal overflow" },
+          { group: "Spacing", property: "Gap", value: "12px" },
+        ],
+      },
+    ],
+  },
+
+  /* ------------------------------------------------------------------ */
+  /*  Filter Drawer                                                      */
+  /* ------------------------------------------------------------------ */
+  {
+    name: "Filter Drawer",
+    figmaPath: "Components / Filter Drawer",
+    liquidCode: `<div class="filter-drawer__overlay">
+  <div class="filter-drawer">
+    <div class="filter-drawer__header">
+      <h2>Filter</h2>
+      <button class="filter-drawer__close">&times;</button>
+    </div>
+    <div class="filter-drawer__body">
+      <div class="filter-drawer__group">
+        <h4>Color</h4>
+        <label><input type="checkbox" /> Black (12)</label>
+      </div>
+    </div>
+    <div class="filter-drawer__footer">
+      <button class="btn">Apply</button>
+    </div>
+  </div>
+</div>`,
+    reactCode: `import { FilterDrawer } from "@dfyne/react";
+
+<FilterDrawer
+  open={isOpen}
+  onClose={() => setIsOpen(false)}
+  filters={[
+    { key: "color", label: "Color", type: "checkbox", options: [
+      { value: "black", label: "Black", count: 12, selected: false },
+      { value: "white", label: "White", count: 8, selected: true },
+    ]},
+  ]}
+  onFilterChange={() => {}}
+  activeFilterCount={1}
+  onClearAll={() => {}}
+/>`,
+    variants: [
+      {
+        name: "Default",
+        specs: [
+          { group: "Overlay", property: "Background", value: "rgba(0,0,0,0.5)" },
+          { group: "Drawer", property: "Width", value: "100% (mobile) / 400px (desktop)" },
+          { group: "Drawer", property: "Background", value: "#ffffff" },
+          { group: "Drawer", property: "Position", value: "fixed left-0" },
+          { group: "Header", property: "Font", value: "Raleway 14px / 600" },
+          { group: "Header", property: "Tracking", value: "1.5px" },
+          { group: "Header", property: "Transform", value: "uppercase" },
+          { group: "Group Heading", property: "Font", value: "Raleway 10px / 600" },
+          { group: "Group Heading", property: "Tracking", value: "1.5px" },
+          { group: "Option", property: "Font", value: "Raleway 13px / 400" },
+          { group: "Spacing", property: "Padding", value: "24px" },
+          { group: "Colors", property: "Border", value: "1px solid #e8e8e1", cssVar: "--color-border" },
+          { group: "Colors", property: "Checkbox Active", value: "#111111" },
+        ],
+      },
+    ],
+  },
 ];

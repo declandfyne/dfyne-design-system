@@ -31,6 +31,9 @@ import {
   Toast,
   Tooltip,
   SocialIcons,
+  CollectionIntro,
+  CategoryImageCarousel,
+  FilterDrawer,
 } from "@dfyne/react";
 import type { IconName } from "@dfyne/react";
 
@@ -53,6 +56,37 @@ function CartDrawerPreview() {
         subtotal="£130.00"
         shippingMessage="Free UK delivery over £50"
         onCheckout={() => {}}
+      />
+    </>
+  );
+}
+
+function FilterDrawerPreview() {
+  const [isOpen, setIsOpen] = useState(false);
+  return (
+    <>
+      <Button variant="primary" onClick={() => setIsOpen(true)}>
+        OPEN FILTER DRAWER
+      </Button>
+      <FilterDrawer
+        open={isOpen}
+        onClose={() => setIsOpen(false)}
+        filters={[
+          { key: "color", label: "Color", type: "checkbox", options: [
+            { value: "black", label: "Black", count: 12, selected: false },
+            { value: "white", label: "White", count: 8, selected: true },
+            { value: "navy", label: "Navy", count: 6, selected: false },
+          ]},
+          { key: "size", label: "Size", type: "checkbox", options: [
+            { value: "xs", label: "XS", selected: false },
+            { value: "s", label: "S", selected: false },
+            { value: "m", label: "M", selected: true },
+            { value: "l", label: "L", selected: false },
+          ]},
+        ]}
+        onFilterChange={() => {}}
+        activeFilterCount={1}
+        onClearAll={() => {}}
       />
     </>
   );
@@ -452,11 +486,40 @@ export function renderComponent(name: string, props: Record<string, unknown>): R
         ]} />
       );
 
+    case "Collection Intro":
+      return (
+        <div className="w-full">
+          <CollectionIntro
+            category="WOMENS"
+            title="IMPACT"
+            tags={["Supportive", "Mid to low waistband", "Contour zones"]}
+            description="Built for your toughest sessions, IMPACT offers the ultimate support so you can lift heavier and train harder."
+            expandedContent={<p style={{ fontFamily: "Raleway", fontSize: 13, color: "#555" }}>IMPACT features contour-enhancing seams, a mid to low-rise waistband, and four-way stretch fabric for unrestricted movement.</p>}
+          />
+        </div>
+      );
+
+    case "Category Image Carousel":
+      return (
+        <div className="w-full">
+          <CategoryImageCarousel items={[
+            { image: "https://placehold.co/120x150/e8e8e1/111?text=All", alt: "All", label: "ALL PRODUCTS", href: "#", active: true },
+            { image: "https://placehold.co/120x150/ddd/111?text=Flares", alt: "Flares", label: "FLARES", href: "#" },
+            { image: "https://placehold.co/120x150/ccc/111?text=Leggings", alt: "Leggings", label: "LEGGINGS", href: "#" },
+            { image: "https://placehold.co/120x150/bbb/111?text=Shorts", alt: "Shorts", label: "SHORTS", href: "#" },
+            { image: "https://placehold.co/120x150/aaa/111?text=Bras", alt: "Bras", label: "SPORTS BRAS", href: "#" },
+          ]} />
+        </div>
+      );
+
+    case "Filter Drawer":
+      return <FilterDrawerPreview />;
+
     default:
       return null;
   }
 }
 
 export function isFullWidthComponent(name: string): boolean {
-  return ["Campaign Hero", "Announcement Bar", "Newsletter Signup", "Footer", "Collection Grid", "Header"].includes(name);
+  return ["Campaign Hero", "Announcement Bar", "Newsletter Signup", "Footer", "Collection Grid", "Header", "Category Image Carousel"].includes(name);
 }
