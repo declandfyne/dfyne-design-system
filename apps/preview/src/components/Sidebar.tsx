@@ -16,10 +16,10 @@ const groups: SidebarGroup[] = [
   { label: "Filters", items: ["Filter Panel"] },
   { label: "Collection", items: ["Collection Grid"] },
   { label: "Cart", items: ["Cart Item", "Cart Drawer"] },
-  { label: "Navigation", items: ["Header", "Breadcrumbs", "Pagination", "Region Selector", "Social Icons"] },
+  { label: "Navigation", items: ["Header", "Social Icons"] },
   { label: "Modals", items: ["Quick Shop Modal"] },
   { label: "Feedback", items: ["Toast", "Tooltip"] },
-  { label: "Sections", items: ["Campaign Hero", "Announcement Bar", "Newsletter Signup", "Footer", "Slideshow", "Promo Grid", "Media Text"] },
+  { label: "Sections", items: ["Campaign Hero", "Announcement Bar", "Newsletter Signup", "Footer"] },
   { label: "Tokens", items: ["Colors", "Typography", "Spacing", "Glossary"] },
 ];
 

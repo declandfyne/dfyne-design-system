@@ -27,16 +27,10 @@ import {
   CartItem,
   CartDrawer,
   Header,
-  Slideshow,
-  PromoGrid,
   Tabs,
   Toast,
-  Breadcrumbs,
-  Pagination,
-  RegionSelector,
   Tooltip,
   SocialIcons,
-  MediaText,
 } from "@dfyne/react";
 import type { IconName } from "@dfyne/react";
 
@@ -73,27 +67,6 @@ function ToastPreview() {
       </Button>
       <Toast message="Added to bag successfully" type="success" visible={isVisible} onClose={() => setIsVisible(false)} />
     </>
-  );
-}
-
-function PaginationPreview() {
-  const [page, setPage] = useState(1);
-  return <Pagination currentPage={page} totalPages={12} onPageChange={setPage} />;
-}
-
-function RegionSelectorPreview() {
-  const [region, setRegion] = useState("GB");
-  return (
-    <RegionSelector
-      regions={[
-        { code: "GB", label: "United Kingdom", flag: "\u{1F1EC}\u{1F1E7}", currency: "GBP" },
-        { code: "US", label: "United States", flag: "\u{1F1FA}\u{1F1F8}", currency: "USD" },
-        { code: "EU", label: "Europe", flag: "\u{1F1EA}\u{1F1FA}", currency: "EUR" },
-        { code: "AU", label: "Australia", flag: "\u{1F1E6}\u{1F1FA}", currency: "AUD" },
-      ]}
-      activeRegion={region}
-      onChange={setRegion}
-    />
   );
 }
 
@@ -440,34 +413,6 @@ export function renderComponent(name: string, props: Record<string, unknown>): R
         </div>
       );
 
-    case "Slideshow":
-      return (
-        <div className="w-full">
-          <Slideshow
-            slides={[
-              { image: "https://placehold.co/1440x800/333/fff?text=Slide+1", alt: "Slide 1", heading: "NEW COLLECTION", caption: "Spring 2024" },
-              { image: "https://placehold.co/1440x800/444/fff?text=Slide+2", alt: "Slide 2", heading: "BEST SELLERS" },
-              { image: "https://placehold.co/1440x800/555/fff?text=Slide+3", alt: "Slide 3", heading: "SALE", cta: { label: "SHOP NOW", href: "#" } },
-            ]}
-            autoplay={false}
-          />
-        </div>
-      );
-
-    case "Promo Grid":
-      return (
-        <div className="w-full">
-          <PromoGrid
-            cards={[
-              { image: "https://placehold.co/500x625/e8e8e1/111?text=Leggings", alt: "Leggings", title: "LEGGINGS", caption: "New styles" },
-              { image: "https://placehold.co/500x625/ddd/111?text=Bras", alt: "Bras", title: "SPORTS BRAS" },
-              { image: "https://placehold.co/1000x625/ccc/111?text=Shorts", alt: "Shorts", title: "SHORTS", span: 2 },
-            ]}
-            columns={3}
-          />
-        </div>
-      );
-
     case "Tabs":
       return (
         <Tabs tabs={[
@@ -479,22 +424,6 @@ export function renderComponent(name: string, props: Record<string, unknown>): R
 
     case "Toast":
       return <ToastPreview />;
-
-    case "Breadcrumbs":
-      return (
-        <Breadcrumbs items={[
-          { label: "Home", href: "#" },
-          { label: "Shop", href: "#" },
-          { label: "Leggings", href: "#" },
-          { label: "Power Seamless Legging" },
-        ]} />
-      );
-
-    case "Pagination":
-      return <PaginationPreview />;
-
-    case "Region Selector":
-      return <RegionSelectorPreview />;
 
     case "Tooltip":
       return (
@@ -515,23 +444,11 @@ export function renderComponent(name: string, props: Record<string, unknown>): R
         ]} />
       );
 
-    case "Media Text":
-      return (
-        <div className="w-full">
-          <MediaText
-            image={{ src: "https://placehold.co/720x500/e8e8e1/111?text=Our+Story", alt: "Our Story" }}
-            heading="OUR STORY"
-            body="Founded in 2020, DFYNE creates premium women's activewear that combines performance with style. Every piece is designed to make you feel confident and empowered."
-            cta={{ label: "LEARN MORE", href: "#" }}
-          />
-        </div>
-      );
-
     default:
       return null;
   }
 }
 
 export function isFullWidthComponent(name: string): boolean {
-  return ["Campaign Hero", "Announcement Bar", "Newsletter Signup", "Footer", "Collection Grid", "Header", "Slideshow", "Promo Grid", "Media Text"].includes(name);
+  return ["Campaign Hero", "Announcement Bar", "Newsletter Signup", "Footer", "Collection Grid", "Header"].includes(name);
 }

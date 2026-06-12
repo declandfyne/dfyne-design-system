@@ -50,12 +50,6 @@ export type { QuickShopProduct } from "./modals/QuickShopModal";
 // Navigation
 export { Header } from "./navigation/Header";
 export type { NavItem, HeaderProps } from "./navigation/Header";
-export { Breadcrumbs } from "./navigation/Breadcrumbs";
-export type { BreadcrumbItem, BreadcrumbsProps } from "./navigation/Breadcrumbs";
-export { Pagination } from "./navigation/Pagination";
-export type { PaginationProps } from "./navigation/Pagination";
-export { RegionSelector } from "./navigation/RegionSelector";
-export type { Region, RegionSelectorProps } from "./navigation/RegionSelector";
 export { SocialIcons } from "./navigation/SocialIcons";
 export type {
   SocialPlatform,
@@ -74,8 +68,3 @@ export { CampaignHero } from "./sections/CampaignHero";
 export { AnnouncementBar } from "./sections/AnnouncementBar";
 export { NewsletterSignup } from "./sections/NewsletterSignup";
 export { Footer } from "./sections/Footer";
-export { Slideshow } from "./sections/Slideshow";
-export type { Slide, SlideshowProps } from "./sections/Slideshow";
-export { PromoGrid } from "./sections/PromoGrid";
-export { MediaText } from "./sections/MediaText";
-export type { MediaTextProps } from "./sections/MediaText";
