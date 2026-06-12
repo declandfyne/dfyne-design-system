@@ -9,6 +9,8 @@ export { QuantityInput } from "./primitives/QuantityInput";
 
 // Disclosure
 export { Accordion, AccordionItem } from "./disclosure/Accordion";
+export { Tabs } from "./disclosure/Tabs";
+export type { Tab, TabsProps } from "./disclosure/Tabs";
 
 // Search
 export { Search } from "./search/Search";
@@ -48,6 +50,12 @@ export type { QuickShopProduct } from "./modals/QuickShopModal";
 // Navigation
 export { Header } from "./navigation/Header";
 export type { NavItem, HeaderProps } from "./navigation/Header";
+export { Breadcrumbs } from "./navigation/Breadcrumbs";
+export type { BreadcrumbItem, BreadcrumbsProps } from "./navigation/Breadcrumbs";
+
+// Feedback
+export { Toast } from "./feedback/Toast";
+export type { ToastProps } from "./feedback/Toast";
 
 // Sections
 export { CampaignHero } from "./sections/CampaignHero";
