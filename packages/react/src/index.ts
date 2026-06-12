@@ -58,7 +58,13 @@ export type { QuickAddProduct } from "./modals/QuickAdd";
 // Navigation
 export { BackLink } from "./navigation/BackLink";
 export { Header } from "./navigation/Header";
-export type { NavItem, HeaderProps } from "./navigation/Header";
+export type {
+  UtilityLink,
+  SocialLink as HeaderSocialLink,
+  NavSection,
+  NavDropdown,
+  HeaderProps,
+} from "./navigation/Header";
 export { SocialIcons } from "./navigation/SocialIcons";
 export type {
   SocialPlatform,

@@ -437,20 +437,63 @@ export function renderComponent(name: string, props: Record<string, unknown>): R
         <div className="w-full">
           <Header
             logo={<span style={{ fontFamily: "Raleway", fontWeight: 700, fontSize: 18, letterSpacing: 3 }}>DFYNE</span>}
-            navItems={[
-              { label: "Shop", href: "#", children: [
-                { label: "Leggings", href: "#" },
-                { label: "Sports Bras", href: "#" },
-                { label: "Shorts", href: "#" },
-              ]},
-              { label: "New In", href: "#" },
-              { label: "Collections", href: "#" },
-              { label: "About", href: "#" },
+            utilityLinks={[
+              { label: "Contact Us", href: "#" },
+              { label: "Track My Order", href: "#" },
+              { label: "Rewards", href: "#" },
+              { label: "Events", href: "#" },
+            ]}
+            socials={[
+              { platform: "instagram", href: "#" },
+              { platform: "facebook", href: "#" },
+              { platform: "youtube", href: "#" },
+              { platform: "tiktok", href: "#" },
+            ]}
+            regionFlag={"\u{1F1EC}\u{1F1E7}"}
+            navDropdowns={[
+              {
+                label: "WOMENS",
+                sections: [
+                  { links: [
+                    { label: "EXPLORE WOMENS", href: "#" },
+                    { label: "NEW RELEASES", href: "#" },
+                    { label: "BEST SELLERS", href: "#" },
+                    { label: "ALL PRODUCTS", href: "#" },
+                  ]},
+                  { heading: "SHOP BY CATEGORY", links: [
+                    { label: "Shorts", href: "#" },
+                    { label: "Sports Bras", href: "#" },
+                    { label: "T-Shirts & Tops", href: "#" },
+                    { label: "Leggings", href: "#" },
+                  ]},
+                  { heading: "SHOP BY COLLECTION", links: [
+                    { label: "Defy", href: "#" },
+                    { label: "Vision", href: "#" },
+                    { label: "Impact", href: "#" },
+                  ]},
+                ],
+              },
+              {
+                label: "MENS",
+                sections: [
+                  { links: [
+                    { label: "EXPLORE MENS", href: "#" },
+                    { label: "NEW RELEASES", href: "#" },
+                    { label: "ALL PRODUCTS", href: "#" },
+                  ]},
+                  { heading: "SHOP BY CATEGORY", links: [
+                    { label: "Shorts", href: "#" },
+                    { label: "T-Shirts", href: "#" },
+                    { label: "Hoodies", href: "#" },
+                  ]},
+                ],
+              },
             ]}
             cartItemCount={2}
             onCartClick={() => {}}
             onMenuClick={() => {}}
-            onSearch={() => {}}
+            onSearchClick={() => {}}
+            onAccountClick={() => {}}
           />
         </div>
       );

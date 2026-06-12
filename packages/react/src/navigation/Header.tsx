@@ -1,36 +1,112 @@
 "use client";
 
 import { useState } from "react";
-import { List, MagnifyingGlass, Bag } from "@phosphor-icons/react";
-import type { SearchResult } from "../search/Search";
+import {
+  List,
+  MagnifyingGlass,
+  User,
+  Bag,
+  CaretDown,
+  InstagramLogo,
+  FacebookLogo,
+  YoutubeLogo,
+  TiktokLogo,
+  XLogo,
+  PinterestLogo,
+} from "@phosphor-icons/react";
+import type { ComponentType } from "react";
 
-export interface NavItem {
+/* ------------------------------------------------------------------ */
+/*  Types                                                              */
+/* ------------------------------------------------------------------ */
+
+export interface UtilityLink {
   label: string;
   href: string;
-  children?: NavItem[];
+}
+
+export interface SocialLink {
+  platform:
+    | "instagram"
+    | "facebook"
+    | "youtube"
+    | "tiktok"
+    | "twitter"
+    | "pinterest";
+  href: string;
+}
+
+export interface NavSection {
+  heading?: string;
+  links: { label: string; href: string }[];
+}
+
+export interface NavDropdown {
+  label: string;
+  sections: NavSection[];
 }
 
 export interface HeaderProps {
   logo: React.ReactNode;
-  navItems: NavItem[];
-  onSearch?: (query: string) => void;
-  searchResults?: SearchResult[];
-  cartItemCount?: number;
+  utilityLinks?: UtilityLink[];
+  socials?: SocialLink[];
+  regionFlag?: string;
+  onRegionClick?: () => void;
+  navDropdowns: NavDropdown[];
+  onSearchClick?: () => void;
+  onAccountClick?: () => void;
   onCartClick?: () => void;
+  cartItemCount?: number;
   onMenuClick?: () => void;
   className?: string;
 }
 
+/* ------------------------------------------------------------------ */
+/*  Social icon map                                                    */
+/* ------------------------------------------------------------------ */
+
+const socialIconMap: Record<string, ComponentType<{ size?: number }>> = {
+  instagram: InstagramLogo,
+  facebook: FacebookLogo,
+  youtube: YoutubeLogo,
+  tiktok: TiktokLogo,
+  twitter: XLogo,
+  pinterest: PinterestLogo,
+};
+
+/* ------------------------------------------------------------------ */
+/*  Shared inline styles                                               */
+/* ------------------------------------------------------------------ */
+
+const resetButton: React.CSSProperties = {
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  background: "none",
+  border: "none",
+  cursor: "pointer",
+  padding: 0,
+};
+
+/* ------------------------------------------------------------------ */
+/*  Component                                                          */
+/* ------------------------------------------------------------------ */
+
 export function Header({
   logo,
-  navItems,
-  onSearch,
-  cartItemCount,
+  utilityLinks,
+  socials,
+  regionFlag,
+  onRegionClick,
+  navDropdowns,
+  onSearchClick,
+  onAccountClick,
   onCartClick,
+  cartItemCount,
   onMenuClick,
   className,
 }: HeaderProps) {
-  const [hoveredNav, setHoveredNav] = useState<string | null>(null);
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
 
   return (
     <header
@@ -40,153 +116,191 @@ export function Header({
         top: 0,
         left: 0,
         right: 0,
-        height: 60,
         background: "#fff",
-        borderBottom: "1px solid #e8e8e1",
         zIndex: 40,
-        padding: "0 24px",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
         fontFamily: "Raleway, sans-serif",
       }}
     >
-      {/* Left section */}
-      <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
-        {onMenuClick && (
+      {/* ============================================================ */}
+      {/* Row 1 — Utility Bar                                          */}
+      {/* ============================================================ */}
+      <div
+        className="hidden md:flex"
+        style={{
+          height: 40,
+          padding: "0 24px",
+          display: undefined, // overridden by className
+          alignItems: "center",
+          justifyContent: "space-between",
+          borderBottom: "1px solid #e8e8e1",
+        }}
+      >
+        {/* Utility links (left) */}
+        <nav
+          style={{ display: "flex", alignItems: "center", gap: 16 }}
+          aria-label="Utility"
+        >
+          {utilityLinks?.map((link) => (
+            <a
+              key={link.label}
+              href={link.href}
+              style={{
+                fontSize: 11,
+                fontFamily: "Raleway, sans-serif",
+                fontWeight: 400,
+                color: "#111",
+                textDecoration: "none",
+              }}
+              onMouseEnter={(e) => {
+                (e.currentTarget as HTMLAnchorElement).style.textDecoration =
+                  "underline";
+              }}
+              onMouseLeave={(e) => {
+                (e.currentTarget as HTMLAnchorElement).style.textDecoration =
+                  "none";
+              }}
+            >
+              {link.label}
+            </a>
+          ))}
+        </nav>
+
+        {/* Socials + flag (right) */}
+        <div style={{ display: "flex", alignItems: "center", gap: 0 }}>
+          {socials?.map(({ platform, href }) => {
+            const SocialIcon = socialIconMap[platform];
+            if (!SocialIcon) return null;
+            return (
+              <a
+                key={platform}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={platform}
+                style={{
+                  color: "#111",
+                  display: "inline-flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  width: 26,
+                  height: 40,
+                }}
+              >
+                <SocialIcon size={16} />
+              </a>
+            );
+          })}
+          {regionFlag && (
+            <button
+              onClick={onRegionClick}
+              aria-label="Region"
+              style={{
+                ...resetButton,
+                fontSize: 16,
+                marginLeft: 4,
+              }}
+            >
+              {regionFlag}
+            </button>
+          )}
+        </div>
+      </div>
+
+      {/* ============================================================ */}
+      {/* Row 2 — Main Nav                                             */}
+      {/* ============================================================ */}
+      <div
+        style={{
+          height: 43,
+          padding: "0 24px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          position: "relative",
+        }}
+      >
+        {/* Left — nav dropdowns (desktop) / hamburger (mobile) */}
+        <div style={{ display: "flex", alignItems: "center", gap: 16, flex: 1 }}>
+          {/* Hamburger — mobile only */}
           <button
             aria-label="Menu"
             onClick={onMenuClick}
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              background: "none",
-              border: "none",
-              cursor: "pointer",
-              padding: 0,
-            }}
+            style={resetButton}
             className="md:hidden"
           >
             <List size={24} color="#111" />
           </button>
-        )}
-        {logo}
-      </div>
 
-      {/* Center nav */}
-      <nav
-        style={{
-          display: "flex",
-          alignItems: "center",
-          gap: 24,
-        }}
-        className="hidden md:flex"
-      >
-        {navItems.map((item) => (
-          <div
-            key={item.label}
-            style={{ position: "relative" }}
-            onMouseEnter={() =>
-              item.children ? setHoveredNav(item.label) : undefined
-            }
-            onMouseLeave={() =>
-              item.children ? setHoveredNav(null) : undefined
-            }
+          {/* Desktop nav dropdown triggers */}
+          <nav
+            className="hidden md:flex"
+            style={{ display: undefined, alignItems: "center", gap: 20 }}
           >
-            <a
-              href={item.href}
-              style={{
-                fontSize: 10,
-                fontWeight: 600,
-                textTransform: "uppercase",
-                letterSpacing: "1.5px",
-                color: "#111",
-                textDecoration: "none",
-                fontFamily: "Raleway, sans-serif",
-              }}
-            >
-              {item.label}
-            </a>
-
-            {/* Mega-menu */}
-            {item.children && hoveredNav === item.label && (
+            {navDropdowns.map((dropdown) => (
               <div
-                style={{
-                  position: "absolute",
-                  top: "100%",
-                  left: 0,
-                  background: "#fff",
-                  border: "1px solid #e8e8e1",
-                  boxShadow:
-                    "0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -4px rgba(0,0,0,0.1)",
-                  padding: 24,
-                  minWidth: 200,
-                  zIndex: 50,
-                }}
+                key={dropdown.label}
+                onMouseEnter={() => setOpenDropdown(dropdown.label)}
+                onMouseLeave={() => setOpenDropdown(null)}
+                style={{ position: "relative" }}
               >
-                {item.children.map((child) => (
-                  <a
-                    key={child.label}
-                    href={child.href}
-                    style={{
-                      display: "block",
-                      fontSize: 11,
-                      fontFamily: "Raleway, sans-serif",
-                      fontWeight: 400,
-                      color: "#111",
-                      textDecoration: "none",
-                      padding: "6px 0",
-                    }}
-                    onMouseEnter={(e) => {
-                      (e.currentTarget as HTMLElement).style.color = "#555";
-                    }}
-                    onMouseLeave={(e) => {
-                      (e.currentTarget as HTMLElement).style.color = "#111";
-                    }}
-                  >
-                    {child.label}
-                  </a>
-                ))}
+                <button
+                  style={{
+                    ...resetButton,
+                    fontSize: 11,
+                    fontWeight: 600,
+                    textTransform: "uppercase",
+                    letterSpacing: "1.5px",
+                    color: "#111",
+                    fontFamily: "Raleway, sans-serif",
+                    gap: 4,
+                  }}
+                >
+                  {dropdown.label}
+                  <CaretDown size={10} weight="bold" />
+                </button>
               </div>
-            )}
-          </div>
-        ))}
-      </nav>
+            ))}
+          </nav>
+        </div>
 
-      {/* Right section */}
-      <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
-        {onSearch && (
-          <button
-            aria-label="Search"
-            onClick={() => onSearch("")}
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              background: "none",
-              border: "none",
-              cursor: "pointer",
-              padding: 0,
-            }}
-          >
-            <MagnifyingGlass size={20} color="#111" />
-          </button>
-        )}
-        {onCartClick && (
+        {/* Center — Logo */}
+        <div
+          style={{
+            position: "absolute",
+            left: "50%",
+            top: "50%",
+            transform: "translate(-50%, -50%)",
+          }}
+        >
+          {logo}
+        </div>
+
+        {/* Right — Account, Search, Cart */}
+        <div style={{ display: "flex", alignItems: "center", gap: 16, flex: 1, justifyContent: "flex-end" }}>
+          {onAccountClick && (
+            <button
+              aria-label="Account"
+              onClick={onAccountClick}
+              style={resetButton}
+              className="hidden md:flex"
+            >
+              <User size={20} color="#111" />
+            </button>
+          )}
+          {onSearchClick && (
+            <button
+              aria-label="Search"
+              onClick={onSearchClick}
+              style={resetButton}
+              className="hidden md:flex"
+            >
+              <MagnifyingGlass size={20} color="#111" />
+            </button>
+          )}
           <button
             aria-label="Cart"
             onClick={onCartClick}
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              background: "none",
-              border: "none",
-              cursor: "pointer",
-              padding: 0,
-              position: "relative",
-            }}
+            style={{ ...resetButton, position: "relative" }}
           >
             <Bag size={20} color="#111" />
             {cartItemCount != null && cartItemCount > 0 && (
@@ -213,8 +327,80 @@ export function Header({
               </span>
             )}
           </button>
-        )}
+        </div>
       </div>
+
+      {/* ============================================================ */}
+      {/* Mega-menu overlay                                            */}
+      {/* ============================================================ */}
+      {navDropdowns.map((dropdown) =>
+        openDropdown === dropdown.label ? (
+          <div
+            key={dropdown.label}
+            onMouseEnter={() => setOpenDropdown(dropdown.label)}
+            onMouseLeave={() => setOpenDropdown(null)}
+            style={{
+              position: "absolute",
+              top: "100%",
+              left: 0,
+              right: 0,
+              background: "#fff",
+              borderTop: "1px solid #e8e8e1",
+              boxShadow:
+                "0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -4px rgba(0,0,0,0.1)",
+              padding: "32px 48px",
+              zIndex: 50,
+              display: "flex",
+              gap: 48,
+              fontFamily: "Raleway, sans-serif",
+            }}
+          >
+            {dropdown.sections.map((section, sIdx) => (
+              <div key={section.heading ?? `section-${sIdx}`}>
+                {section.heading && (
+                  <div
+                    style={{
+                      fontSize: 10,
+                      fontWeight: 600,
+                      textTransform: "uppercase",
+                      letterSpacing: "1.5px",
+                      color: "#111",
+                      marginBottom: 12,
+                    }}
+                  >
+                    {section.heading}
+                  </div>
+                )}
+                {section.links.map((link) => (
+                  <a
+                    key={link.label}
+                    href={link.href}
+                    style={{
+                      display: "block",
+                      fontSize: 11,
+                      fontFamily: "Raleway, sans-serif",
+                      fontWeight: 400,
+                      color: "#111",
+                      textDecoration: "none",
+                      padding: "5px 0",
+                    }}
+                    onMouseEnter={(e) => {
+                      (e.currentTarget as HTMLAnchorElement).style.color =
+                        "#555";
+                    }}
+                    onMouseLeave={(e) => {
+                      (e.currentTarget as HTMLAnchorElement).style.color =
+                        "#111";
+                    }}
+                  >
+                    {link.label}
+                  </a>
+                ))}
+              </div>
+            ))}
+          </div>
+        ) : null,
+      )}
     </header>
   );
 }
