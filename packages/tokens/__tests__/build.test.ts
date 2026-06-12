@@ -38,7 +38,9 @@ describe("build output", () => {
   it("tokens.json contains spacing tokens", () => {
     const json = JSON.parse(readFileSync(resolve(distDir, "tokens.json"), "utf-8"));
     expect(json["space-1"]).toBe("2px");
-    expect(json["space-14"]).toBe("40px");
+    expect(json["space-14"]).toBe("30px");
+    expect(json["space-15"]).toBe("40px");
+    expect(json["space-16"]).toBe("75px");
   });
 
   it("tokens.json contains shadow tokens", () => {

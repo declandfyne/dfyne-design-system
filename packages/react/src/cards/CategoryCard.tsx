@@ -18,7 +18,9 @@ export function CategoryCard({
         alt={title}
         className="h-full w-full object-cover transition-transform duration-500 ease-out motion-safe:group-hover:scale-[1.02]"
       />
-      <div className="absolute inset-0 bg-gradient-to-t from-black to-black/0 via-black/0" />
+      {/* Grid overlay tint: #000 at 10% + bottom gradient for text legibility */}
+      <div className="absolute inset-0 bg-black/10" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-transparent" />
       <div className="absolute inset-x-[16px] bottom-[16px] flex items-center justify-between gap-5 text-white">
         <div>
           {caption ? (

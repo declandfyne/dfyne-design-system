@@ -3,51 +3,115 @@
 
 :root {
   /* ------------------------------------------------------------------ */
-  /*  Colors — Backgrounds                                               */
+  /*  Colors — Core Palette                                              */
+  /* ------------------------------------------------------------------ */
+  --color-body: #ffffff;
+  --color-text-body: #000000;
+  --color-price: #1c1d1d;
+  --color-savings: #C20000;
+  --color-border: #e8e8e1;
+  --color-btn-primary: #111111;
+  --color-btn-primary-text: #ffffff;
+  --color-cart-dot: #000000;
+  --color-link: #000000;
+
+  /* ------------------------------------------------------------------ */
+  /*  Colors — Header & Navigation                                       */
+  /* ------------------------------------------------------------------ */
+  --color-nav: #ffffff;
+  --color-nav-text: #000000;
+  --color-announcement: #000000;
+  --color-announcement-text: #ffffff;
+
+  /* ------------------------------------------------------------------ */
+  /*  Colors — Footer                                                    */
+  /* ------------------------------------------------------------------ */
+  --color-footer: #ffffff;
+  --color-footer-text: #000000;
+
+  /* ------------------------------------------------------------------ */
+  /*  Colors — Drawers & Modals                                          */
+  /* ------------------------------------------------------------------ */
+  --color-drawer: #ffffff;
+  --color-drawer-text: #000000;
+  --color-drawer-border: #e8e8e1;
+  --color-drawer-button: #111111;
+  --color-drawer-button-text: #ffffff;
+  --color-modal-overlay: rgba(230, 230, 230, 0.60);
+
+  /* ------------------------------------------------------------------ */
+  /*  Colors — Image & Overlay                                           */
+  /* ------------------------------------------------------------------ */
+  --color-hero-text: #ffffff;
+  --color-image-overlay: #000000;
+  --color-image-overlay-opacity: 0;
+  --color-image-overlay-text-shadow: 0.15;
+  --color-small-image-bg: #ffffff;
+  --color-large-image-bg: #0f0f0f;
+  --color-grid-overlay: rgba(0, 0, 0, 0.10);
+
+  /* ------------------------------------------------------------------ */
+  /*  Colors — Checkout                                                  */
+  /* ------------------------------------------------------------------ */
+  --color-checkout-accent: #111111;
+  --color-checkout-body: #ffffff;
+  --color-checkout-button: #111111;
+  --color-checkout-error: #ff6d6d;
+  --color-checkout-sidebar: #fafafa;
+
+  /* ------------------------------------------------------------------ */
+  /*  Colors — Backgrounds (semantic)                                    */
   /* ------------------------------------------------------------------ */
   --color-bg-primary: #ffffff;
   --color-bg-subtle: #f5f5f5;
-  --color-bg-muted: #f4f4f4;
   --color-bg-soft: #f6f6f6;
   --color-bg-wash: #f9f9f9;
   --color-bg-input: #fcfcfc;
   --color-bg-inverse: #0a0a0a;
-  --color-bg-dark: #333333;
+  --color-bg-dark: #111111;
 
   /* ------------------------------------------------------------------ */
-  /*  Colors — Text                                                      */
+  /*  Colors — Text (semantic)                                           */
   /* ------------------------------------------------------------------ */
   --color-text-primary: #0a0a0a;
-  --color-text-body: #1c1d1d;
   --color-text-secondary: #555555;
   --color-text-muted: #888888;
-  --color-text-disabled: #bbbbbb;
+  --color-text-disabled: #b6b6b6;
   --color-text-subtle: #6a6a6a;
   --color-text-inverse: #ffffff;
 
   /* ------------------------------------------------------------------ */
-  /*  Colors — Borders                                                   */
+  /*  Colors — Borders (semantic)                                        */
   /* ------------------------------------------------------------------ */
-  --color-border-default: #e7e7e7;
+  --color-border-default: #e8e8e1;
   --color-border-soft: #f0f0f0;
   --color-border-medium: #cccccc;
   --color-border-strong: #d9d9d9;
-  --color-border-footer: #e8e8e1;
+  --color-border-light: #e0e0e0;
   --color-border-input: #dddddd;
+
+  /* ------------------------------------------------------------------ */
+  /*  Colors — Error                                                     */
+  /* ------------------------------------------------------------------ */
+  --color-error: #d02e2e;
 
   /* ------------------------------------------------------------------ */
   /*  Colors — Overlays                                                  */
   /* ------------------------------------------------------------------ */
-  --color-overlay-light: rgba(0, 0, 0, 0.12);
+  --color-overlay-subtle: rgba(0, 0, 0, 0.09);
+  --color-overlay-light: rgba(0, 0, 0, 0.10);
   --color-overlay-medium: rgba(0, 0, 0, 0.20);
-  --color-overlay-heavy: rgba(0, 0, 0, 0.55);
-  --color-overlay-bottom: rgba(0, 0, 0, 0.60);
+  --color-overlay-heavy: rgba(0, 0, 0, 0.30);
+  --color-overlay-dark: rgba(0, 0, 0, 0.40);
+  --color-overlay-drawer: rgba(0, 0, 0, 0.12);
+  --color-overlay-frosted-light: rgba(255, 255, 255, 0.92);
+  --color-overlay-frosted-opaque: rgba(255, 255, 255, 0.94);
 
   /* ------------------------------------------------------------------ */
   /*  Typography — Font Family                                           */
   /* ------------------------------------------------------------------ */
-  --font-body: "Raleway", Arial, Helvetica, sans-serif;
-  --font-display: "Raleway", Arial, Helvetica, sans-serif;
+  --font-body: "Raleway", sans-serif;
+  --font-display: "Raleway", sans-serif;
 
   /* ------------------------------------------------------------------ */
   /*  Typography — Font Size                                             */
@@ -55,16 +119,29 @@
   --text-2xs: 7px;
   --text-xs: 8px;
   --text-sm: 9px;
-  --text-base: 10px;
+  --text-base: 13px;
   --text-md: 11px;
   --text-lg: 12px;
-  --text-xl: 13px;
-  --text-2xl: 14px;
-  --text-3xl: 18px;
+  --text-xl: 14px;
+  --text-2xl: 18px;
+  --text-3xl: 22px;
+  --text-4xl: 25px;
   --text-display-sm: 34px;
   --text-display-md: 46px;
   --text-display-lg: 70px;
   --text-display-xl: 84px;
+
+  /* ------------------------------------------------------------------ */
+  /*  Typography — Computed sizes (from base)                            */
+  /* ------------------------------------------------------------------ */
+  --text-button: 9px;          /* calc(base - 4px)  */
+  --text-button-mobile: 8px;   /* calc(base - 5px)  */
+  --text-nav: 13px;            /* same as base       */
+  --text-card-title: 12px;
+  --text-card-price: 11px;     /* calc(base * 0.85)  */
+  --text-badge: 10px;
+  --text-label: 9px;
+  --text-overline: 10px;
 
   /* ------------------------------------------------------------------ */
   /*  Typography — Font Weight                                           */
@@ -75,8 +152,21 @@
   --weight-bold: 700;
 
   /* ------------------------------------------------------------------ */
+  /*  Typography — Line Height                                           */
+  /* ------------------------------------------------------------------ */
+  --leading-base: 1.6;
+  --leading-header: 1.3;
+  --leading-hero: 0.9;
+  --leading-tight: 1.2;
+
+  /* ------------------------------------------------------------------ */
   /*  Typography — Letter Spacing                                        */
   /* ------------------------------------------------------------------ */
+  --tracking-base: 0.025em;
+  --tracking-header: 0.075em;
+  --tracking-button: 2.7px;
+  --tracking-nav: 1.5px;
+  --tracking-badge: 1.5px;
   --tracking-tight: 0.02em;
   --tracking-normal: 0.3px;
   --tracking-wide: 1.2px;
@@ -93,67 +183,110 @@
   --space-5: 10px;
   --space-6: 12px;
   --space-7: 14px;
-  --space-8: 16px;
-  --space-9: 20px;
-  --space-10: 24px;
-  --space-11: 28px;
-  --space-12: 32px;
-  --space-13: 36px;
-  --space-14: 40px;
+  --space-8: 15px;
+  --space-9: 16px;
+  --space-10: 17px;
+  --space-11: 20px;
+  --space-12: 22px;
+  --space-13: 24px;
+  --space-14: 30px;
+  --space-15: 40px;
+  --space-16: 75px;
+
+  /* ------------------------------------------------------------------ */
+  /*  Grid Gutters                                                       */
+  /* ------------------------------------------------------------------ */
+  --grid-gutter-mobile: 17px;
+  --grid-gutter-desktop: 22px;
+  --drawer-gutter-mobile: 20px;
+  --drawer-gutter-desktop: 30px;
+
+  /* ------------------------------------------------------------------ */
+  /*  Page Padding                                                       */
+  /* ------------------------------------------------------------------ */
+  --page-padding-mobile: 17px;
+  --page-padding-desktop: 24px;
+  --page-vertical-mobile: 40px;
+  --page-vertical-desktop: 75px;
+
+  /* ------------------------------------------------------------------ */
+  /*  Container Widths                                                   */
+  /* ------------------------------------------------------------------ */
+  --container-narrow: 1000px;
+  --container-tiny: 450px;
+  --container-modal: 1200px;
 
   /* ------------------------------------------------------------------ */
   /*  Border Radius                                                      */
   /* ------------------------------------------------------------------ */
   --radius-none: 0px;
-  --radius-xs: 1px;
-  --radius-sm: 2px;
+  --radius-xs: 2px;
+  --radius-sm: 3px;
   --radius-md: 4px;
+  --radius-base: 6px;
   --radius-lg: 8px;
-  --radius-xl: 14px;
-  --radius-pill: 65px;
-  --radius-button: 89px;
+  --radius-xl: 10px;
+  --radius-2xl: 16px;
+  --radius-3xl: 18px;
+  --radius-button: 50px;
+  --radius-button-near: 89px;
   --radius-full: 999px;
 
   /* ------------------------------------------------------------------ */
   /*  Shadows                                                            */
   /* ------------------------------------------------------------------ */
+  --shadow-card: 0 10px 20px rgba(0, 0, 0, 0.09);
+  --shadow-drawer-bottom: 0 -20px 40px rgba(0, 0, 0, 0.12);
+  --shadow-drawer-side: -20px 0 40px rgba(0, 0, 0, 0.12);
+  --shadow-focus: inset 0 0 0 2px var(--color-text-body);
+  --shadow-input: inset 0 1px 1px #f0f0f0, 0 3px 6px -5px #bbb;
   --shadow-xs: 0 1px 0 rgba(0, 0, 0, 0.06);
   --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
   --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.12);
   --shadow-lg: 0 12px 24px rgba(10, 10, 10, 0.08);
   --shadow-xl: 0 18px 38px rgba(0, 0, 0, 0.12);
   --shadow-arrow: 0 10px 24px rgba(0, 0, 0, 0.14);
-  --shadow-drawer-left: 4px 0 24px -4px rgba(0, 0, 0, 0.15);
-  --shadow-drawer-right: -4px 0 24px -4px rgba(0, 0, 0, 0.15);
 
   /* ------------------------------------------------------------------ */
-  /*  Breakpoints (reference values — use in JS, not CSS)                */
+  /*  Breakpoints (reference — matches DFYNE two-breakpoint system)      */
   /* ------------------------------------------------------------------ */
-  --bp-sm: 640px;
-  --bp-md: 768px;
-  --bp-lg: 1024px;
-  --bp-xl: 1280px;
-  --bp-2xl: 1536px;
+  --bp-mobile: 768px;
+  --bp-desktop: 769px;
+  --bp-lg-desktop: 960px;
+  --bp-tablet-max: 1081px;
 
   /* ------------------------------------------------------------------ */
   /*  Z-Index                                                            */
   /* ------------------------------------------------------------------ */
-  --z-content: 10;
-  --z-dropdown: 20;
-  --z-overlay: 40;
-  --z-header: 50;
-  --z-drawer: 101;
-  --z-skip: 200;
+  --z-base: 0;
+  --z-card: 1;
+  --z-card-hover: 2;
+  --z-badge: 3;
+  --z-float: 4;
+  --z-sticky: 6;
+  --z-modal: 10;
+  --z-drawer: 30;
+  --z-top: 50;
 
   /* ------------------------------------------------------------------ */
-  /*  Animation                                                          */
+  /*  Animation — Duration                                               */
   /* ------------------------------------------------------------------ */
   --duration-fast: 200ms;
   --duration-normal: 300ms;
+  --duration-slide: 260ms;
+  --duration-smooth: 320ms;
   --duration-slow: 500ms;
   --duration-slower: 700ms;
-  --ease-default: ease-out;
+  --duration-long: 1500ms;
+
+  /* ------------------------------------------------------------------ */
+  /*  Animation — Easing                                                 */
+  /* ------------------------------------------------------------------ */
+  --ease-default: cubic-bezier(0.2, 0.06, 0.05, 0.95);
   --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-smooth: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --ease-out: ease-out;
+  --ease-in: ease-in;
 }
 
 

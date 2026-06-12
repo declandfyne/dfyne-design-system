@@ -1,32 +1,25 @@
+/**
+ * Button — matches DFYNE live site (.btn, .btn--secondary, .btn--tertiary)
+ *
+ * Primary:   bg #111, white text, 50px radius, 13px 20px padding, 9px, 600, 2.7px tracking
+ * Secondary: transparent, border #e8e8e1, hover border darkens to body text
+ * Tertiary:  transparent, border #e8e8e1, weight 400, normal tracking, 8px 10px padding
+ */
+
 const variantClasses = {
   primary:
     "bg-[#111111] text-white border-transparent hover:opacity-90",
   secondary:
-    "bg-white text-black border-black hover:bg-[#111111] hover:text-white",
-  outline:
-    "bg-transparent text-black border-[#e8e8e1] hover:border-black",
+    "bg-transparent text-[#000000] border-[#e8e8e1] hover:border-[#000000]",
+  tertiary:
+    "bg-transparent text-[#000000] border-[#e8e8e1]",
   ghost:
     "bg-transparent text-white border-white hover:bg-white hover:text-black",
-} as const;
-
-const sizeClasses = {
-  xs: "h-[34px] px-4 text-[9px] tracking-[2.4px]",
-  sm: "h-[39px] px-5 text-[10px] tracking-[1.5px]",
-  md: "h-[41px] px-5 text-[9px] tracking-[2.7px]",
-  lg: "h-[48px] px-5 text-[11px] tracking-[1.5px]",
-} as const;
-
-const radiusClasses = {
-  default: "rounded-[50px]",
-  pill: "rounded-[140px]",
-  full: "rounded-[999px]",
 } as const;
 
 export function Button({
   children,
   variant = "primary",
-  size = "md",
-  radius = "default",
   disabled = false,
   onClick,
   className = "",
@@ -34,19 +27,24 @@ export function Button({
 }: {
   children: React.ReactNode;
   variant?: keyof typeof variantClasses;
-  size?: keyof typeof sizeClasses;
-  radius?: keyof typeof radiusClasses;
   disabled?: boolean;
   onClick?: () => void;
   className?: string;
   type?: "button" | "submit" | "reset";
 }) {
+  const isTertiary = variant === "tertiary";
+
   return (
     <button
       type={type}
       disabled={disabled}
       onClick={onClick}
-      className={`inline-flex items-center justify-center border font-semibold uppercase transition-colors duration-200 disabled:cursor-not-allowed disabled:opacity-50 ${radiusClasses[radius]} ${variantClasses[variant]} ${sizeClasses[size]} ${className}`.trim()}
+      className={`inline-flex min-w-[90px] items-center justify-center rounded-[50px] border uppercase transition-[border-color,background-color,opacity] duration-300 ease-[ease] disabled:cursor-default disabled:bg-[#f6f6f6] disabled:text-[#b6b6b6] disabled:border-transparent ${
+        isTertiary
+          ? "px-[10px] py-[8px] text-[9px] font-normal normal-case tracking-normal whitespace-nowrap"
+          : "px-[20px] py-[13px] text-[9px] font-semibold tracking-[2.7px]"
+      } ${variantClasses[variant]} ${className}`.trim()}
+      style={{ fontFamily: "Raleway, sans-serif" }}
     >
       {children}
     </button>

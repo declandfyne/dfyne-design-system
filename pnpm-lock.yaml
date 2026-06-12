@@ -55,6 +55,22 @@ importers:
         specifier: ^3
         version: 3.2.6(@types/node@20.17.6)(jiti@2.7.0)(jsdom@26.1.0)(lightningcss@1.32.0)(tsx@4.22.4)
 
+  packages/ai-context:
+    dependencies:
+      '@dfyne/tokens':
+        specifier: workspace:*
+        version: link:../tokens
+    devDependencies:
+      tsx:
+        specifier: ^4
+        version: 4.22.4
+      typescript:
+        specifier: ^5
+        version: 5.9.3
+      vitest:
+        specifier: ^3
+        version: 3.2.6(@types/node@20.17.6)(jiti@2.7.0)(jsdom@26.1.0)(lightningcss@1.32.0)(tsx@4.22.4)
+
   packages/liquid:
     dependencies:
       '@dfyne/tokens':

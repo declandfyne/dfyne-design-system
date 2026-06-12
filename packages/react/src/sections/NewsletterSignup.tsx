@@ -35,7 +35,8 @@ export function NewsletterSignup({
         />
         <button
           type="submit"
-          className="inline-flex h-[42px] items-center justify-center rounded-[89px] bg-black px-5 text-[9px] font-bold uppercase tracking-[2.8px] text-white transition-opacity hover:opacity-90"
+          className="inline-flex items-center justify-center rounded-[50px] bg-[#111111] px-[20px] py-[13px] text-[9px] font-semibold uppercase tracking-[2.7px] text-white transition-opacity hover:opacity-90"
+          style={{ fontFamily: "Raleway, sans-serif" }}
         >
           Subscribe
         </button>
