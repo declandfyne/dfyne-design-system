@@ -46,9 +46,56 @@ const jsonPath = path.join(distDir, "dfyne-context.json");
 fs.writeFileSync(promptPath, prompt, "utf-8");
 fs.writeFileSync(jsonPath, json, "utf-8");
 
-// --- 5. Summary ---
+// --- 5. Generate CLAUDE.md at repo root ---
+const repoRoot = path.resolve(__dirname, "../../..");
+
+const componentList = components
+  .map((c) => `- **${c.name}** — \`import { ${c.name} } from '@dfyne/react'\``)
+  .join("\n");
+
+const claudeMd = `# DFYNE Design System
+
+This monorepo contains the DFYNE design system.
+
+## AI Instructions
+
+When writing UI code for DFYNE:
+- Import components from \`@dfyne/react\` — never re-implement
+- Use CSS tokens from \`packages/tokens/src/tokens.css\` — never use arbitrary values
+- Font: Raleway. Primary: #111111. Background: #ffffff
+- Button text: uppercase, weight 600, tracking 2.7px
+- Product images: 4:5 aspect ratio
+- Currency: GBP via Intl.NumberFormat
+- Spacing: use --space-* tokens. Radius: use --radius-* tokens
+
+## Packages
+- \`packages/tokens\` — ${Object.keys(tokens).length} CSS design tokens
+- \`packages/react\` — React component library (${components.length} components)
+- \`packages/liquid\` — Shopify Liquid snippets
+- \`packages/ai-context\` — Auto-generated AI context files
+- \`apps/preview\` — Design system reference site (Next.js, port 3333)
+
+## Available Components
+
+${componentList}
+
+## Full AI context
+
+See \`packages/ai-context/dist/dfyne-system-prompt.md\` for complete token reference.
+`;
+
+const claudeMdPath = path.join(repoRoot, "CLAUDE.md");
+fs.writeFileSync(claudeMdPath, claudeMd, "utf-8");
+
+// --- 6. Generate .cursorrules at repo root ---
+const cursorRulesPath = path.join(repoRoot, ".cursorrules");
+fs.writeFileSync(cursorRulesPath, prompt, "utf-8");
+
+// --- 7. Summary ---
 console.log(`AI context build complete:`);
 console.log(`  Tokens:     ${Object.keys(tokens).length}`);
 console.log(`  Components: ${components.length}`);
 console.log(`  Prompt:     ${prompt.length} chars -> ${promptPath}`);
 console.log(`  JSON:       ${json.length} chars -> ${jsonPath}`);
+console.log(`  CLAUDE.md:  ${claudeMd.length} chars -> ${claudeMdPath}`);
+console.log(`  .cursorrules: ${prompt.length} chars -> ${cursorRulesPath}`);
