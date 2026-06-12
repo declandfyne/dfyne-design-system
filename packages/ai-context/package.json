@@ -1,0 +1,19 @@
+{
+  "name": "@dfyne/ai-context",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "tsx src/build.ts",
+    "test": "vitest run",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@dfyne/tokens": "workspace:*"
+  },
+  "devDependencies": {
+    "tsx": "^4",
+    "typescript": "^5",
+    "vitest": "^3"
+  }
+}
