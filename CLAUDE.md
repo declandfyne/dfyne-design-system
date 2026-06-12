@@ -15,7 +15,7 @@ When writing UI code for DFYNE:
 
 ## Packages
 - `packages/tokens` — 178 CSS design tokens
-- `packages/react` — React component library (17 components)
+- `packages/react` — React component library (20 components)
 - `packages/liquid` — Shopify Liquid snippets
 - `packages/ai-context` — Auto-generated AI context files
 - `apps/preview` — Design system reference site (Next.js, port 3333)
@@ -39,6 +39,9 @@ When writing UI code for DFYNE:
 - **AnnouncementBar** — `import { AnnouncementBar } from '@dfyne/react'`
 - **NewsletterSignup** — `import { NewsletterSignup } from '@dfyne/react'`
 - **Footer** — `import { Footer } from '@dfyne/react'`
+- **QuantityInput** — `import { QuantityInput } from '@dfyne/react'`
+- **Accordion** — `import { Accordion, AccordionItem } from '@dfyne/react'`
+- **Search** — `import { Search } from '@dfyne/react'`
 
 ## Full AI context
 

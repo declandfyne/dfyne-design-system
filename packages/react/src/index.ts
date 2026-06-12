@@ -5,6 +5,14 @@ export { Badge } from "./primitives/Badge";
 export { SectionHeading } from "./primitives/SectionHeading";
 export { Button } from "./primitives/Button";
 export { ArrowButton } from "./primitives/ArrowButton";
+export { QuantityInput } from "./primitives/QuantityInput";
+
+// Disclosure
+export { Accordion, AccordionItem } from "./disclosure/Accordion";
+
+// Search
+export { Search } from "./search/Search";
+export type { SearchResult } from "./search/Search";
 
 // Cards
 export { ProductCard } from "./cards/ProductCard";
