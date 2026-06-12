@@ -2,11 +2,45 @@
 @source "../../../../packages/react/src/**/*.tsx";
 @import "@dfyne/tokens/css";
 
+:root {
+  --panel-bg: #141414;
+  --canvas-bg: #0e0e0e;
+  --border: #222222;
+  --border-subtle: #1e1e1e;
+  --text-primary: #e0e0e0;
+  --text-secondary: #888888;
+  --text-muted: #555555;
+  --text-accent: #ffffff;
+  --input-bg: #1a1a1a;
+  --input-border: #2a2a2a;
+  --hover-bg: #1a1a1a;
+  --active-bg: #1f1f1f;
+  --sidebar-width: 240px;
+  --props-width: 300px;
+  --toolbar-height: 44px;
+}
+
 body {
   margin: 0;
-  font-family: "Raleway", Arial, Helvetica, sans-serif;
-  background: #f5f5f5;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  background: var(--canvas-bg);
+  color: var(--text-primary);
+}
+
+.font-mono {
+  font-family: "SF Mono", "Cascadia Code", "Fira Code", ui-monospace, monospace;
 }
 
 .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 .no-scrollbar::-webkit-scrollbar { display: none; }
+
+.layout-shell {
+  display: grid;
+  grid-template-columns: var(--sidebar-width) 1fr var(--props-width);
+  height: 100vh;
+  overflow: hidden;
+}
+
+.layout-shell.token-view {
+  grid-template-columns: var(--sidebar-width) 1fr;
+}
