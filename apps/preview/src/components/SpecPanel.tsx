@@ -1,7 +1,7 @@
 "use client";
 
 import { CopyButton } from "./CopyButton";
-import type { Mode } from "./ModeToggle";
+type Mode = "developer" | "designer";
 
 export type SpecEntry = {
   group: string;
