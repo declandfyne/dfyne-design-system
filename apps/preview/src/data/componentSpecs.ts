@@ -994,6 +994,398 @@ export const componentSpecs: ComponentSpecData[] = [
   },
 
   /* ------------------------------------------------------------------ */
+  /*  Slideshow                                                          */
+  /* ------------------------------------------------------------------ */
+  {
+    name: "Slideshow",
+    figmaPath: "Sections / Slideshow",
+    liquidCode: `<section class="slideshow">
+  <div class="slideshow__slide">
+    <img src="..." alt="..." />
+    <div class="slideshow__overlay">
+      <h2>NEW COLLECTION</h2>
+      <p>Spring 2024</p>
+    </div>
+  </div>
+</section>`,
+    reactCode: `import { Slideshow } from "@dfyne/react";
+
+<Slideshow
+  slides={[
+    { image: "...", alt: "Slide 1", heading: "NEW COLLECTION", caption: "Spring 2024" },
+    { image: "...", alt: "Slide 2", heading: "BEST SELLERS" },
+    { image: "...", alt: "Slide 3", heading: "SALE", cta: { label: "SHOP NOW", href: "#" } },
+  ]}
+  autoplay={false}
+/>`,
+    variants: [
+      {
+        name: "Default",
+        specs: [
+          { group: "Layout", property: "Width", value: "100%" },
+          { group: "Layout", property: "Height", value: "800px" },
+          { group: "Layout", property: "Overflow", value: "hidden" },
+          { group: "Heading", property: "Font", value: "Raleway 34-84px / 500" },
+          { group: "Heading", property: "Transform", value: "uppercase" },
+          { group: "Heading", property: "Color", value: "#ffffff" },
+          { group: "Caption", property: "Font", value: "Raleway 10px / 600" },
+          { group: "Caption", property: "Tracking", value: "1.5px" },
+          { group: "Caption", property: "Color", value: "white/80%" },
+          { group: "CTA", property: "Font", value: "9px / 600" },
+          { group: "CTA", property: "Tracking", value: "2.7px" },
+          { group: "Behavior", property: "Autoplay", value: "configurable (default true)" },
+        ],
+      },
+    ],
+  },
+
+  /* ------------------------------------------------------------------ */
+  /*  Promo Grid                                                         */
+  /* ------------------------------------------------------------------ */
+  {
+    name: "Promo Grid",
+    figmaPath: "Sections / Promo Grid",
+    liquidCode: `<section class="promo-grid">
+  <div class="promo-grid__card">
+    <img src="..." alt="..." />
+    <h3 class="promo-grid__title">LEGGINGS</h3>
+  </div>
+</section>`,
+    reactCode: `import { PromoGrid } from "@dfyne/react";
+
+<PromoGrid
+  cards={[
+    { image: "...", alt: "Leggings", title: "LEGGINGS", caption: "New styles" },
+    { image: "...", alt: "Bras", title: "SPORTS BRAS" },
+    { image: "...", alt: "Shorts", title: "SHORTS", span: 2 },
+  ]}
+  columns={3}
+/>`,
+    variants: [
+      {
+        name: "Default",
+        specs: [
+          { group: "Layout", property: "Columns", value: "3 (configurable)" },
+          { group: "Layout", property: "Gap", value: "16px" },
+          { group: "Image", property: "Aspect Ratio", value: "500:625 (4:5)" },
+          { group: "Image", property: "Object Fit", value: "cover" },
+          { group: "Title", property: "Font", value: "Raleway 13px / 600" },
+          { group: "Title", property: "Tracking", value: "1.5px" },
+          { group: "Title", property: "Transform", value: "uppercase" },
+          { group: "Title", property: "Color", value: "#111111" },
+          { group: "Caption", property: "Font", value: "Raleway 11px / 400" },
+          { group: "Caption", property: "Color", value: "rgba(0,0,0,0.6)" },
+        ],
+      },
+    ],
+  },
+
+  /* ------------------------------------------------------------------ */
+  /*  Tabs                                                               */
+  /* ------------------------------------------------------------------ */
+  {
+    name: "Tabs",
+    figmaPath: "Components / Tabs",
+    liquidCode: `<div class="tabs">
+  <div class="tabs__nav">
+    <button class="tabs__tab tabs__tab--active">Description</button>
+    <button class="tabs__tab">Size Guide</button>
+  </div>
+  <div class="tabs__panel">Content here...</div>
+</div>`,
+    reactCode: `import { Tabs } from "@dfyne/react";
+
+<Tabs tabs={[
+  { label: "Description", content: <p>Premium seamless fabric...</p> },
+  { label: "Size Guide", content: <p>XS: 6-8, S: 8-10...</p> },
+  { label: "Delivery", content: <p>Free UK delivery over \u00a350.</p> },
+]} />`,
+    variants: [
+      {
+        name: "Default",
+        specs: [
+          { group: "Tab", property: "Font", value: "Raleway 10px / 600" },
+          { group: "Tab", property: "Tracking", value: "1.5px" },
+          { group: "Tab", property: "Transform", value: "uppercase" },
+          { group: "Tab", property: "Padding", value: "12px 16px" },
+          { group: "Tab Active", property: "Border Bottom", value: "2px solid #111111" },
+          { group: "Tab Active", property: "Color", value: "#111111" },
+          { group: "Panel", property: "Font", value: "Raleway 13px / 400" },
+          { group: "Panel", property: "Line Height", value: "1.6" },
+          { group: "Panel", property: "Padding", value: "16px 0" },
+          { group: "Colors", property: "Border", value: "1px solid #e8e8e1", cssVar: "--color-border" },
+        ],
+      },
+    ],
+  },
+
+  /* ------------------------------------------------------------------ */
+  /*  Toast                                                              */
+  /* ------------------------------------------------------------------ */
+  {
+    name: "Toast",
+    figmaPath: "Components / Toast",
+    liquidCode: `<div class="toast toast--success">
+  <span class="toast__message">Added to bag successfully</span>
+  <button class="toast__close">&times;</button>
+</div>`,
+    reactCode: `import { Toast } from "@dfyne/react";
+
+<Toast
+  message="Added to bag successfully"
+  type="success"
+  visible={true}
+  onClose={() => {}}
+/>`,
+    variants: [
+      {
+        name: "Default",
+        specs: [
+          { group: "Typography", property: "Font", value: "Raleway 13px / 400" },
+          { group: "Typography", property: "Color", value: "#ffffff" },
+          { group: "Spacing", property: "Padding", value: "12px 16px" },
+          { group: "Colors", property: "Background (success)", value: "#111111" },
+          { group: "Shape", property: "Radius", value: "4px" },
+          { group: "Layout", property: "Position", value: "fixed bottom-right" },
+          { group: "Behavior", property: "Animation", value: "slide-up on show" },
+        ],
+      },
+    ],
+  },
+
+  /* ------------------------------------------------------------------ */
+  /*  Breadcrumbs                                                        */
+  /* ------------------------------------------------------------------ */
+  {
+    name: "Breadcrumbs",
+    figmaPath: "Components / Breadcrumbs",
+    liquidCode: `<nav class="breadcrumb" aria-label="breadcrumb">
+  <a href="/">Home</a>
+  <span class="breadcrumb__sep">/</span>
+  <a href="/collections">Shop</a>
+  <span class="breadcrumb__sep">/</span>
+  <span>Power Seamless Legging</span>
+</nav>`,
+    reactCode: `import { Breadcrumbs } from "@dfyne/react";
+
+<Breadcrumbs items={[
+  { label: "Home", href: "#" },
+  { label: "Shop", href: "#" },
+  { label: "Leggings", href: "#" },
+  { label: "Power Seamless Legging" },
+]} />`,
+    variants: [
+      {
+        name: "Default",
+        specs: [
+          { group: "Typography", property: "Font", value: "Raleway 11px / 400" },
+          { group: "Typography", property: "Tracking", value: "0.3px" },
+          { group: "Link", property: "Color", value: "rgba(0,0,0,0.6)" },
+          { group: "Link", property: "Hover", value: "underline" },
+          { group: "Current", property: "Color", value: "#111111" },
+          { group: "Separator", property: "Character", value: "/" },
+          { group: "Separator", property: "Color", value: "rgba(0,0,0,0.3)" },
+          { group: "Spacing", property: "Gap", value: "8px" },
+        ],
+      },
+    ],
+  },
+
+  /* ------------------------------------------------------------------ */
+  /*  Pagination                                                         */
+  /* ------------------------------------------------------------------ */
+  {
+    name: "Pagination",
+    figmaPath: "Components / Pagination",
+    liquidCode: `<nav class="pagination" aria-label="Pagination">
+  <a class="pagination__prev" href="?page=1">&laquo; Prev</a>
+  <span class="pagination__page pagination__page--active">2</span>
+  <a class="pagination__page" href="?page=3">3</a>
+  <a class="pagination__next" href="?page=3">Next &raquo;</a>
+</nav>`,
+    reactCode: `import { Pagination } from "@dfyne/react";
+
+<Pagination
+  currentPage={2}
+  totalPages={12}
+  onPageChange={(page) => {}}
+/>`,
+    variants: [
+      {
+        name: "Default",
+        specs: [
+          { group: "Typography", property: "Font", value: "Raleway 11px / 400" },
+          { group: "Typography", property: "Tracking", value: "0.3px" },
+          { group: "Active Page", property: "Background", value: "#111111" },
+          { group: "Active Page", property: "Color", value: "#ffffff" },
+          { group: "Page", property: "Size", value: "32px x 32px" },
+          { group: "Page", property: "Radius", value: "50%" },
+          { group: "Page", property: "Hover BG", value: "#f6f6f6" },
+          { group: "Spacing", property: "Gap", value: "4px" },
+        ],
+      },
+    ],
+  },
+
+  /* ------------------------------------------------------------------ */
+  /*  Region Selector                                                    */
+  /* ------------------------------------------------------------------ */
+  {
+    name: "Region Selector",
+    figmaPath: "Components / Region Selector",
+    liquidCode: `<div class="region-selector">
+  <button class="region-selector__toggle">
+    <span class="region-selector__flag">\u{1F1EC}\u{1F1E7}</span>
+    <span>United Kingdom (GBP)</span>
+  </button>
+  <ul class="region-selector__list">
+    <li class="region-selector__option">...</li>
+  </ul>
+</div>`,
+    reactCode: `import { RegionSelector } from "@dfyne/react";
+
+<RegionSelector
+  regions={[
+    { code: "GB", label: "United Kingdom", flag: "\u{1F1EC}\u{1F1E7}", currency: "GBP" },
+    { code: "US", label: "United States", flag: "\u{1F1FA}\u{1F1F8}", currency: "USD" },
+  ]}
+  activeRegion="GB"
+  onChange={(code) => {}}
+/>`,
+    variants: [
+      {
+        name: "Default",
+        specs: [
+          { group: "Typography", property: "Font", value: "Raleway 11px / 400" },
+          { group: "Typography", property: "Tracking", value: "0.3px" },
+          { group: "Toggle", property: "Padding", value: "8px 12px" },
+          { group: "Toggle", property: "Border", value: "1px solid #e8e8e1", cssVar: "--color-border" },
+          { group: "Toggle", property: "Radius", value: "4px" },
+          { group: "Dropdown", property: "Background", value: "#ffffff" },
+          { group: "Dropdown", property: "Shadow", value: "0 4px 12px rgba(0,0,0,0.1)" },
+          { group: "Option", property: "Padding", value: "8px 12px" },
+          { group: "Option", property: "Hover BG", value: "#f6f6f6" },
+        ],
+      },
+    ],
+  },
+
+  /* ------------------------------------------------------------------ */
+  /*  Tooltip                                                            */
+  /* ------------------------------------------------------------------ */
+  {
+    name: "Tooltip",
+    figmaPath: "Components / Tooltip",
+    liquidCode: `<div class="tooltip-wrapper">
+  <button>Hover me</button>
+  <div class="tooltip tooltip--top">Top tooltip</div>
+</div>`,
+    reactCode: `import { Tooltip } from "@dfyne/react";
+
+<Tooltip content="Top tooltip" position="top">
+  <button>Hover (Top)</button>
+</Tooltip>
+<Tooltip content="Bottom tooltip" position="bottom">
+  <button>Hover (Bottom)</button>
+</Tooltip>`,
+    variants: [
+      {
+        name: "Default",
+        specs: [
+          { group: "Typography", property: "Font", value: "Raleway 11px / 400" },
+          { group: "Typography", property: "Color", value: "#ffffff" },
+          { group: "Colors", property: "Background", value: "#111111" },
+          { group: "Spacing", property: "Padding", value: "6px 10px" },
+          { group: "Shape", property: "Radius", value: "4px" },
+          { group: "Layout", property: "Positions", value: "top, bottom, left, right" },
+          { group: "Behavior", property: "Trigger", value: "hover / focus" },
+        ],
+      },
+    ],
+  },
+
+  /* ------------------------------------------------------------------ */
+  /*  Social Icons                                                       */
+  /* ------------------------------------------------------------------ */
+  {
+    name: "Social Icons",
+    figmaPath: "Components / Social Icons",
+    liquidCode: `<div class="social-icons">
+  <a href="..." class="social-icons__link" aria-label="Instagram">
+    <svg><!-- instagram --></svg>
+  </a>
+  <a href="..." class="social-icons__link" aria-label="TikTok">
+    <svg><!-- tiktok --></svg>
+  </a>
+</div>`,
+    reactCode: `import { SocialIcons } from "@dfyne/react";
+
+<SocialIcons links={[
+  { platform: "instagram", href: "#" },
+  { platform: "tiktok", href: "#" },
+  { platform: "facebook", href: "#" },
+  { platform: "youtube", href: "#" },
+  { platform: "pinterest", href: "#" },
+]} />`,
+    variants: [
+      {
+        name: "Default",
+        specs: [
+          { group: "Icon", property: "Size", value: "20px" },
+          { group: "Icon", property: "Color", value: "#111111" },
+          { group: "Icon", property: "Hover Color", value: "rgba(0,0,0,0.6)" },
+          { group: "Spacing", property: "Gap", value: "16px" },
+          { group: "Layout", property: "Display", value: "inline-flex" },
+        ],
+      },
+    ],
+  },
+
+  /* ------------------------------------------------------------------ */
+  /*  Media Text                                                         */
+  /* ------------------------------------------------------------------ */
+  {
+    name: "Media Text",
+    figmaPath: "Sections / Media Text",
+    liquidCode: `<section class="media-text">
+  <div class="media-text__image">
+    <img src="..." alt="Our Story" />
+  </div>
+  <div class="media-text__content">
+    <h2>OUR STORY</h2>
+    <p>Founded in 2020...</p>
+    <a href="..." class="btn">LEARN MORE</a>
+  </div>
+</section>`,
+    reactCode: `import { MediaText } from "@dfyne/react";
+
+<MediaText
+  image={{ src: "...", alt: "Our Story" }}
+  heading="OUR STORY"
+  body="Founded in 2020, DFYNE creates premium women's activewear..."
+  cta={{ label: "LEARN MORE", href: "#" }}
+/>`,
+    variants: [
+      {
+        name: "Default",
+        specs: [
+          { group: "Layout", property: "Display", value: "grid 2-col (desktop) / stack (mobile)" },
+          { group: "Image", property: "Aspect Ratio", value: "720:500" },
+          { group: "Image", property: "Object Fit", value: "cover" },
+          { group: "Heading", property: "Font", value: "Raleway 14px / 600" },
+          { group: "Heading", property: "Tracking", value: "1.5px" },
+          { group: "Heading", property: "Transform", value: "uppercase" },
+          { group: "Body", property: "Font", value: "Raleway 13px / 400" },
+          { group: "Body", property: "Line Height", value: "1.6" },
+          { group: "Body", property: "Color", value: "rgba(0,0,0,0.7)" },
+          { group: "CTA", property: "Style", value: "Primary Button" },
+          { group: "Spacing", property: "Content Padding", value: "40px" },
+        ],
+      },
+    ],
+  },
+
+  /* ------------------------------------------------------------------ */
   /*  Cart Drawer                                                        */
   /* ------------------------------------------------------------------ */
   {
