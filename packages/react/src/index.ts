@@ -26,6 +26,9 @@ export { ProductRail } from "./rails/ProductRail";
 export { CategoryRail } from "./rails/CategoryRail";
 export { CrossSellRail } from "./rails/CrossSellRail";
 
+// Gallery
+export { ProductGallery } from "./gallery/ProductGallery";
+
 // Sections
 export { CampaignHero } from "./sections/CampaignHero";
 export { AnnouncementBar } from "./sections/AnnouncementBar";
