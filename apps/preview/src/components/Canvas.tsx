@@ -1,5 +1,7 @@
 "use client";
 
+import { useEffect, useState, useRef } from "react";
+
 export function Canvas({
   children,
   dark,
@@ -9,21 +11,51 @@ export function Canvas({
   dark: boolean;
   fullWidth?: boolean;
 }) {
+  const [visible, setVisible] = useState(false);
+  const keyRef = useRef(0);
+
+  /* Re-trigger fade-in whenever children change */
+  useEffect(() => {
+    setVisible(false);
+    keyRef.current += 1;
+    const frame = requestAnimationFrame(() => setVisible(true));
+    return () => cancelAnimationFrame(frame);
+  }, [children]);
+
+  const dotColor = dark ? "#111111" : "#e0e0e0";
+  const bgColor = dark ? "#080808" : "#f5f5f5";
+
+  const dotGrid = [
+    `radial-gradient(circle, ${dotColor} 0.75px, transparent 0.75px)`,
+  ].join(", ");
+
   return (
     <div
-      className="flex flex-1 items-center justify-center overflow-auto p-10"
-      style={{ background: dark ? "var(--canvas-bg)" : "#e8e8e8" }}
+      className="relative flex flex-1 items-center justify-center overflow-auto"
+      style={{
+        background: bgColor,
+        backgroundImage: dotGrid,
+        backgroundSize: "24px 24px",
+        backgroundPosition: "12px 12px",
+      }}
     >
-      {fullWidth ? (
-        <div className="w-full max-w-[1200px]">{children}</div>
-      ) : (
-        <div
-          className="flex flex-col items-center gap-6 rounded-xl bg-white px-16 py-12"
-          style={{ minWidth: 300, boxShadow: "0 0 0 1px rgba(255,255,255,0.05)" }}
-        >
-          {children}
-        </div>
-      )}
+      <div
+        className={fullWidth ? "w-full" : "flex items-center justify-center p-10"}
+        style={{
+          opacity: visible ? 1 : 0,
+          transition: "opacity 200ms ease-out",
+        }}
+      >
+        {children}
+      </div>
+
+      {/* Zoom indicator */}
+      <span
+        className="pointer-events-none absolute bottom-3 right-4 select-none font-mono text-[10px]"
+        style={{ color: dark ? "#333" : "#bbb" }}
+      >
+        100%
+      </span>
     </div>
   );
 }
