@@ -6,6 +6,7 @@ export { SectionHeading } from "./primitives/SectionHeading";
 export { Button } from "./primitives/Button";
 export { ArrowButton } from "./primitives/ArrowButton";
 export { QuantityInput } from "./primitives/QuantityInput";
+export { LengthSelector } from "./primitives/LengthSelector";
 
 // Disclosure
 export { Accordion, AccordionItem } from "./disclosure/Accordion";
@@ -44,10 +45,11 @@ export { CartDrawer } from "./cart/CartDrawer";
 export type { CartDrawerItem } from "./cart/CartDrawer";
 
 // Modals
-export { QuickShopModal } from "./modals/QuickShopModal";
-export type { QuickShopProduct } from "./modals/QuickShopModal";
+export { QuickAdd } from "./modals/QuickAdd";
+export type { QuickAddProduct } from "./modals/QuickAdd";
 
 // Navigation
+export { BackLink } from "./navigation/BackLink";
 export { Header } from "./navigation/Header";
 export type { NavItem, HeaderProps } from "./navigation/Header";
 export { SocialIcons } from "./navigation/SocialIcons";
