@@ -167,6 +167,7 @@ export default function PreviewPage() {
         propValues={propValues}
         onPropChange={handlePropChange}
         specs={firstVariantSpecs}
+        componentName={active}
       />
     </div>
   );

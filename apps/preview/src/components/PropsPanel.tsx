@@ -14,17 +14,17 @@ type PropApiEntry = {
 
 function getApiEntries(controls: ComponentControlDef): PropApiEntry[] {
   const colorMap: Record<string, { color: string; bg: string }> = {
-    enum: { color: "#7ee787", bg: "#1a2a1a" },
-    boolean: { color: "#ff7b72", bg: "#2a1a1a" },
-    string: { color: "#79c0ff", bg: "#1a2332" },
-    number: { color: "#e3b341", bg: "#2a2a1a" },
+    enum: { color: "#7ee787", bg: "rgba(126,231,135,0.15)" },
+    boolean: { color: "#ff7b72", bg: "rgba(255,123,114,0.15)" },
+    string: { color: "#79c0ff", bg: "rgba(121,192,255,0.15)" },
+    number: { color: "#e3b341", bg: "rgba(227,179,65,0.15)" },
   };
 
   return Object.entries(controls.props).map(([name, ctrl]) => ({
     name,
     type: ctrl.type,
     typeColor: colorMap[ctrl.type]?.color ?? "#888",
-    typeBg: colorMap[ctrl.type]?.bg ?? "#1a1a1a",
+    typeBg: colorMap[ctrl.type]?.bg ?? "rgba(136,136,136,0.1)",
     defaultVal: JSON.stringify(ctrl.default),
   }));
 }
@@ -34,14 +34,14 @@ export function PropsPanel({
   propValues,
   onPropChange,
   specs,
+  componentName,
 }: {
   controls: ComponentControlDef | undefined;
   propValues: Record<string, unknown>;
   onPropChange: (name: string, value: unknown) => void;
   specs: SpecEntry[];
+  componentName?: string;
 }) {
-  const sectionTitle = "text-[10px] font-semibold uppercase tracking-[1px] mb-2.5";
-
   return (
     <div
       className="flex h-full flex-col overflow-y-auto border-l"
@@ -49,52 +49,124 @@ export function PropsPanel({
     >
       {/* Header */}
       <div
-        className="shrink-0 border-b px-4 py-3 text-[11px] font-semibold uppercase tracking-[1px]"
-        style={{ borderColor: "var(--border)", color: "var(--text-muted)" }}
+        className="shrink-0 px-4"
+        style={{
+          borderBottom: "1px solid var(--border)",
+          paddingTop: 14,
+          paddingBottom: 14,
+        }}
       >
-        Controls
+        {componentName ? (
+          <span
+            style={{
+              fontSize: 14,
+              fontFamily: "Raleway, sans-serif",
+              fontWeight: 600,
+              color: "#fff",
+              letterSpacing: "0.3px",
+            }}
+          >
+            {componentName}
+          </span>
+        ) : (
+          <span
+            style={{
+              fontSize: 11,
+              fontWeight: 600,
+              textTransform: "uppercase",
+              letterSpacing: "1px",
+              color: "var(--text-muted)",
+            }}
+          >
+            Controls
+          </span>
+        )}
       </div>
 
       {/* Props Controls */}
       {controls && Object.keys(controls.props).length > 0 && (
-        <div className="border-b px-4 py-3" style={{ borderColor: "var(--border-subtle)" }}>
-          <div className={sectionTitle} style={{ color: "var(--text-muted)" }}>Props</div>
-          {Object.entries(controls.props).map(([name, ctrl]) => (
-            <ControlInput
-              key={name}
-              name={name}
-              control={ctrl}
-              value={propValues[name] ?? ctrl.default}
-              onChange={(val) => onPropChange(name, val)}
-            />
-          ))}
+        <div className="px-4" style={{ borderBottom: "1px solid var(--border-subtle)", paddingTop: 14, paddingBottom: 14 }}>
+          <div
+            style={{
+              fontSize: 10,
+              fontWeight: 600,
+              textTransform: "uppercase",
+              letterSpacing: "1px",
+              color: "var(--text-muted)",
+              marginBottom: 12,
+            }}
+          >
+            Props
+          </div>
+          <div style={{ display: "flex", flexDirection: "column", gap: 2 }}>
+            {Object.entries(controls.props).map(([name, ctrl]) => (
+              <ControlInput
+                key={name}
+                name={name}
+                control={ctrl}
+                value={propValues[name] ?? ctrl.default}
+                onChange={(val) => onPropChange(name, val)}
+              />
+            ))}
+          </div>
         </div>
       )}
 
       {/* API Table */}
       {controls && Object.keys(controls.props).length > 0 && (
-        <div className="border-b px-4 py-3" style={{ borderColor: "var(--border-subtle)" }}>
-          <div className={sectionTitle} style={{ color: "var(--text-muted)" }}>API</div>
+        <div className="px-4" style={{ borderBottom: "1px solid var(--border-subtle)", paddingTop: 14, paddingBottom: 14 }}>
+          <div
+            style={{
+              fontSize: 10,
+              fontWeight: 600,
+              textTransform: "uppercase",
+              letterSpacing: "1px",
+              color: "var(--text-muted)",
+              marginBottom: 12,
+            }}
+          >
+            API
+          </div>
           {/* Header row */}
-          <div className="mb-1 grid grid-cols-[1fr_60px_1fr] gap-2 border-b pb-1.5" style={{ borderColor: "var(--border)" }}>
-            <span className="text-[10px] font-semibold uppercase tracking-[0.5px]" style={{ color: "var(--text-muted)" }}>Prop</span>
-            <span className="text-[10px] font-semibold uppercase tracking-[0.5px]" style={{ color: "var(--text-muted)" }}>Type</span>
-            <span className="text-[10px] font-semibold uppercase tracking-[0.5px]" style={{ color: "var(--text-muted)" }}>Default</span>
+          <div
+            className="grid grid-cols-[1fr_56px_1fr] gap-x-3"
+            style={{
+              borderBottom: "1px solid var(--border)",
+              paddingBottom: 8,
+              marginBottom: 4,
+            }}
+          >
+            <span style={{ fontSize: 10, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.5px", color: "var(--text-muted)" }}>Prop</span>
+            <span style={{ fontSize: 10, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.5px", color: "var(--text-muted)" }}>Type</span>
+            <span style={{ fontSize: 10, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.5px", color: "var(--text-muted)" }}>Default</span>
           </div>
           {getApiEntries(controls).map((entry) => (
             <div
               key={entry.name}
-              className="grid grid-cols-[1fr_60px_1fr] items-center gap-2 border-b py-[7px]"
-              style={{ borderColor: "var(--border-subtle)" }}
+              className="grid grid-cols-[1fr_56px_1fr] items-center gap-x-3"
+              style={{
+                borderBottom: "1px solid var(--border-subtle)",
+                paddingTop: 6,
+                paddingBottom: 6,
+              }}
             >
-              <span className="font-mono text-[12px] text-[#ccc]">{entry.name}</span>
+              <span style={{ fontFamily: "monospace", fontSize: 11, color: "#ccc" }}>{entry.name}</span>
               <span
-                className="inline-block rounded px-1.5 py-[2px] text-[10px]"
-                style={{ background: entry.typeBg, color: entry.typeColor, fontFamily: "inherit" }}
+                style={{
+                  display: "inline-block",
+                  background: entry.typeBg,
+                  color: entry.typeColor,
+                  fontSize: 10,
+                  fontFamily: "monospace",
+                  fontWeight: 500,
+                  padding: "2px 6px",
+                  borderRadius: 4,
+                  lineHeight: "16px",
+                }}
               >
                 {entry.type}
               </span>
-              <span className="font-mono text-[11px]" style={{ color: "var(--text-muted)" }}>
+              <span style={{ fontFamily: "monospace", fontSize: 11, color: "var(--text-muted)" }}>
                 {entry.defaultVal}
               </span>
             </div>
@@ -104,28 +176,52 @@ export function PropsPanel({
 
       {/* Specs */}
       {specs.length > 0 && (
-        <div className="px-4 py-3">
-          <div className={sectionTitle} style={{ color: "var(--text-muted)" }}>Specs</div>
-          {specs.map((spec) => (
-            <div
-              key={`${spec.group}-${spec.property}`}
-              className="flex items-center justify-between border-b py-1"
-              style={{ borderColor: "var(--border-subtle)" }}
-            >
-              <span className="text-[11px]" style={{ color: "var(--text-muted)" }}>
-                {spec.property}
-              </span>
-              <span className="font-mono flex items-center gap-1.5 text-[11px]" style={{ color: "#aaa" }}>
-                {spec.group === "Colors" && (
-                  <span
-                    className="inline-block h-2.5 w-2.5 rounded-sm border"
-                    style={{ background: spec.value, borderColor: "#333" }}
-                  />
-                )}
-                {spec.value}
-              </span>
-            </div>
-          ))}
+        <div className="px-4" style={{ paddingTop: 14, paddingBottom: 14 }}>
+          <div
+            style={{
+              fontSize: 10,
+              fontWeight: 600,
+              textTransform: "uppercase",
+              letterSpacing: "1px",
+              color: "var(--text-muted)",
+              marginBottom: 12,
+            }}
+          >
+            Specs
+          </div>
+          <div style={{ display: "flex", flexDirection: "column", gap: 0 }}>
+            {specs.map((spec) => (
+              <div
+                key={`${spec.group}-${spec.property}`}
+                className="flex items-center justify-between"
+                style={{
+                  borderBottom: "1px solid var(--border-subtle)",
+                  paddingTop: 5,
+                  paddingBottom: 5,
+                }}
+              >
+                <span style={{ fontSize: 11, color: "var(--text-muted)" }}>
+                  {spec.property}
+                </span>
+                <span className="flex items-center gap-1.5" style={{ fontFamily: "monospace", fontSize: 11, color: "#aaa" }}>
+                  {spec.group === "Colors" && (
+                    <span
+                      style={{
+                        display: "inline-block",
+                        width: 12,
+                        height: 12,
+                        borderRadius: 2,
+                        background: spec.value,
+                        border: "1px solid #333",
+                        flexShrink: 0,
+                      }}
+                    />
+                  )}
+                  {spec.value}
+                </span>
+              </div>
+            ))}
+          </div>
         </div>
       )}
     </div>
