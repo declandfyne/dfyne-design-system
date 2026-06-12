@@ -945,6 +945,172 @@ export const componentSpecs: ComponentSpecData[] = [
   },
 
   /* ------------------------------------------------------------------ */
+  /*  Cart Item                                                          */
+  /* ------------------------------------------------------------------ */
+  {
+    name: "Cart Item",
+    figmaPath: "Components / Cart Item",
+    liquidCode: `<div class="cart__item">
+  <div class="cart__item-image">
+    <img src="..." alt="..." width="80" height="100" />
+  </div>
+  <div class="cart__item-details">
+    <p class="cart__item-name">Power Seamless Legging</p>
+    <p class="cart__item-variant">Black / M</p>
+    <p class="cart__item-price">£54.00</p>
+    <div class="js-qty__wrapper"><!-- quantity --></div>
+    <button class="cart__item-remove">Remove</button>
+  </div>
+</div>`,
+    reactCode: `import { CartItem } from "@dfyne/react";
+
+<CartItem
+  image={{ src: "https://placehold.co/80x100/e8e8e1/111?text=Legging", alt: "Legging" }}
+  name="Power Seamless Legging"
+  variant="Black / M"
+  price="£54.00"
+  quantity={1}
+  onQuantityChange={(v) => {}}
+  onRemove={() => {}}
+/>`,
+    variants: [
+      {
+        name: "Default",
+        specs: [
+          { group: "Image", property: "Width", value: "80px" },
+          { group: "Image", property: "Height", value: "100px" },
+          { group: "Image", property: "Radius", value: "4px" },
+          { group: "Image", property: "Object Fit", value: "cover" },
+          { group: "Name", property: "Font", value: "Raleway 13px / 600" },
+          { group: "Name", property: "Tracking", value: "0.325px" },
+          { group: "Variant", property: "Font", value: "Raleway 11px / 400" },
+          { group: "Variant", property: "Color", value: "rgba(0,0,0,0.6)" },
+          { group: "Price", property: "Font", value: "Raleway 13px / 400" },
+          { group: "Spacing", property: "Gap", value: "12px" },
+          { group: "Colors", property: "Border Bottom", value: "1px solid #e8e8e1", cssVar: "--color-border" },
+        ],
+      },
+    ],
+  },
+
+  /* ------------------------------------------------------------------ */
+  /*  Cart Drawer                                                        */
+  /* ------------------------------------------------------------------ */
+  {
+    name: "Cart Drawer",
+    figmaPath: "Sections / Cart Drawer",
+    liquidCode: `<div class="cart-drawer__overlay">
+  <div class="cart-drawer">
+    <div class="cart-drawer__header">
+      <h2>Your Bag</h2>
+      <button class="cart-drawer__close">&times;</button>
+    </div>
+    <div class="cart-drawer__items">
+      <!-- CartItem elements -->
+    </div>
+    <div class="cart-drawer__footer">
+      <p class="cart-drawer__subtotal">Subtotal: £130.00</p>
+      <p class="cart-drawer__shipping">Free UK delivery over £50</p>
+      <button class="btn">CHECKOUT</button>
+    </div>
+  </div>
+</div>`,
+    reactCode: `import { CartDrawer } from "@dfyne/react";
+
+<CartDrawer
+  open={isOpen}
+  onClose={() => setIsOpen(false)}
+  items={[
+    { image: { src: "...", alt: "Item" }, name: "Power Seamless Legging", variant: "Black / M", price: "£54.00", quantity: 1 },
+  ]}
+  onItemQuantityChange={() => {}}
+  onItemRemove={() => {}}
+  subtotal="£130.00"
+  shippingMessage="Free UK delivery over £50"
+  onCheckout={() => {}}
+/>`,
+    variants: [
+      {
+        name: "Default",
+        specs: [
+          { group: "Overlay", property: "Background", value: "rgba(0,0,0,0.5)" },
+          { group: "Drawer", property: "Width", value: "400px (desktop)" },
+          { group: "Drawer", property: "Background", value: "#ffffff" },
+          { group: "Drawer", property: "Position", value: "fixed right-0" },
+          { group: "Header", property: "Font", value: "Raleway 14px / 600" },
+          { group: "Header", property: "Tracking", value: "1.5px" },
+          { group: "Header", property: "Transform", value: "uppercase" },
+          { group: "Subtotal", property: "Font", value: "Raleway 13px / 600" },
+          { group: "Shipping", property: "Font", value: "Raleway 11px / 400" },
+          { group: "Shipping", property: "Color", value: "rgba(0,0,0,0.6)" },
+          { group: "Spacing", property: "Padding", value: "24px" },
+        ],
+      },
+    ],
+  },
+
+  /* ------------------------------------------------------------------ */
+  /*  Header                                                             */
+  /* ------------------------------------------------------------------ */
+  {
+    name: "Header",
+    figmaPath: "Sections / Header",
+    liquidCode: `<header class="site-header">
+  <div class="page-width">
+    <a class="site-header__logo" href="/">DFYNE</a>
+    <nav class="site-nav">
+      <a href="/collections/shop" class="site-nav__link">Shop</a>
+      <a href="/collections/new" class="site-nav__link">New In</a>
+    </nav>
+    <div class="site-header__icons">
+      <button class="site-header__search"><!-- search --></button>
+      <a class="site-header__cart" href="/cart">
+        <span class="cart-link__count">2</span>
+      </a>
+    </div>
+  </div>
+</header>`,
+    reactCode: `import { Header } from "@dfyne/react";
+
+<Header
+  logo={<span style={{ fontFamily: "Raleway", fontWeight: 700, fontSize: 18, letterSpacing: 3 }}>DFYNE</span>}
+  navItems={[
+    { label: "Shop", href: "#", children: [
+      { label: "Leggings", href: "#" },
+      { label: "Sports Bras", href: "#" },
+    ]},
+    { label: "New In", href: "#" },
+  ]}
+  cartItemCount={2}
+  onCartClick={() => {}}
+  onMenuClick={() => {}}
+  onSearch={() => {}}
+/>`,
+    variants: [
+      {
+        name: "Default",
+        specs: [
+          { group: "Layout", property: "Height", value: "60px" },
+          { group: "Layout", property: "Position", value: "sticky top-0" },
+          { group: "Layout", property: "Z-Index", value: "1000" },
+          { group: "Colors", property: "Background", value: "#ffffff" },
+          { group: "Colors", property: "Border Bottom", value: "1px solid #e8e8e1", cssVar: "--color-border" },
+          { group: "Logo", property: "Font", value: "Raleway 18px / 700" },
+          { group: "Logo", property: "Tracking", value: "3px" },
+          { group: "Nav", property: "Font", value: "Raleway 10px / 600" },
+          { group: "Nav", property: "Tracking", value: "1.5px" },
+          { group: "Nav", property: "Transform", value: "uppercase" },
+          { group: "Nav", property: "Gap", value: "24px" },
+          { group: "Cart Badge", property: "Size", value: "16px" },
+          { group: "Cart Badge", property: "Background", value: "#111111" },
+          { group: "Cart Badge", property: "Text", value: "#ffffff" },
+          { group: "Cart Badge", property: "Font", value: "9px / 600" },
+        ],
+      },
+    ],
+  },
+
+  /* ------------------------------------------------------------------ */
   /*  Footer                                                             */
   /* ------------------------------------------------------------------ */
   {

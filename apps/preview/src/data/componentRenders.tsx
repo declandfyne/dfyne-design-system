@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import {
   Icon,
   Badge,
@@ -24,8 +24,35 @@ import {
   FilterPanel,
   CollectionGrid,
   QuickShopModal,
+  CartItem,
+  CartDrawer,
+  Header,
 } from "@dfyne/react";
 import type { IconName } from "@dfyne/react";
+
+function CartDrawerPreview() {
+  const [isOpen, setIsOpen] = useState(false);
+  return (
+    <>
+      <Button variant="primary" onClick={() => setIsOpen(true)}>
+        OPEN CART DRAWER
+      </Button>
+      <CartDrawer
+        open={isOpen}
+        onClose={() => setIsOpen(false)}
+        items={[
+          { image: { src: "https://placehold.co/80x100/e8e8e1/111?text=1", alt: "Item" }, name: "Power Seamless Legging", variant: "Black / M", price: "£54.00", quantity: 1 },
+          { image: { src: "https://placehold.co/80x100/e8e8e1/111?text=2", alt: "Item" }, name: "Vital Sports Bra", variant: "White / S", price: "£38.00", quantity: 2 },
+        ]}
+        onItemQuantityChange={() => {}}
+        onItemRemove={() => {}}
+        subtotal="£130.00"
+        shippingMessage="Free UK delivery over £50"
+        onCheckout={() => {}}
+      />
+    </>
+  );
+}
 
 export function renderComponent(name: string, props: Record<string, unknown>): React.ReactNode {
   switch (name) {
@@ -331,11 +358,50 @@ export function renderComponent(name: string, props: Record<string, unknown>): R
         />
       );
 
+    case "Cart Item":
+      return (
+        <CartItem
+          image={{ src: "https://placehold.co/80x100/e8e8e1/111?text=Legging", alt: "Legging" }}
+          name={(props.name as string) ?? "Power Seamless Legging"}
+          variant={(props.variant as string) ?? "Black / M"}
+          price={(props.price as string) ?? "£54.00"}
+          quantity={(props.quantity as number) ?? 1}
+          onQuantityChange={() => {}}
+          onRemove={() => {}}
+        />
+      );
+
+    case "Cart Drawer":
+      return <CartDrawerPreview />;
+
+    case "Header":
+      return (
+        <div className="w-full">
+          <Header
+            logo={<span style={{ fontFamily: "Raleway", fontWeight: 700, fontSize: 18, letterSpacing: 3 }}>DFYNE</span>}
+            navItems={[
+              { label: "Shop", href: "#", children: [
+                { label: "Leggings", href: "#" },
+                { label: "Sports Bras", href: "#" },
+                { label: "Shorts", href: "#" },
+              ]},
+              { label: "New In", href: "#" },
+              { label: "Collections", href: "#" },
+              { label: "About", href: "#" },
+            ]}
+            cartItemCount={2}
+            onCartClick={() => {}}
+            onMenuClick={() => {}}
+            onSearch={() => {}}
+          />
+        </div>
+      );
+
     default:
       return null;
   }
 }
 
 export function isFullWidthComponent(name: string): boolean {
-  return ["Campaign Hero", "Announcement Bar", "Newsletter Signup", "Footer", "Collection Grid"].includes(name);
+  return ["Campaign Hero", "Announcement Bar", "Newsletter Signup", "Footer", "Collection Grid", "Header"].includes(name);
 }
