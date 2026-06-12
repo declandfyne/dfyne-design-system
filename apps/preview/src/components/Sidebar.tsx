@@ -8,8 +8,16 @@ type SidebarGroup = {
 };
 
 const groups: SidebarGroup[] = [
-  { label: "Primitives", items: ["Button", "Badge", "Icon", "Section Heading", "Arrow Button"] },
+  { label: "Primitives", items: ["Button", "Badge", "Icon", "Section Heading", "Arrow Button", "Quantity Input"] },
+  { label: "Disclosure", items: ["Accordion"] },
+  { label: "Search", items: ["Search"] },
   { label: "Cards", items: ["Product Card", "Category Card", "Color Swatch", "Size Button", "Cross-Sell Card"] },
+  { label: "Gallery", items: ["Product Gallery"] },
+  { label: "Filters", items: ["Filter Panel"] },
+  { label: "Collection", items: ["Collection Grid"] },
+  { label: "Cart", items: ["Cart Item", "Cart Drawer"] },
+  { label: "Navigation", items: ["Header"] },
+  { label: "Modals", items: ["Quick Shop Modal"] },
   { label: "Sections", items: ["Campaign Hero", "Announcement Bar", "Newsletter Signup", "Footer"] },
   { label: "Tokens", items: ["Colors", "Typography", "Spacing", "Glossary"] },
 ];
