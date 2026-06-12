@@ -92,6 +92,63 @@ function FilterDrawerPreview() {
   );
 }
 
+function QuickAddPreview() {
+  const [isOpen, setIsOpen] = useState(false);
+  return (
+    <div style={{
+      width: 375,
+      height: 812,
+      position: "relative",
+      overflow: "hidden",
+      borderRadius: 40,
+      border: "8px solid #1a1a1a",
+      background: "#fff",
+      boxShadow: "0 25px 50px rgba(0,0,0,0.3)",
+      transform: "translateZ(0)",
+    }}>
+      {/* Fake product grid behind */}
+      <div style={{ padding: 16, display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
+        {[1,2,3,4].map(i => (
+          <div key={i} style={{ background: "#f0f0f0", aspectRatio: "4/5", borderRadius: 4, position: "relative" }}>
+            <button
+              onClick={() => setIsOpen(true)}
+              style={{
+                position: "absolute", bottom: 8, right: 8,
+                width: 32, height: 32, borderRadius: 16,
+                background: "#111", color: "#fff", border: "none",
+                fontSize: 18, cursor: "pointer", display: "flex",
+                alignItems: "center", justifyContent: "center",
+              }}
+            >+</button>
+          </div>
+        ))}
+      </div>
+      <QuickAdd
+        open={isOpen}
+        onClose={() => setIsOpen(false)}
+        product={{
+          name: "Impact Long Sleeve One Piece",
+          variant: "Truffle",
+          price: "\u00a375.99",
+          images: [
+            { src: "https://placehold.co/400x500/e8e8e1/111?text=Front", alt: "Front" },
+            { src: "https://placehold.co/400x500/e8e8e1/111?text=Back", alt: "Back" },
+          ],
+          lengths: ["REGULAR", "TALL"],
+          sizes: [
+            { label: "XS", soldOut: false },
+            { label: "S", soldOut: false },
+            { label: "M", soldOut: false },
+            { label: "L", soldOut: true },
+          ],
+          href: "#",
+        }}
+        onAddToCart={() => setIsOpen(false)}
+      />
+    </div>
+  );
+}
+
 function ToastPreview() {
   const [isVisible, setIsVisible] = useState(false);
   return (
@@ -391,32 +448,7 @@ export function renderComponent(name: string, props: Record<string, unknown>): R
       );
 
     case "Quick Add":
-      return (
-        <div style={{ width: 375, height: 812, position: "relative", overflow: "hidden", borderRadius: 24, border: "2px solid #e8e8e1", background: "#fff", margin: "0 auto" }}>
-          <QuickAdd
-            open={true}
-            onClose={() => {}}
-            product={{
-              name: "Impact Long Sleeve One Piece",
-              variant: "Truffle",
-              price: "\u00a375.99",
-              images: [
-                { src: "https://placehold.co/400x500/e8e8e1/111?text=Front", alt: "Front" },
-                { src: "https://placehold.co/400x500/e8e8e1/111?text=Back", alt: "Back" },
-              ],
-              lengths: ["REGULAR", "TALL"],
-              sizes: [
-                { label: "XS", soldOut: false },
-                { label: "S", soldOut: false },
-                { label: "M", soldOut: false },
-                { label: "L", soldOut: true },
-              ],
-              href: "/products/impact-one-piece",
-            }}
-            onAddToCart={() => {}}
-          />
-        </div>
-      );
+      return <QuickAddPreview />;
 
     case "Cart Item":
       return (
