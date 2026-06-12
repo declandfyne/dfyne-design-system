@@ -16,6 +16,10 @@ import {
   AnnouncementBar,
   NewsletterSignup,
   Footer,
+  QuantityInput,
+  Accordion,
+  AccordionItem,
+  Search,
 } from "@dfyne/react";
 import type { IconName } from "@dfyne/react";
 
@@ -165,6 +169,50 @@ export function renderComponent(name: string, props: Record<string, unknown>): R
         <Icon
           name={(props.name as IconName) ?? "cart"}
           className="h-8 w-8"
+        />
+      );
+
+    case "Quantity Input":
+      return (
+        <QuantityInput
+          value={(props.value as number) ?? 1}
+          onChange={() => {}}
+          min={(props.min as number) ?? 1}
+          max={(props.max as number) ?? 10}
+          disabled={props.disabled as boolean | undefined}
+        />
+      );
+
+    case "Accordion":
+      return (
+        <Accordion allowMultiple={props.allowMultiple as boolean | undefined}>
+          <AccordionItem title="Description" defaultOpen>
+            Engineered for high-impact training, this longsleeve top features
+            sweat-wicking fabric and four-way stretch for unrestricted movement.
+          </AccordionItem>
+          <AccordionItem title="Size Guide">
+            Model is 5&apos;9&quot; and wears size S. See full size chart for
+            detailed measurements.
+          </AccordionItem>
+          <AccordionItem title="Delivery &amp; Returns">
+            Free tracked delivery on orders over £30. 100-day hassle-free
+            returns on all orders.
+          </AccordionItem>
+        </Accordion>
+      );
+
+    case "Search":
+      return (
+        <Search
+          value={(props.value as string) ?? ""}
+          onChange={() => {}}
+          results={[
+            { id: "1", title: "Power Legging", price: "£54.00", type: "product" },
+            { id: "2", title: "Impact Longsleeve Top", price: "£52.20", type: "product" },
+            { id: "3", title: "Leggings", type: "collection" },
+          ]}
+          placeholder={(props.placeholder as string) ?? "Search products..."}
+          loading={props.loading as boolean | undefined}
         />
       );
 

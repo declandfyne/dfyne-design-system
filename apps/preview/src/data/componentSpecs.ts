@@ -606,6 +606,156 @@ export const componentSpecs: ComponentSpecData[] = [
   },
 
   /* ------------------------------------------------------------------ */
+  /*  Quantity Input                                                     */
+  /* ------------------------------------------------------------------ */
+  {
+    name: "Quantity Input",
+    figmaPath: "Components / Quantity Input",
+    liquidCode: `<div class="js-qty__wrapper">
+  <button class="js-qty__adjust js-qty__adjust--minus" aria-label="Decrease quantity">−</button>
+  <input type="number" class="js-qty__num" value="1" min="1" max="10" />
+  <button class="js-qty__adjust js-qty__adjust--plus" aria-label="Increase quantity">+</button>
+</div>`,
+    reactCode: `import { QuantityInput } from "@dfyne/react";
+
+<QuantityInput value={1} onChange={(v) => setValue(v)} />
+<QuantityInput value={1} onChange={(v) => setValue(v)} min={1} max={10} />
+<QuantityInput value={1} onChange={(v) => setValue(v)} disabled />`,
+    variants: [
+      {
+        name: "Default",
+        specs: [
+          { group: "Typography", property: "Font Family", value: "Raleway, sans-serif", cssVar: "--font-body" },
+          { group: "Typography", property: "Font Size", value: "13px" },
+          { group: "Typography", property: "Font Weight", value: "400" },
+          { group: "Typography", property: "Text Align", value: "center" },
+          { group: "Spacing", property: "Height", value: "42px" },
+          { group: "Spacing", property: "Width", value: "120px" },
+          { group: "Spacing", property: "Button Width", value: "36px" },
+          { group: "Colors", property: "Background", value: "#ffffff" },
+          { group: "Colors", property: "Text", value: "#000000" },
+          { group: "Colors", property: "Border", value: "1px solid #e8e8e1", cssVar: "--color-border" },
+          { group: "Shape", property: "Radius", value: "4px" },
+        ],
+      },
+      {
+        name: "Disabled",
+        specs: [
+          { group: "Colors", property: "Background", value: "#f6f6f6" },
+          { group: "Colors", property: "Text", value: "#b6b6b6" },
+          { group: "Colors", property: "Border", value: "#e0e0e0" },
+        ],
+      },
+    ],
+  },
+
+  /* ------------------------------------------------------------------ */
+  /*  Accordion                                                          */
+  /* ------------------------------------------------------------------ */
+  {
+    name: "Accordion",
+    figmaPath: "Components / Accordion",
+    liquidCode: `<div class="accordion">
+  <details class="accordion__item" open>
+    <summary class="accordion__trigger">
+      <span>Description</span>
+      <svg class="accordion__icon"><!-- chevron --></svg>
+    </summary>
+    <div class="accordion__content">Product description...</div>
+  </details>
+  <details class="accordion__item">
+    <summary class="accordion__trigger">
+      <span>Size Guide</span>
+      <svg class="accordion__icon"><!-- chevron --></svg>
+    </summary>
+    <div class="accordion__content">Size guide content...</div>
+  </details>
+</div>`,
+    reactCode: `import { Accordion, AccordionItem } from "@dfyne/react";
+
+<Accordion>
+  <AccordionItem title="Description" defaultOpen>
+    Product description...
+  </AccordionItem>
+  <AccordionItem title="Size Guide">
+    Size guide content...
+  </AccordionItem>
+  <AccordionItem title="Delivery & Returns">
+    Delivery info...
+  </AccordionItem>
+</Accordion>`,
+    variants: [
+      {
+        name: "Default",
+        specs: [
+          { group: "Typography", property: "Trigger Font", value: "Raleway 13px / 600" },
+          { group: "Typography", property: "Trigger Tracking", value: "0.325px" },
+          { group: "Typography", property: "Content Font", value: "Raleway 13px / 400" },
+          { group: "Typography", property: "Content Line Height", value: "1.6" },
+          { group: "Spacing", property: "Trigger Padding", value: "16px 0" },
+          { group: "Spacing", property: "Content Padding", value: "0 0 16px 0" },
+          { group: "Colors", property: "Text", value: "#000000" },
+          { group: "Colors", property: "Border", value: "1px solid #e8e8e1", cssVar: "--color-border" },
+          { group: "Shape", property: "Icon Rotation", value: "180deg when open" },
+        ],
+      },
+    ],
+  },
+
+  /* ------------------------------------------------------------------ */
+  /*  Search                                                             */
+  /* ------------------------------------------------------------------ */
+  {
+    name: "Search",
+    figmaPath: "Components / Search",
+    liquidCode: `<div class="search-bar">
+  <form class="search-bar__form" action="/search">
+    <input type="search" class="search-bar__input" placeholder="Search products..." />
+    <button class="search-bar__submit" type="submit">
+      <svg><!-- search icon --></svg>
+    </button>
+  </form>
+  <div class="predictive-search__results">
+    <a class="predictive-search__item" href="/products/...">
+      <img src="..." />
+      <span class="predictive-search__title">Power Legging</span>
+      <span class="predictive-search__price">£54.00</span>
+    </a>
+  </div>
+</div>`,
+    reactCode: `import { Search } from "@dfyne/react";
+
+<Search
+  value={query}
+  onChange={setQuery}
+  results={[
+    { id: "1", title: "Power Legging", price: "£54.00", type: "product" },
+    { id: "2", title: "Leggings", type: "collection" },
+  ]}
+  placeholder="Search products..."
+/>`,
+    variants: [
+      {
+        name: "Default",
+        specs: [
+          { group: "Input", property: "Font", value: "Raleway 13px / 400" },
+          { group: "Input", property: "Height", value: "42px" },
+          { group: "Input", property: "Placeholder Color", value: "rgba(0,0,0,0.4)" },
+          { group: "Input", property: "Border", value: "1px solid #e8e8e1", cssVar: "--color-border" },
+          { group: "Input", property: "Radius", value: "4px" },
+          { group: "Results", property: "Background", value: "#ffffff" },
+          { group: "Results", property: "Shadow", value: "0 4px 12px rgba(0,0,0,0.1)" },
+          { group: "Results", property: "Radius", value: "4px" },
+          { group: "Result Item", property: "Font", value: "Raleway 13px / 400" },
+          { group: "Result Item", property: "Padding", value: "8px 12px" },
+          { group: "Result Item", property: "Hover BG", value: "#f6f6f6" },
+          { group: "Result Item", property: "Image Size", value: "40px × 50px" },
+        ],
+      },
+    ],
+  },
+
+  /* ------------------------------------------------------------------ */
   /*  Footer                                                             */
   /* ------------------------------------------------------------------ */
   {
