@@ -29,6 +29,9 @@ export { CrossSellRail } from "./rails/CrossSellRail";
 // Gallery
 export { ProductGallery } from "./gallery/ProductGallery";
 
+// Collection
+export { CollectionGrid } from "./collection/CollectionGrid";
+
 // Sections
 export { CampaignHero } from "./sections/CampaignHero";
 export { AnnouncementBar } from "./sections/AnnouncementBar";
