@@ -94,6 +94,15 @@ function FilterDrawerPreview() {
 
 function QuickAddPreview() {
   const [isOpen, setIsOpen] = useState(false);
+  const [selectedLength, setSelectedLength] = useState<string | undefined>();
+  const [selectedSize, setSelectedSize] = useState<string | undefined>();
+
+  const handleClose = () => {
+    setIsOpen(false);
+    setSelectedLength(undefined);
+    setSelectedSize(undefined);
+  };
+
   return (
     <div style={{
       width: 375,
@@ -106,7 +115,7 @@ function QuickAddPreview() {
       boxShadow: "0 25px 50px rgba(0,0,0,0.3)",
       transform: "translateZ(0)",
     }}>
-      {/* Fake product grid behind */}
+      {/* Fake product grid */}
       <div style={{ padding: 16, display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
         {[1,2,3,4].map(i => (
           <div key={i} style={{ background: "#f0f0f0", aspectRatio: "4/5", borderRadius: 4, position: "relative" }}>
@@ -125,7 +134,7 @@ function QuickAddPreview() {
       </div>
       <QuickAdd
         open={isOpen}
-        onClose={() => setIsOpen(false)}
+        onClose={handleClose}
         product={{
           name: "Impact Long Sleeve One Piece",
           variant: "Truffle",
@@ -139,11 +148,16 @@ function QuickAddPreview() {
             { label: "XS", soldOut: false },
             { label: "S", soldOut: false },
             { label: "M", soldOut: false },
-            { label: "L", soldOut: true },
+            { label: "L", soldOut: false },
+            { label: "XL", soldOut: true },
           ],
           href: "#",
         }}
-        onAddToCart={() => setIsOpen(false)}
+        selectedLength={selectedLength}
+        selectedSize={selectedSize}
+        onLengthSelect={(l) => { setSelectedLength(l); setSelectedSize(undefined); }}
+        onSizeSelect={setSelectedSize}
+        onAddToCart={handleClose}
       />
     </div>
   );

@@ -1,8 +1,53 @@
 "use client";
 
+import { useState } from "react";
 import { ControlInput } from "./ControlInput";
 import type { ComponentControlDef } from "../data/componentControls";
 import type { SpecEntry } from "./SpecPanel";
+
+function CopyableValue({ value }: { value: string }) {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = async () => {
+    await navigator.clipboard.writeText(value);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 1000);
+  };
+
+  return (
+    <button
+      type="button"
+      onClick={handleCopy}
+      style={{
+        display: "flex",
+        alignItems: "center",
+        gap: 6,
+        background: "none",
+        border: "none",
+        padding: 0,
+        cursor: "pointer",
+        fontFamily: "'SF Mono', 'Cascadia Code', 'Fira Code', ui-monospace, monospace",
+        fontSize: 11,
+        color: copied ? "#6ee7b7" : "#aaa",
+        transition: "color 0.2s ease",
+      }}
+      title="Click to copy"
+    >
+      {value.startsWith("#") && (
+        <span style={{
+          display: "inline-block",
+          width: 12,
+          height: 12,
+          borderRadius: 2,
+          background: value,
+          border: "1px solid rgba(255,255,255,0.1)",
+          flexShrink: 0,
+        }} />
+      )}
+      {copied ? "Copied!" : value}
+    </button>
+  );
+}
 
 type PropApiEntry = {
   name: string;
@@ -150,25 +195,9 @@ export function PropsPanel({
                 paddingBottom: 6,
               }}
             >
-              <span style={{ fontFamily: "monospace", fontSize: 11, color: "#ccc" }}>{entry.name}</span>
-              <span
-                style={{
-                  display: "inline-block",
-                  background: entry.typeBg,
-                  color: entry.typeColor,
-                  fontSize: 10,
-                  fontFamily: "monospace",
-                  fontWeight: 500,
-                  padding: "2px 6px",
-                  borderRadius: 4,
-                  lineHeight: "16px",
-                }}
-              >
-                {entry.type}
-              </span>
-              <span style={{ fontFamily: "monospace", fontSize: 11, color: "var(--text-muted)" }}>
-                {entry.defaultVal}
-              </span>
+              <CopyableValue value={entry.name} />
+              <CopyableValue value={entry.type} />
+              <CopyableValue value={entry.defaultVal} />
             </div>
           ))}
         </div>
@@ -203,22 +232,7 @@ export function PropsPanel({
                 <span style={{ fontSize: 11, color: "var(--text-muted)" }}>
                   {spec.property}
                 </span>
-                <span className="flex items-center gap-1.5" style={{ fontFamily: "monospace", fontSize: 11, color: "#aaa" }}>
-                  {spec.group === "Colors" && (
-                    <span
-                      style={{
-                        display: "inline-block",
-                        width: 12,
-                        height: 12,
-                        borderRadius: 2,
-                        background: spec.value,
-                        border: "1px solid #333",
-                        flexShrink: 0,
-                      }}
-                    />
-                  )}
-                  {spec.value}
-                </span>
+                <CopyableValue value={spec.value} />
               </div>
             ))}
           </div>
