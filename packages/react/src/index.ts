@@ -56,6 +56,12 @@ export { Pagination } from "./navigation/Pagination";
 export type { PaginationProps } from "./navigation/Pagination";
 export { RegionSelector } from "./navigation/RegionSelector";
 export type { Region, RegionSelectorProps } from "./navigation/RegionSelector";
+export { SocialIcons } from "./navigation/SocialIcons";
+export type {
+  SocialPlatform,
+  SocialLink,
+  SocialIconsProps,
+} from "./navigation/SocialIcons";
 
 // Feedback
 export { Toast } from "./feedback/Toast";
