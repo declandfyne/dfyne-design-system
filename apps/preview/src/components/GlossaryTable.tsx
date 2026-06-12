@@ -43,10 +43,15 @@ export function GlossaryTable({ entries }: { entries: GlossaryEntry[] }) {
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           placeholder="Search tokens..."
-          className="w-[260px] rounded border border-[#e8e8e8] bg-white px-3 py-1.5 text-[12px] text-[#1a1a1a] outline-none placeholder:text-[#b0b0b0] focus:border-[#a0a0a0]"
-          style={{ fontFamily: sysFont }}
+          className="w-[260px] rounded px-3 py-1.5 text-[12px] outline-none placeholder:text-[#b0b0b0]"
+          style={{
+            fontFamily: sysFont,
+            border: "1px solid var(--input-border)",
+            background: "var(--input-bg)",
+            color: "var(--text-primary)",
+          }}
         />
-        <span className="text-[12px] text-[#a0a0a0]" style={{ fontFamily: sysFont }}>
+        <span className="text-[12px]" style={{ fontFamily: sysFont, color: "var(--text-muted)" }}>
           {filtered.length} of {entries.length} tokens
         </span>
       </div>
@@ -58,12 +63,12 @@ export function GlossaryTable({ entries }: { entries: GlossaryEntry[] }) {
             key={cat}
             type="button"
             onClick={() => setActiveCategory(cat)}
-            className={`rounded-full border px-3 py-1 text-[11px] transition-colors ${
+            className="rounded-full border px-3 py-1 text-[11px] transition-colors"
+            style={
               activeCategory === cat
-                ? "border-[#1a1a1a] bg-[#1a1a1a] text-white"
-                : "border-[#e0e0e0] bg-white text-[#6f6f6f] hover:border-[#c0c0c0] hover:text-[#4a4a4a]"
-            }`}
-            style={{ fontFamily: sysFont }}
+                ? { borderColor: "#1a1a1a", background: "#1a1a1a", color: "#fff", fontFamily: sysFont }
+                : { borderColor: "var(--border)", background: "var(--input-bg)", color: "var(--text-muted)", fontFamily: sysFont }
+            }
           >
             {cat}
           </button>
@@ -71,17 +76,21 @@ export function GlossaryTable({ entries }: { entries: GlossaryEntry[] }) {
       </div>
 
       {/* Table */}
-      <div className="overflow-hidden rounded-[8px] border border-[#e8e8e8]">
+      <div className="overflow-hidden rounded-[8px]" style={{ border: "1px solid var(--border)" }}>
         {/* Header */}
         <div
-          className="grid gap-3 border-b border-[#e8e8e8] bg-[#fafafa] px-4 py-2.5"
-          style={{ gridTemplateColumns: "minmax(180px, 1.4fr) minmax(120px, 1fr) minmax(140px, 1fr) minmax(140px, 1fr) 40px" }}
+          className="grid gap-3 px-4 py-2.5"
+          style={{
+            gridTemplateColumns: "minmax(180px, 1.4fr) minmax(120px, 1fr) minmax(140px, 1fr) minmax(140px, 1fr) 40px",
+            borderBottom: "1px solid var(--border)",
+            background: "var(--panel-bg)",
+          }}
         >
           {["CSS Variable", "Figma", "JS Import", "Value", ""].map((h) => (
             <span
               key={h || "copy"}
-              className="text-[11px] font-medium text-[#a0a0a0]"
-              style={{ fontFamily: sysFont }}
+              className="text-[11px] font-medium"
+              style={{ fontFamily: sysFont, color: "var(--text-muted)" }}
             >
               {h}
             </span>
@@ -91,20 +100,25 @@ export function GlossaryTable({ entries }: { entries: GlossaryEntry[] }) {
         {/* Rows */}
         <div className="max-h-[520px] overflow-y-auto">
           {filtered.length === 0 ? (
-            <div className="px-4 py-8 text-center text-[12px] text-[#a0a0a0]" style={{ fontFamily: sysFont }}>
+            <div className="px-4 py-8 text-center text-[12px]" style={{ fontFamily: sysFont, color: "var(--text-muted)" }}>
               No tokens match your search.
             </div>
           ) : (
             filtered.map((entry) => (
               <div
                 key={entry.cssVar}
-                className="grid items-center gap-3 border-b border-[#e8e8e8] px-4 py-2 transition-colors last:border-b-0 hover:bg-[#f5f5f5]"
-                style={{ gridTemplateColumns: "minmax(180px, 1.4fr) minmax(120px, 1fr) minmax(140px, 1fr) minmax(140px, 1fr) 40px" }}
+                className="grid items-center gap-3 px-4 py-2 transition-colors last:border-b-0"
+                style={{
+                  gridTemplateColumns: "minmax(180px, 1.4fr) minmax(120px, 1fr) minmax(140px, 1fr) minmax(140px, 1fr) 40px",
+                  borderBottom: "1px solid var(--border)",
+                }}
+                onMouseEnter={(e) => (e.currentTarget.style.background = "var(--hover-bg)")}
+                onMouseLeave={(e) => (e.currentTarget.style.background = "")}
               >
                 {/* CSS Variable */}
                 <code
-                  className="truncate text-[11px] text-[#4a4a4a]"
-                  style={{ fontFamily: monoFont }}
+                  className="truncate text-[11px]"
+                  style={{ fontFamily: monoFont, color: "var(--text-secondary)" }}
                   title={entry.cssVar}
                 >
                   {entry.cssVar}
@@ -112,8 +126,8 @@ export function GlossaryTable({ entries }: { entries: GlossaryEntry[] }) {
 
                 {/* Figma path */}
                 <span
-                  className="truncate text-[11px] text-[#8f8f8f]"
-                  style={{ fontFamily: monoFont }}
+                  className="truncate text-[11px]"
+                  style={{ fontFamily: monoFont, color: "var(--text-muted)" }}
                   title={entry.figmaPath}
                 >
                   {entry.figmaPath}
@@ -121,8 +135,8 @@ export function GlossaryTable({ entries }: { entries: GlossaryEntry[] }) {
 
                 {/* JS name */}
                 <code
-                  className="truncate text-[11px] text-[#8f8f8f]"
-                  style={{ fontFamily: monoFont }}
+                  className="truncate text-[11px]"
+                  style={{ fontFamily: monoFont, color: "var(--text-muted)" }}
                   title={entry.jsName}
                 >
                   {entry.jsName}
@@ -132,13 +146,13 @@ export function GlossaryTable({ entries }: { entries: GlossaryEntry[] }) {
                 <div className="flex items-center gap-2 overflow-hidden">
                   {isColorValue(entry.value) && (
                     <span
-                      className="inline-block h-3 w-3 shrink-0 rounded-sm border border-[#e0e0e0]"
-                      style={{ backgroundColor: entry.value }}
+                      className="inline-block h-3 w-3 shrink-0 rounded-sm"
+                      style={{ backgroundColor: entry.value, border: "1px solid var(--border)" }}
                     />
                   )}
                   <code
-                    className="truncate text-[11px] text-[#6f6f6f]"
-                    style={{ fontFamily: monoFont }}
+                    className="truncate text-[11px]"
+                    style={{ fontFamily: monoFont, color: "var(--text-secondary)" }}
                     title={entry.value}
                   >
                     {entry.value}

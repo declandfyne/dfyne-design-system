@@ -34,7 +34,10 @@ export function CopyAsDropdown({ formats }: { formats: CopyFormat[] }) {
       <button
         type="button"
         onClick={() => setOpen((prev) => !prev)}
-        className="inline-flex items-center justify-center rounded px-1.5 py-0.5 text-[10px] text-[#a0a0a0] transition-colors hover:bg-[#f0f0f0] active:bg-[#e0e0e0]"
+        className="inline-flex items-center justify-center rounded px-1.5 py-0.5 text-[10px] transition-colors"
+        style={{ color: "var(--text-muted)" }}
+        onMouseEnter={(e) => (e.currentTarget.style.background = "var(--hover-bg)")}
+        onMouseLeave={(e) => (e.currentTarget.style.background = "")}
         title="Copy as…"
       >
         ⎘
@@ -42,21 +45,27 @@ export function CopyAsDropdown({ formats }: { formats: CopyFormat[] }) {
 
       {open && (
         <div
-          className="absolute left-0 top-full z-50 mt-1 min-w-[180px] rounded border border-[#e8e8e8] bg-white shadow-sm"
-          style={{ fontFamily: "inherit" }}
+          className="absolute left-0 top-full z-50 mt-1 min-w-[180px] rounded shadow-sm"
+          style={{
+            fontFamily: "inherit",
+            border: "1px solid var(--border)",
+            background: "var(--panel-bg)",
+          }}
         >
           {formats.map((fmt, i) => (
             <button
               key={i}
               type="button"
               onClick={() => handleCopy(fmt.value, i)}
-              className="flex w-full items-center justify-between gap-4 px-3 py-1.5 text-left transition-colors hover:bg-[#f5f5f5]"
+              className="flex w-full items-center justify-between gap-4 px-3 py-1.5 text-left transition-colors"
+              onMouseEnter={(e) => (e.currentTarget.style.background = "var(--hover-bg)")}
+              onMouseLeave={(e) => (e.currentTarget.style.background = "")}
             >
-              <span className="text-[11px] font-medium text-[#111]">{fmt.label}</span>
+              <span className="text-[11px] font-medium" style={{ color: "var(--text-secondary)" }}>{fmt.label}</span>
               {copiedIndex === i ? (
                 <span className="text-[11px] text-[#4caf50]">✓ Copied</span>
               ) : (
-                <span className="max-w-[90px] truncate text-[11px] text-[#6f6f6f]">
+                <span className="max-w-[90px] truncate text-[11px]" style={{ color: "var(--text-muted)" }}>
                   {fmt.value}
                 </span>
               )}

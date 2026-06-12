@@ -8,23 +8,23 @@ const sysFont =
 export function UsageCard({ guideline }: { guideline: UsageGuideline }) {
   return (
     <div
-      className="overflow-hidden rounded-[8px] border border-[#e8e8e8]"
-      style={{ fontFamily: sysFont }}
+      className="overflow-hidden rounded-[8px]"
+      style={{ fontFamily: sysFont, border: "1px solid var(--border)" }}
     >
       {/* ---- Header ---- */}
-      <div className="border-b border-[#e8e8e8] px-5 py-4">
-        <p className="text-[13px] font-semibold text-[#1a1a1a]">
+      <div className="px-5 py-4" style={{ borderBottom: "1px solid var(--border)" }}>
+        <p className="text-[13px] font-semibold" style={{ color: "var(--text-primary)" }}>
           {guideline.component}
         </p>
-        <p className="mt-1 text-[12px] leading-relaxed text-[#8f8f8f]">
+        <p className="mt-1 text-[12px] leading-relaxed" style={{ color: "var(--text-secondary)" }}>
           {guideline.description}
         </p>
       </div>
 
       {/* ---- When / When Not ---- */}
-      <div className="grid grid-cols-2 border-b border-[#e8e8e8]">
+      <div className="grid grid-cols-2" style={{ borderBottom: "1px solid var(--border)" }}>
         {/* When to use */}
-        <div className="border-r border-[#e8e8e8] px-5 py-4">
+        <div className="px-5 py-4" style={{ borderRight: "1px solid var(--border-subtle)" }}>
           <p
             className="mb-2.5 text-[10px] font-semibold uppercase text-[#4caf50]"
             style={{ letterSpacing: "1.2px" }}
@@ -35,9 +35,10 @@ export function UsageCard({ guideline }: { guideline: UsageGuideline }) {
             {guideline.when.map((item, i) => (
               <li
                 key={i}
-                className="text-[11px] leading-relaxed text-[#4a4a4a]"
+                className="text-[11px] leading-relaxed"
+                style={{ color: "var(--text-secondary)" }}
               >
-                <span className="mr-1.5 text-[#c0c0c0]">&bull;</span>
+                <span className="mr-1.5" style={{ color: "var(--text-muted)" }}>&bull;</span>
                 {item}
               </li>
             ))}
@@ -56,9 +57,10 @@ export function UsageCard({ guideline }: { guideline: UsageGuideline }) {
             {guideline.whenNot.map((item, i) => (
               <li
                 key={i}
-                className="text-[11px] leading-relaxed text-[#4a4a4a]"
+                className="text-[11px] leading-relaxed"
+                style={{ color: "var(--text-secondary)" }}
               >
-                <span className="mr-1.5 text-[#c0c0c0]">&bull;</span>
+                <span className="mr-1.5" style={{ color: "var(--text-muted)" }}>&bull;</span>
                 {item}
               </li>
             ))}
@@ -69,7 +71,7 @@ export function UsageCard({ guideline }: { guideline: UsageGuideline }) {
       {/* ---- Do / Don't ---- */}
       <div className="grid grid-cols-2">
         {/* Do */}
-        <div className="border-r border-[#e8e8e8] px-5 py-4">
+        <div className="px-5 py-4" style={{ borderRight: "1px solid var(--border-subtle)" }}>
           <p
             className="mb-2.5 text-[10px] font-semibold uppercase text-[#4caf50]"
             style={{ letterSpacing: "1.2px" }}
@@ -79,10 +81,10 @@ export function UsageCard({ guideline }: { guideline: UsageGuideline }) {
           <div className="space-y-3">
             {guideline.doExamples.map((ex, i) => (
               <div key={i}>
-                <p className="text-[11px] font-semibold text-[#1a1a1a]">
+                <p className="text-[11px] font-semibold" style={{ color: "var(--text-primary)" }}>
                   {ex.label}
                 </p>
-                <p className="mt-0.5 text-[11px] leading-relaxed text-[#8f8f8f]">
+                <p className="mt-0.5 text-[11px] leading-relaxed" style={{ color: "var(--text-secondary)" }}>
                   {ex.reason}
                 </p>
               </div>
@@ -101,10 +103,10 @@ export function UsageCard({ guideline }: { guideline: UsageGuideline }) {
           <div className="space-y-3">
             {guideline.dontExamples.map((ex, i) => (
               <div key={i}>
-                <p className="text-[11px] font-semibold text-[#1a1a1a]">
+                <p className="text-[11px] font-semibold" style={{ color: "var(--text-primary)" }}>
                   {ex.label}
                 </p>
-                <p className="mt-0.5 text-[11px] leading-relaxed text-[#8f8f8f]">
+                <p className="mt-0.5 text-[11px] leading-relaxed" style={{ color: "var(--text-secondary)" }}>
                   {ex.reason}
                 </p>
               </div>
