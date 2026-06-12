@@ -35,6 +35,11 @@ export { ProductGallery } from "./gallery/ProductGallery";
 // Collection
 export { CollectionGrid } from "./collection/CollectionGrid";
 export { CollectionIntro } from "./collection/CollectionIntro";
+export { CategoryImageCarousel } from "./collection/CategoryImageCarousel";
+export type {
+  CategoryImage,
+  CategoryImageCarouselProps,
+} from "./collection/CategoryImageCarousel";
 
 // Filters
 export { FilterPanel } from "./filters/FilterPanel";
