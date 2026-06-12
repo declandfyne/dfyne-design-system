@@ -201,11 +201,17 @@ export function renderComponent(name: string, props: Record<string, unknown>): R
       return (
         <div className="w-full">
           <Footer
-            columns={[
-              { heading: "Account", links: ["Login", "Register", "Rewards", "Track My Order"] },
-              { heading: "About", links: ["About", "Careers", "Sustainability"] },
-              { heading: "Contact", links: ["Contact Us", "Privacy Policy", "Terms & Conditions"] },
-              { heading: "Delivery & Returns", links: ["Shipping", "Returns", "International"] },
+            links={[
+              { label: "Contact Us", href: "#" },
+              { label: "Track My Order", href: "#" },
+              { label: "Rewards", href: "#" },
+              { label: "Events", href: "#" },
+            ]}
+            socials={[
+              { platform: "instagram", href: "#" },
+              { platform: "facebook", href: "#" },
+              { platform: "youtube", href: "#" },
+              { platform: "tiktok", href: "#" },
             ]}
           />
         </div>
