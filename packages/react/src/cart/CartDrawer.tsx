@@ -82,7 +82,7 @@ export function CartDrawer({
           height: "100%",
           backgroundColor: "#ffffff",
           boxShadow: "-4px 0 24px rgba(0,0,0,0.12)",
-          zIndex: 50,
+          zIndex: 51,
           display: "flex",
           flexDirection: "column",
           fontFamily: "Raleway, sans-serif",
