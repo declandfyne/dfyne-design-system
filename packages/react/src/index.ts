@@ -34,6 +34,7 @@ export { ProductGallery } from "./gallery/ProductGallery";
 
 // Collection
 export { CollectionGrid } from "./collection/CollectionGrid";
+export { CollectionIntro } from "./collection/CollectionIntro";
 
 // Filters
 export { FilterPanel } from "./filters/FilterPanel";
