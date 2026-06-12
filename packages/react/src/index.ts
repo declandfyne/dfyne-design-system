@@ -36,6 +36,11 @@ export { CollectionGrid } from "./collection/CollectionGrid";
 export { FilterPanel } from "./filters/FilterPanel";
 export type { FilterGroup, FilterOption, SortOption } from "./filters/FilterPanel";
 
+// Cart
+export { CartItem } from "./cart/CartItem";
+export { CartDrawer } from "./cart/CartDrawer";
+export type { CartDrawerItem } from "./cart/CartDrawer";
+
 // Modals
 export { QuickShopModal } from "./modals/QuickShopModal";
 export type { QuickShopProduct } from "./modals/QuickShopModal";
