@@ -22,15 +22,16 @@
     "react-dom": "^19"
   },
   "devDependencies": {
-    "@testing-library/react": "^16",
+    "@figma/code-connect": "^1.4.8",
     "@testing-library/jest-dom": "^6",
+    "@testing-library/react": "^16",
     "@testing-library/user-event": "^14",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
     "jsdom": "^26",
     "react": "^19",
     "react-dom": "^19",
     "typescript": "^5",
-    "vitest": "^3",
-    "@types/react": "^19",
-    "@types/react-dom": "^19"
+    "vitest": "^3"
   }
 }
