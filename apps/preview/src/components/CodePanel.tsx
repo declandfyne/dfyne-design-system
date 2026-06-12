@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useCallback } from "react";
 
 export function CodePanel({
   reactCode,
@@ -13,7 +13,10 @@ export function CodePanel({
 }) {
   const [tab, setTab] = useState<"react" | "liquid" | "tokens">("react");
   const [copied, setCopied] = useState(false);
-  const [collapsed, setCollapsed] = useState(false);
+  const [height, setHeight] = useState(160);
+  const dragging = useRef(false);
+  const startY = useRef(0);
+  const startHeight = useRef(0);
 
   const code = tab === "react" ? reactCode : tab === "liquid" ? liquidCode : (cssTokens ?? "");
 
@@ -23,6 +26,28 @@ export function CodePanel({
     setTimeout(() => setCopied(false), 1500);
   };
 
+  const onDragStart = useCallback((e: React.MouseEvent) => {
+    e.preventDefault();
+    dragging.current = true;
+    startY.current = e.clientY;
+    startHeight.current = height;
+
+    const onMove = (ev: MouseEvent) => {
+      if (!dragging.current) return;
+      const delta = startY.current - ev.clientY;
+      setHeight(Math.max(60, Math.min(500, startHeight.current + delta)));
+    };
+
+    const onUp = () => {
+      dragging.current = false;
+      document.removeEventListener("mousemove", onMove);
+      document.removeEventListener("mouseup", onUp);
+    };
+
+    document.addEventListener("mousemove", onMove);
+    document.addEventListener("mouseup", onUp);
+  }, [height]);
+
   const tabs = [
     { id: "react" as const, label: "React" },
     { id: "liquid" as const, label: "Liquid" },
@@ -31,6 +56,15 @@ export function CodePanel({
 
   return (
     <div className="shrink-0 border-t" style={{ borderColor: "var(--border)", background: "var(--panel-bg)" }}>
+      {/* Drag handle */}
+      <div
+        onMouseDown={onDragStart}
+        className="flex cursor-row-resize items-center justify-center"
+        style={{ height: 6, background: "var(--panel-bg)" }}
+      >
+        <div style={{ width: 36, height: 2, borderRadius: 1, background: "#333" }} />
+      </div>
+
       {/* Header */}
       <div
         className="flex items-center justify-between border-b px-4"
@@ -65,26 +99,16 @@ export function CodePanel({
           >
             {copied ? "Copied!" : "Copy"}
           </button>
-          <button
-            type="button"
-            onClick={() => setCollapsed(!collapsed)}
-            className="px-1 text-[12px]"
-            style={{ color: "var(--text-muted)" }}
-          >
-            {collapsed ? "▲" : "▼"}
-          </button>
         </div>
       </div>
 
       {/* Code body */}
-      {!collapsed && (
-        <pre
-          className="font-mono overflow-x-auto px-4 py-3 text-[12px] leading-[1.7]"
-          style={{ color: "#8b949e", maxHeight: 140 }}
-        >
-          {code}
-        </pre>
-      )}
+      <pre
+        className="font-mono overflow-auto px-4 py-3 text-[12px] leading-[1.7]"
+        style={{ color: "#8b949e", height }}
+      >
+        {code}
+      </pre>
     </div>
   );
 }

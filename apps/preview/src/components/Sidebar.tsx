@@ -36,7 +36,7 @@ export function Sidebar({
     <nav className="flex h-full flex-col overflow-y-auto border-r bg-[var(--panel-bg)]" style={{ borderColor: "var(--border)" }}>
       {/* Header */}
       <div className="border-b px-4 pb-3 pt-5" style={{ borderColor: "var(--border)" }}>
-        <div className="text-[11px] font-bold tracking-[3px] text-white">DFYNE</div>
+        <img src="/dfyne-logo-white.png" alt="DFYNE" style={{ height: 18 }} />
         <input
           type="text"
           placeholder="Search..."
