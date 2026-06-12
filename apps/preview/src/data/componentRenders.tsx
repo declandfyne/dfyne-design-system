@@ -392,28 +392,30 @@ export function renderComponent(name: string, props: Record<string, unknown>): R
 
     case "Quick Add":
       return (
-        <QuickAdd
-          open={true}
-          onClose={() => {}}
-          product={{
-            name: "Impact Long Sleeve One Piece",
-            variant: "Truffle",
-            price: "\u00a375.99",
-            images: [
-              { src: "https://placehold.co/400x500/e8e8e1/111?text=Front", alt: "Front" },
-              { src: "https://placehold.co/400x500/e8e8e1/111?text=Back", alt: "Back" },
-            ],
-            lengths: ["REGULAR", "TALL"],
-            sizes: [
-              { label: "XS", soldOut: false },
-              { label: "S", soldOut: false },
-              { label: "M", soldOut: false },
-              { label: "L", soldOut: true },
-            ],
-            href: "/products/impact-one-piece",
-          }}
-          onAddToCart={() => {}}
-        />
+        <div style={{ width: 375, height: 812, position: "relative", overflow: "hidden", borderRadius: 24, border: "2px solid #e8e8e1", background: "#fff", margin: "0 auto" }}>
+          <QuickAdd
+            open={true}
+            onClose={() => {}}
+            product={{
+              name: "Impact Long Sleeve One Piece",
+              variant: "Truffle",
+              price: "\u00a375.99",
+              images: [
+                { src: "https://placehold.co/400x500/e8e8e1/111?text=Front", alt: "Front" },
+                { src: "https://placehold.co/400x500/e8e8e1/111?text=Back", alt: "Back" },
+              ],
+              lengths: ["REGULAR", "TALL"],
+              sizes: [
+                { label: "XS", soldOut: false },
+                { label: "S", soldOut: false },
+                { label: "M", soldOut: false },
+                { label: "L", soldOut: true },
+              ],
+              href: "/products/impact-one-piece",
+            }}
+            onAddToCart={() => {}}
+          />
+        </div>
       );
 
     case "Cart Item":
@@ -432,71 +434,86 @@ export function renderComponent(name: string, props: Record<string, unknown>): R
     case "Cart Drawer":
       return <CartDrawerPreview />;
 
-    case "Header":
+    case "Header": {
+      const headerProps = {
+        logo: <span style={{ fontFamily: "Raleway", fontWeight: 700, fontSize: 18, letterSpacing: 3 }}>DFYNE</span>,
+        utilityLinks: [
+          { label: "Contact Us", href: "#" },
+          { label: "Track My Order", href: "#" },
+          { label: "Rewards", href: "#" },
+          { label: "Events", href: "#" },
+        ],
+        socials: [
+          { platform: "instagram" as const, href: "#" },
+          { platform: "facebook" as const, href: "#" },
+          { platform: "youtube" as const, href: "#" },
+          { platform: "tiktok" as const, href: "#" },
+        ],
+        regionFlag: "\u{1F1EC}\u{1F1E7}",
+        navDropdowns: [
+          {
+            label: "WOMENS",
+            sections: [
+              { links: [
+                { label: "EXPLORE WOMENS", href: "#" },
+                { label: "NEW RELEASES", href: "#" },
+                { label: "BEST SELLERS", href: "#" },
+                { label: "ALL PRODUCTS", href: "#" },
+              ]},
+              { heading: "SHOP BY CATEGORY", links: [
+                { label: "Shorts", href: "#" },
+                { label: "Sports Bras", href: "#" },
+                { label: "T-Shirts & Tops", href: "#" },
+                { label: "Leggings", href: "#" },
+              ]},
+              { heading: "SHOP BY COLLECTION", links: [
+                { label: "Defy", href: "#" },
+                { label: "Vision", href: "#" },
+                { label: "Impact", href: "#" },
+              ]},
+            ],
+          },
+          {
+            label: "MENS",
+            sections: [
+              { links: [
+                { label: "EXPLORE MENS", href: "#" },
+                { label: "NEW RELEASES", href: "#" },
+                { label: "ALL PRODUCTS", href: "#" },
+              ]},
+              { heading: "SHOP BY CATEGORY", links: [
+                { label: "Shorts", href: "#" },
+                { label: "T-Shirts", href: "#" },
+                { label: "Hoodies", href: "#" },
+              ]},
+            ],
+          },
+        ],
+        cartItemCount: 2,
+        onCartClick: () => {},
+        onMenuClick: () => {},
+        onSearchClick: () => {},
+        onAccountClick: () => {},
+      };
       return (
-        <div className="w-full">
-          <Header
-            logo={<span style={{ fontFamily: "Raleway", fontWeight: 700, fontSize: 18, letterSpacing: 3 }}>DFYNE</span>}
-            utilityLinks={[
-              { label: "Contact Us", href: "#" },
-              { label: "Track My Order", href: "#" },
-              { label: "Rewards", href: "#" },
-              { label: "Events", href: "#" },
-            ]}
-            socials={[
-              { platform: "instagram", href: "#" },
-              { platform: "facebook", href: "#" },
-              { platform: "youtube", href: "#" },
-              { platform: "tiktok", href: "#" },
-            ]}
-            regionFlag={"\u{1F1EC}\u{1F1E7}"}
-            navDropdowns={[
-              {
-                label: "WOMENS",
-                sections: [
-                  { links: [
-                    { label: "EXPLORE WOMENS", href: "#" },
-                    { label: "NEW RELEASES", href: "#" },
-                    { label: "BEST SELLERS", href: "#" },
-                    { label: "ALL PRODUCTS", href: "#" },
-                  ]},
-                  { heading: "SHOP BY CATEGORY", links: [
-                    { label: "Shorts", href: "#" },
-                    { label: "Sports Bras", href: "#" },
-                    { label: "T-Shirts & Tops", href: "#" },
-                    { label: "Leggings", href: "#" },
-                  ]},
-                  { heading: "SHOP BY COLLECTION", links: [
-                    { label: "Defy", href: "#" },
-                    { label: "Vision", href: "#" },
-                    { label: "Impact", href: "#" },
-                  ]},
-                ],
-              },
-              {
-                label: "MENS",
-                sections: [
-                  { links: [
-                    { label: "EXPLORE MENS", href: "#" },
-                    { label: "NEW RELEASES", href: "#" },
-                    { label: "ALL PRODUCTS", href: "#" },
-                  ]},
-                  { heading: "SHOP BY CATEGORY", links: [
-                    { label: "Shorts", href: "#" },
-                    { label: "T-Shirts", href: "#" },
-                    { label: "Hoodies", href: "#" },
-                  ]},
-                ],
-              },
-            ]}
-            cartItemCount={2}
-            onCartClick={() => {}}
-            onMenuClick={() => {}}
-            onSearchClick={() => {}}
-            onAccountClick={() => {}}
-          />
+        <div style={{ display: "flex", flexDirection: "column", gap: 32, width: "100%" }}>
+          {/* Desktop */}
+          <div>
+            <div style={{ fontFamily: "Raleway", fontSize: 10, fontWeight: 600, textTransform: "uppercase" as const, letterSpacing: "1.5px", color: "#888", marginBottom: 8 }}>DESKTOP</div>
+            <div className="w-full">
+              <Header {...headerProps} />
+            </div>
+          </div>
+          {/* Mobile */}
+          <div>
+            <div style={{ fontFamily: "Raleway", fontSize: 10, fontWeight: 600, textTransform: "uppercase" as const, letterSpacing: "1.5px", color: "#888", marginBottom: 8 }}>MOBILE (375px)</div>
+            <div style={{ width: 375, overflow: "hidden", borderRadius: 16, border: "2px solid #e8e8e1" }}>
+              <Header {...headerProps} />
+            </div>
+          </div>
         </div>
       );
+    }
 
     case "Tabs":
       return (
