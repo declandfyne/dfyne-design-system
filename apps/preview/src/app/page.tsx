@@ -11,6 +11,7 @@ import { TokenPage } from "../components/TokenPage";
 import { UsageCard } from "../components/UsageCard";
 import { renderComponent, isFullWidthComponent } from "../data/componentRenders";
 import { componentSpecs } from "../data/componentSpecs";
+import { highlightCode } from "../utils/highlightCode";
 import { getControls } from "../data/componentControls";
 import { usageGuidelines } from "../data/usageGuidelines";
 
@@ -133,9 +134,15 @@ export default function PreviewPage() {
           <div className="flex-1 overflow-y-auto p-10" style={{ background: "var(--canvas-bg)" }}>
             <div className="mx-auto max-w-[700px]">
               <h2 className="mb-6 text-[18px] font-light text-white">{active}</h2>
-              <div className="font-mono rounded-lg border p-4 text-[12px]" style={{ borderColor: "var(--border)", background: "var(--panel-bg)", color: "#8b949e" }}>
-                <pre>{spec.reactCode}</pre>
+              <div className="font-mono rounded-lg border p-4 text-[12px] leading-[1.7]" style={{ borderColor: "var(--border)", background: "var(--panel-bg)", color: "#8b949e" }}>
+                <pre>{highlightCode(spec.reactCode, "react")}</pre>
               </div>
+              {spec.liquidCode && (
+                <div className="font-mono mt-4 rounded-lg border p-4 text-[12px] leading-[1.7]" style={{ borderColor: "var(--border)", background: "var(--panel-bg)", color: "#8b949e" }}>
+                  <div className="mb-2 text-[10px] uppercase tracking-wider" style={{ color: "var(--text-muted)" }}>Liquid</div>
+                  <pre>{highlightCode(spec.liquidCode, "liquid")}</pre>
+                </div>
+              )}
             </div>
           </div>
         )}
