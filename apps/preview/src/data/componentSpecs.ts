@@ -887,58 +887,80 @@ export const componentSpecs: ComponentSpecData[] = [
   },
 
   /* ------------------------------------------------------------------ */
-  /*  Quick Shop Modal                                                   */
+  /*  Quick Add                                                          */
   /* ------------------------------------------------------------------ */
   {
-    name: "Quick Shop Modal",
-    figmaPath: "Components / Quick Shop Modal",
-    liquidCode: `<div class="quick-shop-modal__overlay">
-  <div class="quick-shop-modal">
-    <button class="quick-shop-modal__close" aria-label="Close">&times;</button>
-    <div class="quick-shop-modal__image">
-      <img src="..." alt="..." />
+    name: "Quick Add",
+    figmaPath: "Components / Quick Add",
+    liquidCode: `<div class="quick-add__overlay">
+  <div class="quick-add">
+    <div class="quick-add__header">
+      <span>QUICK ADD</span>
+      <button class="quick-add__close" aria-label="Close">&times;</button>
     </div>
-    <div class="quick-shop-modal__info">
-      <h3 class="quick-shop-modal__title">Power Seamless Legging</h3>
-      <p class="quick-shop-modal__price">£54.00</p>
-      <div class="quick-shop-modal__sizes"><!-- size buttons --></div>
-      <button class="btn">ADD TO BAG</button>
+    <div class="quick-add__images"><!-- horizontal scroll --></div>
+    <div class="quick-add__info">
+      <h3 class="quick-add__name">Impact Long Sleeve One Piece</h3>
+      <p class="quick-add__variant">Truffle</p>
+      <p class="quick-add__price">\u00a375.99</p>
     </div>
+    <div class="quick-add__lengths"><!-- length pills --></div>
+    <div class="quick-add__sizes"><!-- size pills --></div>
+    <button class="btn">ADD TO CART</button>
+    <a href="..." class="btn btn--secondary">VIEW PRODUCT</a>
   </div>
 </div>`,
-    reactCode: `import { QuickShopModal } from "@dfyne/react";
+    reactCode: `import { QuickAdd } from "@dfyne/react";
 
-<QuickShopModal
+<QuickAdd
   open={true}
   onClose={() => {}}
   product={{
-    name: "Power Seamless Legging",
-    price: "£54.00",
+    name: "Impact Long Sleeve One Piece",
+    variant: "Truffle",
+    price: "\u00a375.99",
     images: [
-      { src: "https://placehold.co/400x500/e8e8e1/111?text=Front", alt: "Front" },
+      { src: "/front.jpg", alt: "Front" },
+      { src: "/back.jpg", alt: "Back" },
     ],
+    lengths: ["REGULAR", "TALL"],
     sizes: [
-      { label: "S", selected: false, soldOut: false },
-      { label: "M", selected: true, soldOut: false },
-      { label: "XL", selected: false, soldOut: true },
+      { label: "XS", soldOut: false },
+      { label: "S", soldOut: false },
+      { label: "M", soldOut: false },
+      { label: "L", soldOut: true },
     ],
+    href: "/products/impact-one-piece",
   }}
-  onAddToBag={() => {}}
+  onLengthSelect={(l) => setLength(l)}
+  onSizeSelect={(s) => setSize(s)}
+  onAddToCart={() => {}}
+  selectedLength={length}
+  selectedSize={size}
 />`,
     variants: [
       {
         name: "Default",
         specs: [
-          { group: "Overlay", property: "Background", value: "rgba(0,0,0,0.5)" },
-          { group: "Modal", property: "Background", value: "#ffffff" },
-          { group: "Modal", property: "Radius", value: "8px" },
-          { group: "Modal", property: "Max Width", value: "720px" },
-          { group: "Modal", property: "Shadow", value: "0 8px 32px rgba(0,0,0,0.2)" },
-          { group: "Title", property: "Font", value: "Raleway 14px / 600" },
-          { group: "Title", property: "Tracking", value: "0.5px" },
+          { group: "Backdrop", property: "Background", value: "rgba(0,0,0,0.4)" },
+          { group: "Backdrop", property: "Position", value: "fixed inset-0, z-50" },
+          { group: "Sheet", property: "Background", value: "#ffffff" },
+          { group: "Sheet", property: "Border Radius", value: "16px 16px 0 0" },
+          { group: "Sheet", property: "Max Height", value: "85vh" },
+          { group: "Sheet", property: "Animation", value: "translateY(100%) \u2192 translateY(0), 300ms ease" },
+          { group: "Header", property: "Font", value: "Raleway 10px / 600" },
+          { group: "Header", property: "Tracking", value: "1.5px" },
+          { group: "Header", property: "Transform", value: "uppercase" },
+          { group: "Name", property: "Font", value: "Raleway 14px / 600" },
+          { group: "Name", property: "Color", value: "#111111" },
+          { group: "Variant", property: "Font", value: "Raleway 11px / 400" },
+          { group: "Variant", property: "Color", value: "#888888" },
           { group: "Price", property: "Font", value: "Raleway 13px / 400" },
+          { group: "Price", property: "Color", value: "#1c1d1d" },
           { group: "Image", property: "Aspect Ratio", value: "4:5" },
-          { group: "Spacing", property: "Padding", value: "24px" },
+          { group: "Image", property: "Width", value: "calc(50% - 2px)" },
+          { group: "Image", property: "Scroll", value: "horizontal snap" },
+          { group: "Spacing", property: "Padding", value: "16px horizontal, 16px bottom" },
         ],
       },
     ],

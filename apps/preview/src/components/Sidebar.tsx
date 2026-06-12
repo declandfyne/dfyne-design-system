@@ -17,7 +17,7 @@ const groups: SidebarGroup[] = [
   { label: "Collection", items: ["Collection Grid"] },
   { label: "Cart", items: ["Cart Item", "Cart Drawer"] },
   { label: "Navigation", items: ["Header", "Social Icons"] },
-  { label: "Modals", items: ["Quick Shop Modal"] },
+  { label: "Modals", items: ["Quick Add"] },
   { label: "Feedback", items: ["Toast", "Tooltip"] },
   { label: "Sections", items: ["Campaign Hero", "Announcement Bar", "Newsletter Signup", "Footer"] },
   { label: "Tokens", items: ["Colors", "Typography", "Spacing", "Glossary"] },

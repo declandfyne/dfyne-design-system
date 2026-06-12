@@ -23,7 +23,7 @@ import {
   ProductGallery,
   FilterPanel,
   CollectionGrid,
-  QuickShopModal,
+  QuickAdd,
   CartItem,
   CartDrawer,
   Header,
@@ -350,27 +350,29 @@ export function renderComponent(name: string, props: Record<string, unknown>): R
         </div>
       );
 
-    case "Quick Shop Modal":
+    case "Quick Add":
       return (
-        <QuickShopModal
+        <QuickAdd
           open={true}
           onClose={() => {}}
           product={{
-            name: "Power Seamless Legging",
-            price: "£54.00",
+            name: "Impact Long Sleeve One Piece",
+            variant: "Truffle",
+            price: "\u00a375.99",
             images: [
               { src: "https://placehold.co/400x500/e8e8e1/111?text=Front", alt: "Front" },
               { src: "https://placehold.co/400x500/e8e8e1/111?text=Back", alt: "Back" },
             ],
+            lengths: ["REGULAR", "TALL"],
             sizes: [
-              { label: "XS", selected: false, soldOut: false },
-              { label: "S", selected: false, soldOut: false },
-              { label: "M", selected: true, soldOut: false },
-              { label: "L", selected: false, soldOut: false },
-              { label: "XL", selected: false, soldOut: true },
+              { label: "XS", soldOut: false },
+              { label: "S", soldOut: false },
+              { label: "M", soldOut: false },
+              { label: "L", soldOut: true },
             ],
+            href: "/products/impact-one-piece",
           }}
-          onAddToBag={() => {}}
+          onAddToCart={() => {}}
         />
       );
 
