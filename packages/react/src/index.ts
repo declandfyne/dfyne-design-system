@@ -43,6 +43,7 @@ export type {
 
 // Filters
 export { FilterPanel } from "./filters/FilterPanel";
+export { FilterDrawer } from "./filters/FilterDrawer";
 export type { FilterGroup, FilterOption, SortOption } from "./filters/FilterPanel";
 
 // Cart
