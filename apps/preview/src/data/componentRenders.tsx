@@ -20,6 +20,10 @@ import {
   Accordion,
   AccordionItem,
   Search,
+  ProductGallery,
+  FilterPanel,
+  CollectionGrid,
+  QuickShopModal,
 } from "@dfyne/react";
 import type { IconName } from "@dfyne/react";
 
@@ -216,11 +220,122 @@ export function renderComponent(name: string, props: Record<string, unknown>): R
         />
       );
 
+    case "Product Gallery":
+      return (
+        <div style={{ maxWidth: 400 }}>
+          <ProductGallery
+            images={[
+              { src: "https://placehold.co/400x500/e8e8e1/111?text=Front", alt: "Front" },
+              { src: "https://placehold.co/400x500/e8e8e1/111?text=Back", alt: "Back" },
+              { src: "https://placehold.co/400x500/e8e8e1/111?text=Detail", alt: "Detail" },
+            ]}
+          />
+        </div>
+      );
+
+    case "Filter Panel":
+      return (
+        <FilterPanel
+          filters={[
+            { key: "color", label: "Color", type: "checkbox", options: [
+              { value: "black", label: "Black", count: 12, selected: false },
+              { value: "white", label: "White", count: 8, selected: true },
+            ]},
+            { key: "size", label: "Size", type: "checkbox", options: [
+              { value: "s", label: "S", selected: false },
+              { value: "m", label: "M", selected: true },
+            ]},
+          ]}
+          onFilterChange={() => {}}
+          sortOptions={[
+            { value: "featured", label: "Featured" },
+            { value: "price-asc", label: "Price: Low to High" },
+          ]}
+          sortValue="featured"
+          onSortChange={() => {}}
+          activeFilterCount={1}
+          onClearAll={() => {}}
+        />
+      );
+
+    case "Collection Grid":
+      return (
+        <div className="w-full">
+          <CollectionGrid
+            heading="Leggings"
+            productCount={24}
+            products={[
+              <ProductCard
+                key="1"
+                image="https://placehold.co/394x492/f2f2f2/1c1d1d?text=Power+Legging"
+                name="Power Seamless Legging"
+                color="Midnight Black"
+                price={54}
+                rating={4.8}
+                reviewCount={1200}
+              />,
+              <ProductCard
+                key="2"
+                image="https://placehold.co/394x492/f2f2f2/1c1d1d?text=Impact+Legging"
+                name="Impact High Rise Legging"
+                color="Storm Grey"
+                price={48}
+                rating={4.6}
+                reviewCount={890}
+              />,
+              <ProductCard
+                key="3"
+                image="https://placehold.co/394x492/f2f2f2/1c1d1d?text=Adapt+Legging"
+                name="Adapt Seamless Legging"
+                color="Deep Plum"
+                price={52}
+                rating={4.7}
+                reviewCount={650}
+                badge="NEW"
+              />,
+              <ProductCard
+                key="4"
+                image="https://placehold.co/394x492/f2f2f2/1c1d1d?text=Core+Legging"
+                name="Core Training Legging"
+                color="Black"
+                price={42}
+                rating={4.5}
+                reviewCount={2100}
+              />,
+            ]}
+          />
+        </div>
+      );
+
+    case "Quick Shop Modal":
+      return (
+        <QuickShopModal
+          open={true}
+          onClose={() => {}}
+          product={{
+            name: "Power Seamless Legging",
+            price: "£54.00",
+            images: [
+              { src: "https://placehold.co/400x500/e8e8e1/111?text=Front", alt: "Front" },
+              { src: "https://placehold.co/400x500/e8e8e1/111?text=Back", alt: "Back" },
+            ],
+            sizes: [
+              { label: "XS", selected: false, soldOut: false },
+              { label: "S", selected: false, soldOut: false },
+              { label: "M", selected: true, soldOut: false },
+              { label: "L", selected: false, soldOut: false },
+              { label: "XL", selected: false, soldOut: true },
+            ],
+          }}
+          onAddToBag={() => {}}
+        />
+      );
+
     default:
       return null;
   }
 }
 
 export function isFullWidthComponent(name: string): boolean {
-  return ["Campaign Hero", "Announcement Bar", "Newsletter Signup", "Footer"].includes(name);
+  return ["Campaign Hero", "Announcement Bar", "Newsletter Signup", "Footer", "Collection Grid"].includes(name);
 }

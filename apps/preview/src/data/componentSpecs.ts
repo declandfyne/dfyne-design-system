@@ -756,6 +756,195 @@ export const componentSpecs: ComponentSpecData[] = [
   },
 
   /* ------------------------------------------------------------------ */
+  /*  Product Gallery                                                    */
+  /* ------------------------------------------------------------------ */
+  {
+    name: "Product Gallery",
+    figmaPath: "Components / Product Gallery",
+    liquidCode: `<div class="product__photos">
+  <div class="product__main-image">
+    <img src="..." alt="Front" />
+  </div>
+  <div class="product__thumbs">
+    <button class="product__thumb active"><img src="..." alt="Front" /></button>
+    <button class="product__thumb"><img src="..." alt="Back" /></button>
+    <button class="product__thumb"><img src="..." alt="Detail" /></button>
+  </div>
+</div>`,
+    reactCode: `import { ProductGallery } from "@dfyne/react";
+
+<ProductGallery images={[
+  { src: "https://placehold.co/400x500/e8e8e1/111?text=Front", alt: "Front" },
+  { src: "https://placehold.co/400x500/e8e8e1/111?text=Back", alt: "Back" },
+  { src: "https://placehold.co/400x500/e8e8e1/111?text=Detail", alt: "Detail" },
+]} />`,
+    variants: [
+      {
+        name: "Default",
+        specs: [
+          { group: "Image", property: "Aspect Ratio", value: "4:5 (portrait)" },
+          { group: "Image", property: "Object Fit", value: "cover" },
+          { group: "Image", property: "Radius", value: "4px" },
+          { group: "Thumbnails", property: "Size", value: "64px × 80px" },
+          { group: "Thumbnails", property: "Radius", value: "2px" },
+          { group: "Thumbnails", property: "Active Border", value: "1px solid #000000" },
+          { group: "Spacing", property: "Gap", value: "8px" },
+        ],
+      },
+    ],
+  },
+
+  /* ------------------------------------------------------------------ */
+  /*  Filter Panel                                                       */
+  /* ------------------------------------------------------------------ */
+  {
+    name: "Filter Panel",
+    figmaPath: "Components / Filter Panel",
+    liquidCode: `<div class="collection-filter">
+  <div class="collection-filter__group">
+    <h4 class="collection-filter__heading">Color</h4>
+    <label class="collection-filter__option">
+      <input type="checkbox" /> Black (12)
+    </label>
+  </div>
+  <div class="collection-filter__sort">
+    <select><option>Featured</option></select>
+  </div>
+</div>`,
+    reactCode: `import { FilterPanel } from "@dfyne/react";
+
+<FilterPanel
+  filters={[
+    { key: "color", label: "Color", type: "checkbox", options: [
+      { value: "black", label: "Black", count: 12, selected: false },
+      { value: "white", label: "White", count: 8, selected: true },
+    ]},
+  ]}
+  onFilterChange={() => {}}
+  sortOptions={[
+    { value: "featured", label: "Featured" },
+    { value: "price-asc", label: "Price: Low to High" },
+  ]}
+  sortValue="featured"
+  onSortChange={() => {}}
+  activeFilterCount={1}
+  onClearAll={() => {}}
+/>`,
+    variants: [
+      {
+        name: "Default",
+        specs: [
+          { group: "Typography", property: "Heading Font", value: "Raleway 10px / 600" },
+          { group: "Typography", property: "Heading Tracking", value: "1.5px" },
+          { group: "Typography", property: "Heading Transform", value: "uppercase" },
+          { group: "Typography", property: "Option Font", value: "Raleway 13px / 400" },
+          { group: "Spacing", property: "Group Gap", value: "24px" },
+          { group: "Spacing", property: "Option Gap", value: "12px" },
+          { group: "Colors", property: "Border", value: "1px solid #e8e8e1", cssVar: "--color-border" },
+          { group: "Colors", property: "Checkbox Active", value: "#111111" },
+        ],
+      },
+    ],
+  },
+
+  /* ------------------------------------------------------------------ */
+  /*  Collection Grid                                                    */
+  /* ------------------------------------------------------------------ */
+  {
+    name: "Collection Grid",
+    figmaPath: "Sections / Collection Grid",
+    liquidCode: `<div class="collection-content">
+  <div class="page-width">
+    <h1 class="collection-title">Leggings</h1>
+    <span class="collection-count">24 products</span>
+    <div class="grid grid--uniform">
+      <!-- ProductCard items -->
+    </div>
+  </div>
+</div>`,
+    reactCode: `import { CollectionGrid } from "@dfyne/react";
+
+<CollectionGrid
+  heading="Leggings"
+  productCount={24}
+  products={[/* ProductCard instances */]}
+/>`,
+    variants: [
+      {
+        name: "Default",
+        specs: [
+          { group: "Heading", property: "Font", value: "Raleway 14px / 600" },
+          { group: "Heading", property: "Tracking", value: "1.5px" },
+          { group: "Heading", property: "Transform", value: "uppercase" },
+          { group: "Count", property: "Font", value: "Raleway 11px / 400" },
+          { group: "Count", property: "Color", value: "rgba(0,0,0,0.6)" },
+          { group: "Grid", property: "Columns", value: "4 (desktop) / 2 (mobile)" },
+          { group: "Grid", property: "Gap", value: "16px" },
+          { group: "Spacing", property: "Heading Bottom", value: "24px" },
+        ],
+      },
+    ],
+  },
+
+  /* ------------------------------------------------------------------ */
+  /*  Quick Shop Modal                                                   */
+  /* ------------------------------------------------------------------ */
+  {
+    name: "Quick Shop Modal",
+    figmaPath: "Components / Quick Shop Modal",
+    liquidCode: `<div class="quick-shop-modal__overlay">
+  <div class="quick-shop-modal">
+    <button class="quick-shop-modal__close" aria-label="Close">&times;</button>
+    <div class="quick-shop-modal__image">
+      <img src="..." alt="..." />
+    </div>
+    <div class="quick-shop-modal__info">
+      <h3 class="quick-shop-modal__title">Power Seamless Legging</h3>
+      <p class="quick-shop-modal__price">£54.00</p>
+      <div class="quick-shop-modal__sizes"><!-- size buttons --></div>
+      <button class="btn">ADD TO BAG</button>
+    </div>
+  </div>
+</div>`,
+    reactCode: `import { QuickShopModal } from "@dfyne/react";
+
+<QuickShopModal
+  open={true}
+  onClose={() => {}}
+  product={{
+    name: "Power Seamless Legging",
+    price: "£54.00",
+    images: [
+      { src: "https://placehold.co/400x500/e8e8e1/111?text=Front", alt: "Front" },
+    ],
+    sizes: [
+      { label: "S", selected: false, soldOut: false },
+      { label: "M", selected: true, soldOut: false },
+      { label: "XL", selected: false, soldOut: true },
+    ],
+  }}
+  onAddToBag={() => {}}
+/>`,
+    variants: [
+      {
+        name: "Default",
+        specs: [
+          { group: "Overlay", property: "Background", value: "rgba(0,0,0,0.5)" },
+          { group: "Modal", property: "Background", value: "#ffffff" },
+          { group: "Modal", property: "Radius", value: "8px" },
+          { group: "Modal", property: "Max Width", value: "720px" },
+          { group: "Modal", property: "Shadow", value: "0 8px 32px rgba(0,0,0,0.2)" },
+          { group: "Title", property: "Font", value: "Raleway 14px / 600" },
+          { group: "Title", property: "Tracking", value: "0.5px" },
+          { group: "Price", property: "Font", value: "Raleway 13px / 400" },
+          { group: "Image", property: "Aspect Ratio", value: "4:5" },
+          { group: "Spacing", property: "Padding", value: "24px" },
+        ],
+      },
+    ],
+  },
+
+  /* ------------------------------------------------------------------ */
   /*  Footer                                                             */
   /* ------------------------------------------------------------------ */
   {
