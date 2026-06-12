@@ -2,26 +2,38 @@ import { describe, it, expect } from "vitest";
 import { render, screen } from "@testing-library/react";
 import { Footer } from "../src/index";
 
-const columns = [
-  { heading: "Account", links: ["Login", "Register"] },
-  { heading: "Delivery", links: ["Shipping", "Returns"] },
+const links = [
+  { label: "Contact Us", href: "/contact" },
+  { label: "Track My Order", href: "/track" },
+  { label: "Rewards", href: "/rewards" },
+];
+
+const socials = [
+  { platform: "instagram" as const, href: "https://instagram.com/dfyne" },
+  { platform: "facebook" as const, href: "https://facebook.com/dfyne" },
 ];
 
 describe("Footer", () => {
-  it("renders column headings", () => {
-    render(<Footer columns={columns} />);
-    expect(screen.getByText("Account")).toBeInTheDocument();
-    expect(screen.getByText("Delivery")).toBeInTheDocument();
+  it("renders all links", () => {
+    render(<Footer links={links} />);
+    expect(screen.getByText("Contact Us")).toBeInTheDocument();
+    expect(screen.getByText("Track My Order")).toBeInTheDocument();
+    expect(screen.getByText("Rewards")).toBeInTheDocument();
   });
 
-  it("renders links in each column", () => {
-    render(<Footer columns={columns} />);
-    expect(screen.getByText("Login")).toBeInTheDocument();
-    expect(screen.getByText("Returns")).toBeInTheDocument();
+  it("renders links as anchors with correct href", () => {
+    render(<Footer links={links} />);
+    expect(screen.getByText("Contact Us").closest("a")).toHaveAttribute("href", "/contact");
   });
 
-  it("renders as a footer element", () => {
-    const { container } = render(<Footer columns={columns} />);
-    expect(container.querySelector("footer")).toBeInTheDocument();
+  it("renders social icons when provided", () => {
+    render(<Footer links={links} socials={socials} />);
+    const socialLinks = screen.getAllByRole("link").filter(a => a.getAttribute("target") === "_blank");
+    expect(socialLinks.length).toBe(2);
+  });
+
+  it("renders without socials", () => {
+    render(<Footer links={links} />);
+    expect(screen.getByText("Contact Us")).toBeInTheDocument();
   });
 });

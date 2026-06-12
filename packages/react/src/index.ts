@@ -68,3 +68,4 @@ export { CampaignHero } from "./sections/CampaignHero";
 export { AnnouncementBar } from "./sections/AnnouncementBar";
 export { NewsletterSignup } from "./sections/NewsletterSignup";
 export { Footer } from "./sections/Footer";
+export type { FooterLink, FooterSocial, FooterProps } from "./sections/Footer";

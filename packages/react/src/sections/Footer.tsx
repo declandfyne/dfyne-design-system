@@ -1,31 +1,64 @@
-type FooterColumn = {
-  heading: string;
-  links: string[];
-};
+import { SocialIcons } from "../navigation/SocialIcons";
+import type { SocialLink } from "../navigation/SocialIcons";
 
-export function Footer({
-  columns,
-  className = "",
-}: {
-  columns: FooterColumn[];
+export interface FooterLink {
+  label: string;
+  href: string;
+}
+
+export interface FooterSocial {
+  platform: "instagram" | "facebook" | "youtube" | "tiktok" | "pinterest" | "twitter";
+  href: string;
+}
+
+export interface FooterProps {
+  links: FooterLink[];
+  socials?: FooterSocial[];
   className?: string;
-}) {
+}
+
+export function Footer({ links, socials, className = "" }: FooterProps) {
   return (
-    <footer className={`border-t border-[#e8e8e1] bg-white px-4 py-12 sm:px-6 lg:px-0 lg:pt-[61px] lg:pb-[60px] ${className}`.trim()}>
-      <div className="mx-auto grid max-w-[1442px] gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:justify-center lg:gap-0">
-        {columns.map((column) => (
-          <div key={column.heading} className="px-0 lg:px-[22px]">
-            <h3 className="text-[10px] font-semibold uppercase tracking-[1.5px]">{column.heading}</h3>
-            <ul className="mt-[34px] space-y-[14px] text-[11.05px]">
-              {column.links.map((link) => (
-                <li key={link}>
-                  <a href="#" className="hover:underline">{link}</a>
-                </li>
-              ))}
-            </ul>
-          </div>
+    <footer
+      className={className}
+      style={{
+        borderTop: "1px solid #e8e8e1",
+        backgroundColor: "#fff",
+        padding: "40px 24px",
+        textAlign: "center",
+      }}
+    >
+      <nav
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          gap: 24,
+          flexWrap: "wrap",
+        }}
+      >
+        {links.map(({ label, href }) => (
+          <a
+            key={label}
+            href={href}
+            style={{
+              fontFamily: "Raleway, sans-serif",
+              fontSize: 11,
+              fontWeight: 400,
+              color: "#111",
+              textDecoration: "none",
+            }}
+          >
+            {label}
+          </a>
         ))}
-      </div>
+      </nav>
+
+      {socials && socials.length > 0 && (
+        <div style={{ marginTop: 24, display: "flex", justifyContent: "center" }}>
+          <SocialIcons links={socials as SocialLink[]} size={20} />
+        </div>
+      )}
     </footer>
   );
 }
