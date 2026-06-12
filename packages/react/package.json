@@ -15,7 +15,8 @@
     "clean": "echo 'nothing to clean'"
   },
   "dependencies": {
-    "@dfyne/tokens": "workspace:*"
+    "@dfyne/tokens": "workspace:*",
+    "@phosphor-icons/react": "^2.1.10"
   },
   "peerDependencies": {
     "react": "^19",
