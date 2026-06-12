@@ -54,10 +54,14 @@ export { Breadcrumbs } from "./navigation/Breadcrumbs";
 export type { BreadcrumbItem, BreadcrumbsProps } from "./navigation/Breadcrumbs";
 export { Pagination } from "./navigation/Pagination";
 export type { PaginationProps } from "./navigation/Pagination";
+export { RegionSelector } from "./navigation/RegionSelector";
+export type { Region, RegionSelectorProps } from "./navigation/RegionSelector";
 
 // Feedback
 export { Toast } from "./feedback/Toast";
 export type { ToastProps } from "./feedback/Toast";
+export { Tooltip } from "./feedback/Tooltip";
+export type { TooltipProps } from "./feedback/Tooltip";
 
 // Sections
 export { CampaignHero } from "./sections/CampaignHero";
