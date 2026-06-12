@@ -32,6 +32,10 @@ export { ProductGallery } from "./gallery/ProductGallery";
 // Collection
 export { CollectionGrid } from "./collection/CollectionGrid";
 
+// Filters
+export { FilterPanel } from "./filters/FilterPanel";
+export type { FilterGroup, FilterOption, SortOption } from "./filters/FilterPanel";
+
 // Sections
 export { CampaignHero } from "./sections/CampaignHero";
 export { AnnouncementBar } from "./sections/AnnouncementBar";
