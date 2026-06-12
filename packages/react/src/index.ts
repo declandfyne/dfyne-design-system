@@ -40,6 +40,10 @@ export type { FilterGroup, FilterOption, SortOption } from "./filters/FilterPane
 export { QuickShopModal } from "./modals/QuickShopModal";
 export type { QuickShopProduct } from "./modals/QuickShopModal";
 
+// Navigation
+export { Header } from "./navigation/Header";
+export type { NavItem, HeaderProps } from "./navigation/Header";
+
 // Sections
 export { CampaignHero } from "./sections/CampaignHero";
 export { AnnouncementBar } from "./sections/AnnouncementBar";
