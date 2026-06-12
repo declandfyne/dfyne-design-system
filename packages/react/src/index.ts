@@ -36,6 +36,10 @@ export { CollectionGrid } from "./collection/CollectionGrid";
 export { FilterPanel } from "./filters/FilterPanel";
 export type { FilterGroup, FilterOption, SortOption } from "./filters/FilterPanel";
 
+// Modals
+export { QuickShopModal } from "./modals/QuickShopModal";
+export type { QuickShopProduct } from "./modals/QuickShopModal";
+
 // Sections
 export { CampaignHero } from "./sections/CampaignHero";
 export { AnnouncementBar } from "./sections/AnnouncementBar";
