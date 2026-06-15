@@ -14,16 +14,16 @@ export function ControlInput({
   onChange: (value: unknown) => void;
 }) {
   const inputStyle = {
-    background: "var(--input-bg)",
-    borderColor: "var(--input-border)",
-    color: "#ccc",
+    background: "#ffffff",
+    borderColor: "#d0d0d0",
+    color: "#111",
   };
 
   switch (control.type) {
     case "enum":
       return (
         <div className="flex items-center justify-between py-[5px]">
-          <span className="text-[12px]" style={{ color: "var(--text-secondary)" }}>{name}</span>
+          <span className="text-[12px]" style={{ color: "#555" }}>{name}</span>
           <select
             value={value as string}
             onChange={(e) => onChange(e.target.value)}
@@ -40,18 +40,18 @@ export function ControlInput({
     case "boolean":
       return (
         <div className="flex items-center justify-between py-[5px]">
-          <span className="text-[12px]" style={{ color: "var(--text-secondary)" }}>{name}</span>
+          <span className="text-[12px]" style={{ color: "#555" }}>{name}</span>
           <button
             type="button"
             onClick={() => onChange(!(value as boolean))}
             className="relative h-[18px] w-[32px] rounded-full transition-colors"
-            style={{ background: value ? "#fff" : "#2a2a2a" }}
+            style={{ background: value ? "#111" : "#d0d0d0" }}
           >
             <span
               className="absolute top-[2px] h-[14px] w-[14px] rounded-full transition-all"
               style={{
                 left: value ? 16 : 2,
-                background: value ? "#111" : "#666",
+                background: value ? "#fff" : "#888",
               }}
             />
           </button>
@@ -61,7 +61,7 @@ export function ControlInput({
     case "string":
       return (
         <div className="flex items-center justify-between py-[5px]">
-          <span className="text-[12px]" style={{ color: "var(--text-secondary)" }}>{name}</span>
+          <span className="text-[12px]" style={{ color: "#555" }}>{name}</span>
           <input
             type="text"
             value={value as string}
@@ -75,7 +75,7 @@ export function ControlInput({
     case "number":
       return (
         <div className="flex items-center justify-between py-[5px]">
-          <span className="text-[12px]" style={{ color: "var(--text-secondary)" }}>{name}</span>
+          <span className="text-[12px]" style={{ color: "#555" }}>{name}</span>
           <input
             type="number"
             value={value as number}

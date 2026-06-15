@@ -28,7 +28,7 @@ function CopyableValue({ value }: { value: string }) {
         cursor: "pointer",
         fontFamily: "'SF Mono', 'Cascadia Code', 'Fira Code', ui-monospace, monospace",
         fontSize: 11,
-        color: copied ? "#6ee7b7" : "#aaa",
+        color: copied ? "#1a7a4a" : "#555",
         transition: "color 0.2s ease",
       }}
       title="Click to copy"
@@ -40,7 +40,7 @@ function CopyableValue({ value }: { value: string }) {
           height: 12,
           borderRadius: 2,
           background: value,
-          border: "1px solid rgba(255,255,255,0.1)",
+          border: "1px solid rgba(0,0,0,0.12)",
           flexShrink: 0,
         }} />
       )}
@@ -59,10 +59,10 @@ type PropApiEntry = {
 
 function getApiEntries(controls: ComponentControlDef): PropApiEntry[] {
   const colorMap: Record<string, { color: string; bg: string }> = {
-    enum: { color: "#7ee787", bg: "rgba(126,231,135,0.15)" },
-    boolean: { color: "#ff7b72", bg: "rgba(255,123,114,0.15)" },
-    string: { color: "#79c0ff", bg: "rgba(121,192,255,0.15)" },
-    number: { color: "#e3b341", bg: "rgba(227,179,65,0.15)" },
+    enum: { color: "#1a7a3a", bg: "rgba(26,122,58,0.1)" },
+    boolean: { color: "#c0392b", bg: "rgba(192,57,43,0.1)" },
+    string: { color: "#1a5fa8", bg: "rgba(26,95,168,0.1)" },
+    number: { color: "#7d5a00", bg: "rgba(125,90,0,0.1)" },
   };
 
   return Object.entries(controls.props).map(([name, ctrl]) => ({
@@ -90,13 +90,13 @@ export function PropsPanel({
   return (
     <div
       className="flex h-full flex-col overflow-y-auto border-l"
-      style={{ background: "var(--panel-bg)", borderColor: "var(--border)" }}
+      style={{ background: "#f8f8f8", borderColor: "#e0e0e0" }}
     >
       {/* Header */}
       <div
         className="shrink-0 px-4"
         style={{
-          borderBottom: "1px solid var(--border)",
+          borderBottom: "1px solid #e0e0e0",
           paddingTop: 14,
           paddingBottom: 14,
         }}
@@ -107,7 +107,7 @@ export function PropsPanel({
               fontSize: 14,
               fontFamily: "Raleway, sans-serif",
               fontWeight: 600,
-              color: "#fff",
+              color: "#111",
               letterSpacing: "0.3px",
             }}
           >
@@ -120,7 +120,7 @@ export function PropsPanel({
               fontWeight: 600,
               textTransform: "uppercase",
               letterSpacing: "1px",
-              color: "var(--text-muted)",
+              color: "#666",
             }}
           >
             Controls
@@ -130,14 +130,14 @@ export function PropsPanel({
 
       {/* Props Controls */}
       {controls && Object.keys(controls.props).length > 0 && (
-        <div className="px-4" style={{ borderBottom: "1px solid var(--border-subtle)", paddingTop: 14, paddingBottom: 14 }}>
+        <div className="px-4" style={{ borderBottom: "1px solid #ebebeb", paddingTop: 14, paddingBottom: 14 }}>
           <div
             style={{
               fontSize: 10,
               fontWeight: 600,
               textTransform: "uppercase",
               letterSpacing: "1px",
-              color: "var(--text-muted)",
+              color: "#666",
               marginBottom: 12,
             }}
           >
@@ -159,14 +159,14 @@ export function PropsPanel({
 
       {/* API Table */}
       {controls && Object.keys(controls.props).length > 0 && (
-        <div className="px-4" style={{ borderBottom: "1px solid var(--border-subtle)", paddingTop: 14, paddingBottom: 14 }}>
+        <div className="px-4" style={{ borderBottom: "1px solid #ebebeb", paddingTop: 14, paddingBottom: 14 }}>
           <div
             style={{
               fontSize: 10,
               fontWeight: 600,
               textTransform: "uppercase",
               letterSpacing: "1px",
-              color: "var(--text-muted)",
+              color: "#666",
               marginBottom: 12,
             }}
           >
@@ -176,21 +176,21 @@ export function PropsPanel({
           <div
             className="grid grid-cols-[1fr_56px_1fr] gap-x-3"
             style={{
-              borderBottom: "1px solid var(--border)",
+              borderBottom: "1px solid #e0e0e0",
               paddingBottom: 8,
               marginBottom: 4,
             }}
           >
-            <span style={{ fontSize: 10, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.5px", color: "var(--text-muted)" }}>Prop</span>
-            <span style={{ fontSize: 10, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.5px", color: "var(--text-muted)" }}>Type</span>
-            <span style={{ fontSize: 10, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.5px", color: "var(--text-muted)" }}>Default</span>
+            <span style={{ fontSize: 10, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.5px", color: "#666" }}>Prop</span>
+            <span style={{ fontSize: 10, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.5px", color: "#666" }}>Type</span>
+            <span style={{ fontSize: 10, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.5px", color: "#666" }}>Default</span>
           </div>
           {getApiEntries(controls).map((entry) => (
             <div
               key={entry.name}
               className="grid grid-cols-[1fr_56px_1fr] items-center gap-x-3"
               style={{
-                borderBottom: "1px solid var(--border-subtle)",
+                borderBottom: "1px solid #ebebeb",
                 paddingTop: 6,
                 paddingBottom: 6,
               }}
@@ -212,7 +212,7 @@ export function PropsPanel({
               fontWeight: 600,
               textTransform: "uppercase",
               letterSpacing: "1px",
-              color: "var(--text-muted)",
+              color: "#666",
               marginBottom: 12,
             }}
           >
@@ -224,12 +224,12 @@ export function PropsPanel({
                 key={`${spec.group}-${spec.property}`}
                 className="flex items-center justify-between"
                 style={{
-                  borderBottom: "1px solid var(--border-subtle)",
+                  borderBottom: "1px solid #ebebeb",
                   paddingTop: 5,
                   paddingBottom: 5,
                 }}
               >
-                <span style={{ fontSize: 11, color: "var(--text-muted)" }}>
+                <span style={{ fontSize: 11, color: "#666" }}>
                   {spec.property}
                 </span>
                 <CopyableValue value={spec.value} />

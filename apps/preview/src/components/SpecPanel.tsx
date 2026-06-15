@@ -29,7 +29,7 @@ export function SpecPanel({
     <div className={`space-y-4 ${compact ? "text-[11px]" : "text-[12px]"}`}>
       {Object.entries(groups).map(([group, entries]) => (
         <div key={group}>
-          <p className="mb-2 text-[10px] font-semibold uppercase tracking-[1.2px] text-[#a0a0a0]">
+          <p className="mb-2 text-[10px] font-semibold uppercase tracking-[1.2px] text-[#666]">
             {group}
           </p>
           <div className="space-y-0.5">
