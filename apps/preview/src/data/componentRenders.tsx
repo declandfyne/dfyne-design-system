@@ -373,17 +373,22 @@ export function renderComponent(name: string, props: Record<string, unknown>): R
 
     case "Search":
       return (
-        <Search
-          value={(props.value as string) ?? ""}
-          onChange={() => {}}
-          results={[
-            { id: "1", title: "Power Legging", price: "£54.00", type: "product" },
-            { id: "2", title: "Impact Longsleeve Top", price: "£52.20", type: "product" },
-            { id: "3", title: "Leggings", type: "collection" },
-          ]}
-          placeholder={(props.placeholder as string) ?? "Search products..."}
-          loading={props.loading as boolean | undefined}
-        />
+        <div style={{ width: "100%", maxWidth: 800 }}>
+          <Search
+            value={(props.value as string) ?? ""}
+            onChange={() => {}}
+            placeholder={(props.placeholder as string) ?? "Search"}
+            loading={props.loading as boolean | undefined}
+            popularSearches={["Recently Restocked", "Impact", "Leggings", "Flares", "Tops"]}
+            recentlyViewed={[
+              { id: "1", title: "Impact Shorts | 4.5\"", color: "Midnight Black", price: "£52.50", image: "https://placehold.co/160x200/e8e8e1/111?text=Shorts", type: "product" },
+              { id: "2", title: "Charge Training Shorts | 6\"", color: "Burgundy", price: "£49.00", image: "https://placehold.co/160x200/e8e8e1/111?text=Training", type: "product" },
+              { id: "3", title: "Charge Training Shorts | 6\"", color: "Midnight Black", price: "£49.00", image: "https://placehold.co/160x200/e8e8e1/111?text=Charge", type: "product" },
+              { id: "4", title: "Charge Training Shorts | 6\"", color: "Stone", price: "£49.00", image: "https://placehold.co/160x200/e8e8e1/111?text=Stone", type: "product" },
+              { id: "5", title: "Signature Track Jacket", color: "Ink", price: "£85.00", image: "https://placehold.co/160x200/e8e8e1/111?text=Jacket", type: "product" },
+            ]}
+          />
+        </div>
       );
 
     case "Product Gallery":
@@ -626,5 +631,5 @@ export function renderComponent(name: string, props: Record<string, unknown>): R
 }
 
 export function isFullWidthComponent(name: string): boolean {
-  return ["Campaign Hero", "Announcement Bar", "Newsletter Signup", "Footer", "Collection Grid", "Header", "Category Image Carousel"].includes(name);
+  return ["Campaign Hero", "Announcement Bar", "Newsletter Signup", "Footer", "Collection Grid", "Header", "Category Image Carousel", "Search"].includes(name);
 }
