@@ -21,6 +21,7 @@ const groups: SidebarGroup[] = [
   { label: "Feedback", items: ["Toast", "Tooltip"] },
   { label: "Sections", items: ["Campaign Hero", "Announcement Bar", "Newsletter Signup", "Footer"] },
   { label: "Tokens", items: ["Colors", "Typography", "Spacing", "Glossary"] },
+  { label: "System", items: ["Settings"] },
 ];
 
 const totalItems = groups.reduce((sum, g) => sum + g.items.length, 0);
@@ -163,7 +164,13 @@ export function Sidebar({
                 <button
                   key={item}
                   type="button"
-                  onClick={() => onSelect(item)}
+                  onClick={() => {
+                    if (item === "Settings") {
+                      window.location.href = "/settings";
+                    } else {
+                      onSelect(item);
+                    }
+                  }}
                   onMouseEnter={(e) => {
                     if (!isActive) {
                       e.currentTarget.style.background = "var(--hover-bg)";
