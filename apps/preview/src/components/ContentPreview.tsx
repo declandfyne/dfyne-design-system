@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { client, isSanityConfigured } from "../sanity/client";
 
 type SiteContent = {
@@ -8,8 +8,11 @@ type SiteContent = {
   hero?: { caption?: string; heading?: string; ctaLabel?: string; secondaryCtaLabel?: string };
   newsletter?: { heading?: string; subtext?: string; placeholder?: string; buttonText?: string };
   uiLabels?: Record<string, string>;
+  navigation?: Record<string, unknown>;
   footer?: { links?: Array<{ label?: string; href?: string }>; copyrightText?: string };
 };
+
+type SiteContentDoc = SiteContent & { _id?: string };
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
@@ -33,20 +36,65 @@ function Section({ title, children }: { title: string; children: React.ReactNode
   );
 }
 
-function Field({ label, value }: { label: string; value?: string }) {
+function EditableField({
+  label,
+  value,
+  onChange,
+}: {
+  label: string;
+  value?: string;
+  onChange: (val: string) => void;
+}) {
+  const [focused, setFocused] = useState(false);
   return (
-    <div style={{ display: "flex", justifyContent: "space-between", padding: "6px 0", borderBottom: "1px solid var(--border-subtle)" }}>
-      <span style={{ fontSize: 12, color: "var(--text-muted)" }}>{label}</span>
-      <span style={{ fontSize: 12, color: value ? "var(--text-primary)" : "var(--text-muted)", fontStyle: value ? "normal" : "italic" }}>
-        {value || "Not set"}
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        padding: "5px 0",
+        borderBottom: "1px solid var(--border-subtle)",
+        gap: 12,
+      }}
+    >
+      <span
+        style={{
+          fontSize: 12,
+          color: "var(--text-muted)",
+          flexShrink: 0,
+          width: 120,
+        }}
+      >
+        {label}
       </span>
+      <input
+        value={value ?? ""}
+        onChange={(e) => onChange(e.target.value)}
+        onFocus={() => setFocused(true)}
+        onBlur={() => setFocused(false)}
+        style={{
+          flex: 1,
+          background: "var(--input-bg)",
+          border: focused ? "1px solid var(--text-muted)" : "1px solid var(--input-border)",
+          color: "var(--text-primary)",
+          borderRadius: 4,
+          padding: "6px 10px",
+          fontSize: 12,
+          fontFamily: "inherit",
+          width: "100%",
+          outline: "none",
+        }}
+      />
     </div>
   );
 }
 
 export function ContentPreview() {
-  const [content, setContent] = useState<SiteContent | null>(null);
+  const [content, setContent] = useState<SiteContentDoc | null>(null);
   const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
+  const [saved, setSaved] = useState(false);
+  const [dirty, setDirty] = useState(false);
+  const docId = useRef<string | undefined>(undefined);
 
   useEffect(() => {
     if (!isSanityConfigured) {
@@ -54,11 +102,103 @@ export function ContentPreview() {
       return;
     }
     client
-      .fetch<SiteContent | null>(`*[_type == "siteContent"][0]`)
-      .then((data) => setContent(data))
+      .fetch<SiteContentDoc | null>(
+        `*[_type == "siteContent"][0]{ _id, announcements, hero, newsletter, uiLabels, navigation, footer }`
+      )
+      .then((data) => {
+        if (data) {
+          docId.current = data._id;
+        }
+        setContent(data);
+      })
       .catch(() => setContent(null))
       .finally(() => setLoading(false));
   }, []);
+
+  const updateField = (path: string, value: string) => {
+    setDirty(true);
+    setContent((prev) => {
+      if (!prev) return prev;
+      const copy = JSON.parse(JSON.stringify(prev));
+      const parts = path.split(".");
+      let obj: Record<string, unknown> = copy;
+      for (let i = 0; i < parts.length - 1; i++) {
+        const key = parts[i];
+        if (/^\d+$/.test(key)) {
+          obj = (obj as unknown as unknown[])[parseInt(key)] as Record<string, unknown>;
+        } else {
+          obj = obj[key] as Record<string, unknown>;
+        }
+      }
+      obj[parts[parts.length - 1]] = value;
+      return copy;
+    });
+  };
+
+  const addAnnouncement = () => {
+    setDirty(true);
+    setContent((prev) => {
+      if (!prev) return prev;
+      const copy = JSON.parse(JSON.stringify(prev));
+      copy.announcements = [...(copy.announcements ?? []), { text: "", detail: "", link: "" }];
+      return copy;
+    });
+  };
+
+  const removeAnnouncement = (i: number) => {
+    setDirty(true);
+    setContent((prev) => {
+      if (!prev) return prev;
+      const copy = JSON.parse(JSON.stringify(prev));
+      copy.announcements = (copy.announcements ?? []).filter((_: unknown, idx: number) => idx !== i);
+      return copy;
+    });
+  };
+
+  const addFooterLink = () => {
+    setDirty(true);
+    setContent((prev) => {
+      if (!prev) return prev;
+      const copy = JSON.parse(JSON.stringify(prev));
+      if (!copy.footer) copy.footer = {};
+      copy.footer.links = [...(copy.footer.links ?? []), { label: "", href: "" }];
+      return copy;
+    });
+  };
+
+  const removeFooterLink = (i: number) => {
+    setDirty(true);
+    setContent((prev) => {
+      if (!prev) return prev;
+      const copy = JSON.parse(JSON.stringify(prev));
+      copy.footer.links = (copy.footer.links ?? []).filter((_: unknown, idx: number) => idx !== i);
+      return copy;
+    });
+  };
+
+  const handleSave = async () => {
+    if (!isSanityConfigured || !docId.current) return;
+    setSaving(true);
+    try {
+      await client.createOrReplace({
+        _id: docId.current,
+        _type: "siteContent",
+        announcements: content?.announcements,
+        hero: content?.hero,
+        newsletter: content?.newsletter,
+        uiLabels: content?.uiLabels,
+        navigation: content?.navigation,
+        footer: content?.footer,
+      });
+      setSaved(true);
+      setDirty(false);
+      setTimeout(() => setSaved(false), 2000);
+    } catch (err) {
+      console.error("Failed to save content:", err);
+    } finally {
+      setSaving(false);
+    }
+  };
 
   if (loading) {
     return (
@@ -76,53 +216,270 @@ export function ContentPreview() {
     );
   }
 
+  const saveLabel = saving ? "SAVING..." : saved ? "SAVED" : "SAVE CONTENT";
+  const saveColor = saved ? "#22c55e" : "#ffffff";
+  const saveBg = dirty && !saving ? "#111111" : "#333333";
+
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
-      {content.announcements && content.announcements.length > 0 && (
-        <Section title="Announcements">
-          {content.announcements.map((a, i) => (
-            <div key={i} style={{ padding: "8px 0", borderBottom: "1px solid var(--border-subtle)" }}>
-              <div style={{ fontSize: 12, color: "var(--text-primary)" }}>{a.text || "Empty"}</div>
-              {a.detail && (
-                <div style={{ fontSize: 11, color: "var(--text-muted)", marginTop: 2 }}>{a.detail}</div>
-              )}
+      {/* Header row with Save button */}
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "flex-end",
+          marginBottom: 24,
+        }}
+      >
+        <button
+          onClick={handleSave}
+          disabled={!dirty || saving}
+          style={{
+            background: saveBg,
+            color: saveColor,
+            fontSize: 9,
+            fontWeight: 600,
+            letterSpacing: "2.7px",
+            textTransform: "uppercase",
+            padding: "10px 24px",
+            borderRadius: 4,
+            border: "none",
+            cursor: dirty && !saving ? "pointer" : "default",
+            transition: "background 0.15s",
+          }}
+        >
+          {saveLabel}
+        </button>
+      </div>
+
+      {/* Announcements */}
+      <Section title="Announcements">
+        {(content.announcements ?? []).map((a, i) => (
+          <div
+            key={i}
+            style={{
+              padding: "10px 0",
+              borderBottom: "1px solid var(--border-subtle)",
+              marginBottom: 8,
+            }}
+          >
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                marginBottom: 6,
+              }}
+            >
+              <span
+                style={{
+                  fontSize: 9,
+                  fontWeight: 700,
+                  letterSpacing: 1.5,
+                  textTransform: "uppercase",
+                  color: "var(--text-muted)",
+                }}
+              >
+                Announcement {i + 1}
+              </span>
+              <button
+                onClick={() => removeAnnouncement(i)}
+                style={{
+                  background: "none",
+                  border: "none",
+                  color: "var(--text-muted)",
+                  cursor: "pointer",
+                  fontSize: 14,
+                  lineHeight: 1,
+                  padding: "0 4px",
+                }}
+                title="Remove"
+              >
+                ×
+              </button>
             </div>
-          ))}
-        </Section>
-      )}
+            <EditableField
+              label="Text"
+              value={a.text}
+              onChange={(v) => updateField(`announcements.${i}.text`, v)}
+            />
+            <EditableField
+              label="Detail"
+              value={a.detail}
+              onChange={(v) => updateField(`announcements.${i}.detail`, v)}
+            />
+            <EditableField
+              label="Link"
+              value={a.link}
+              onChange={(v) => updateField(`announcements.${i}.link`, v)}
+            />
+          </div>
+        ))}
+        <button
+          onClick={addAnnouncement}
+          style={{
+            marginTop: 8,
+            background: "none",
+            border: "1px solid var(--border)",
+            color: "var(--text-muted)",
+            fontSize: 9,
+            fontWeight: 600,
+            letterSpacing: "2px",
+            textTransform: "uppercase",
+            padding: "6px 14px",
+            borderRadius: 4,
+            cursor: "pointer",
+          }}
+        >
+          + Add Announcement
+        </button>
+      </Section>
 
+      {/* Hero */}
       <Section title="Hero">
-        <Field label="Caption" value={content.hero?.caption} />
-        <Field label="Heading" value={content.hero?.heading} />
-        <Field label="CTA Label" value={content.hero?.ctaLabel} />
-        <Field label="Secondary CTA" value={content.hero?.secondaryCtaLabel} />
+        <EditableField
+          label="Caption"
+          value={content.hero?.caption}
+          onChange={(v) => updateField("hero.caption", v)}
+        />
+        <EditableField
+          label="Heading"
+          value={content.hero?.heading}
+          onChange={(v) => updateField("hero.heading", v)}
+        />
+        <EditableField
+          label="CTA Label"
+          value={content.hero?.ctaLabel}
+          onChange={(v) => updateField("hero.ctaLabel", v)}
+        />
+        <EditableField
+          label="Secondary CTA"
+          value={content.hero?.secondaryCtaLabel}
+          onChange={(v) => updateField("hero.secondaryCtaLabel", v)}
+        />
       </Section>
 
+      {/* Newsletter */}
       <Section title="Newsletter">
-        <Field label="Heading" value={content.newsletter?.heading} />
-        <Field label="Subtext" value={content.newsletter?.subtext} />
-        <Field label="Placeholder" value={content.newsletter?.placeholder} />
-        <Field label="Button Text" value={content.newsletter?.buttonText} />
+        <EditableField
+          label="Heading"
+          value={content.newsletter?.heading}
+          onChange={(v) => updateField("newsletter.heading", v)}
+        />
+        <EditableField
+          label="Subtext"
+          value={content.newsletter?.subtext}
+          onChange={(v) => updateField("newsletter.subtext", v)}
+        />
+        <EditableField
+          label="Placeholder"
+          value={content.newsletter?.placeholder}
+          onChange={(v) => updateField("newsletter.placeholder", v)}
+        />
+        <EditableField
+          label="Button Text"
+          value={content.newsletter?.buttonText}
+          onChange={(v) => updateField("newsletter.buttonText", v)}
+        />
       </Section>
 
+      {/* UI Labels */}
       {content.uiLabels && (
         <Section title="UI Labels">
           {Object.entries(content.uiLabels)
             .filter(([key]) => !key.startsWith("_"))
             .map(([key, value]) => (
-              <Field key={key} label={key} value={value} />
+              <EditableField
+                key={key}
+                label={key}
+                value={value}
+                onChange={(v) => updateField(`uiLabels.${key}`, v)}
+              />
             ))}
         </Section>
       )}
 
-      {content.footer && (
-        <Section title="Footer">
-          <Field label="Copyright" value={content.footer.copyrightText} />
-          {content.footer.links?.map((link, i) => (
-            <Field key={i} label={link.label || `Link ${i + 1}`} value={link.href} />
-          ))}
-        </Section>
-      )}
+      {/* Footer */}
+      <Section title="Footer">
+        <EditableField
+          label="Copyright"
+          value={content.footer?.copyrightText}
+          onChange={(v) => updateField("footer.copyrightText", v)}
+        />
+        {(content.footer?.links ?? []).map((link, i) => (
+          <div
+            key={i}
+            style={{
+              padding: "10px 0",
+              borderBottom: "1px solid var(--border-subtle)",
+              marginBottom: 8,
+            }}
+          >
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                marginBottom: 6,
+              }}
+            >
+              <span
+                style={{
+                  fontSize: 9,
+                  fontWeight: 700,
+                  letterSpacing: 1.5,
+                  textTransform: "uppercase",
+                  color: "var(--text-muted)",
+                }}
+              >
+                Link {i + 1}
+              </span>
+              <button
+                onClick={() => removeFooterLink(i)}
+                style={{
+                  background: "none",
+                  border: "none",
+                  color: "var(--text-muted)",
+                  cursor: "pointer",
+                  fontSize: 14,
+                  lineHeight: 1,
+                  padding: "0 4px",
+                }}
+                title="Remove"
+              >
+                ×
+              </button>
+            </div>
+            <EditableField
+              label="Label"
+              value={link.label}
+              onChange={(v) => updateField(`footer.links.${i}.label`, v)}
+            />
+            <EditableField
+              label="Href"
+              value={link.href}
+              onChange={(v) => updateField(`footer.links.${i}.href`, v)}
+            />
+          </div>
+        ))}
+        <button
+          onClick={addFooterLink}
+          style={{
+            marginTop: 8,
+            background: "none",
+            border: "1px solid var(--border)",
+            color: "var(--text-muted)",
+            fontSize: 9,
+            fontWeight: 600,
+            letterSpacing: "2px",
+            textTransform: "uppercase",
+            padding: "6px 14px",
+            borderRadius: 4,
+            cursor: "pointer",
+          }}
+        >
+          + Add Link
+        </button>
+      </Section>
     </div>
   );
 }
