@@ -90,7 +90,7 @@ export function PropsPanel({
   return (
     <div
       className="flex h-full flex-col overflow-y-auto border-l"
-      style={{ background: "#f8f8f8", borderColor: "#e0e0e0" }}
+      style={{ background: "#ffffff", borderColor: "#e0e0e0" }}
     >
       {/* Header */}
       <div
