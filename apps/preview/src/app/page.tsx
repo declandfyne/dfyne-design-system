@@ -27,7 +27,7 @@ function getInitialItem(): string {
 export default function PreviewPage() {
   const [active, setActive] = useState("Button");
   const [tab, setTab] = useState<TabName>("canvas");
-  const [darkCanvas, setDarkCanvas] = useState(true);
+  const [darkCanvas, setDarkCanvas] = useState(false);
   const [propValues, setPropValues] = useState<Record<string, unknown>>({});
 
   // Initialize from hash on mount
