@@ -38,8 +38,8 @@ export function Toolbar({
       className="flex shrink-0 items-center justify-between px-5"
       style={{
         height: "var(--toolbar-height)",
-        background: "var(--panel-bg)",
-        borderBottom: "1px solid var(--border)",
+        background: "#ffffff",
+        borderBottom: "1px solid #e0e0e0",
       }}
     >
       {/* Left: Tabs */}
@@ -57,14 +57,14 @@ export function Toolbar({
               fontSize: "13px",
               fontFamily: "Raleway, sans-serif",
               letterSpacing: "0.5px",
-              color: activeTab === tab.id ? "#fff" : "var(--text-muted)",
+              color: activeTab === tab.id ? "#111" : "#999",
               fontWeight: activeTab === tab.id ? 600 : 400,
             }}
             onMouseEnter={(e) => {
-              if (activeTab !== tab.id) e.currentTarget.style.color = "var(--text-secondary)";
+              if (activeTab !== tab.id) e.currentTarget.style.color = "#555";
             }}
             onMouseLeave={(e) => {
-              if (activeTab !== tab.id) e.currentTarget.style.color = "var(--text-muted)";
+              if (activeTab !== tab.id) e.currentTarget.style.color = "#999";
             }}
           >
             {tab.label}
@@ -78,7 +78,7 @@ export function Toolbar({
             left: indicatorStyle.left,
             width: indicatorStyle.width,
             height: 2,
-            background: "#fff",
+            background: "#111",
             borderRadius: 1,
             transition: "left 0.25s cubic-bezier(0.4,0,0.2,1), width 0.25s cubic-bezier(0.4,0,0.2,1)",
           }}
@@ -87,7 +87,7 @@ export function Toolbar({
 
       <div className="flex items-center gap-3">
         {/* Separator */}
-        <div style={{ width: 1, height: 20, background: "var(--border)" }} />
+        <div style={{ width: 1, height: 20, background: "#e0e0e0" }} />
 
         {/* Light/Dark pill toggle */}
         <button
@@ -99,14 +99,13 @@ export function Toolbar({
             width: 52,
             height: 28,
             borderRadius: 9999,
-            background: darkCanvas ? "#2a2a2a" : "#3a3a3a",
-            border: "1px solid #3a3a3a",
+            background: darkCanvas ? "#333" : "#e0e0e0",
+            border: "1px solid #d0d0d0",
             cursor: "pointer",
             transition: "background 0.2s",
             flexShrink: 0,
           }}
         >
-          {/* Circle indicator */}
           <span
             style={{
               position: "absolute",
@@ -115,12 +114,11 @@ export function Toolbar({
               width: 18,
               height: 18,
               borderRadius: 9999,
-              background: "#fff",
+              background: darkCanvas ? "#fff" : "#111",
               transition: "left 0.25s cubic-bezier(0.4,0,0.2,1)",
-              boxShadow: "0 1px 3px rgba(0,0,0,0.3)",
+              boxShadow: "0 1px 3px rgba(0,0,0,0.2)",
             }}
           />
-          {/* Sun/Moon icons */}
           <span
             style={{
               position: "absolute",
@@ -128,7 +126,7 @@ export function Toolbar({
               left: 8,
               transform: "translateY(-50%)",
               fontSize: 11,
-              opacity: darkCanvas ? 0.4 : 0,
+              opacity: darkCanvas ? 0.5 : 0,
               transition: "opacity 0.2s",
             }}
           >
@@ -141,7 +139,7 @@ export function Toolbar({
               right: 8,
               transform: "translateY(-50%)",
               fontSize: 10,
-              opacity: darkCanvas ? 0 : 0.4,
+              opacity: darkCanvas ? 0 : 0.5,
               transition: "opacity 0.2s",
             }}
           >
@@ -156,7 +154,7 @@ export function Toolbar({
           className="transition-all"
           style={{
             background: "transparent",
-            border: "1px solid #333",
+            border: "1px solid #d0d0d0",
             borderRadius: 6,
             padding: "0 10px",
             height: 28,
@@ -165,17 +163,17 @@ export function Toolbar({
             fontWeight: 500,
             letterSpacing: "1px",
             textTransform: "uppercase",
-            color: "var(--text-secondary)",
+            color: "#555",
             cursor: "pointer",
             whiteSpace: "nowrap",
           }}
           onMouseEnter={(e) => {
-            e.currentTarget.style.borderColor = "#555";
-            e.currentTarget.style.color = "#ccc";
+            e.currentTarget.style.borderColor = "#999";
+            e.currentTarget.style.color = "#111";
           }}
           onMouseLeave={(e) => {
-            e.currentTarget.style.borderColor = "#333";
-            e.currentTarget.style.color = "var(--text-secondary)";
+            e.currentTarget.style.borderColor = "#d0d0d0";
+            e.currentTarget.style.color = "#555";
           }}
         >
           Copy JSX

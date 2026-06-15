@@ -72,7 +72,7 @@ export function CodePanel({
   return (
     <div
       className="shrink-0 border-t"
-      style={{ borderColor: "var(--border)", background: "var(--panel-bg)" }}
+      style={{ borderColor: "#e0e0e0", background: "#ffffff" }}
     >
       {/* Drag handle */}
       <div
@@ -85,7 +85,7 @@ export function CodePanel({
             width: 40,
             height: 2,
             borderRadius: 1,
-            background: "#2a2a2a",
+            background: "#d0d0d0",
           }}
         />
       </div>
@@ -93,7 +93,7 @@ export function CodePanel({
       {/* Tab bar */}
       <div
         className="flex items-center justify-between border-b px-4"
-        style={{ height: 36, borderColor: "var(--border-subtle)" }}
+        style={{ height: 36, borderColor: "#e0e0e0" }}
       >
         <div className="flex items-center gap-1">
           {tabs.map((t) => (
@@ -107,8 +107,7 @@ export function CodePanel({
                 fontSize: 11,
                 letterSpacing: "1px",
                 textTransform: "uppercase",
-                color:
-                  tab === t.id ? "#ffffff" : "var(--text-muted)",
+                color: tab === t.id ? "#111" : "#999",
                 fontWeight: tab === t.id ? 500 : 400,
               }}
             >
@@ -119,7 +118,7 @@ export function CodePanel({
                   style={{
                     height: 1.5,
                     borderRadius: 1,
-                    background: "#ffffff",
+                    background: "#111",
                   }}
                 />
               )}
@@ -133,8 +132,8 @@ export function CodePanel({
               fontSize: 9,
               letterSpacing: "0.5px",
               textTransform: "uppercase",
-              color: "var(--text-muted)",
-              background: "rgba(255,255,255,0.06)",
+              color: "#888",
+              background: "rgba(0,0,0,0.05)",
             }}
           >
             {LANG_LABELS[tab]}
@@ -149,9 +148,9 @@ export function CodePanel({
             fontSize: 10,
             letterSpacing: "1px",
             textTransform: "uppercase",
-            color: copied ? "#6ee7b7" : "var(--text-muted)",
+            color: copied ? "#1a7a4a" : "#888",
             background: "transparent",
-            border: "1px solid rgba(255,255,255,0.08)",
+            border: "1px solid #d0d0d0",
           }}
         >
           {copied ? "Copied" : "Copy"}
@@ -162,9 +161,9 @@ export function CodePanel({
       <pre
         className="font-mono overflow-auto"
         style={{
-          color: "#8b949e",
+          color: "#333",
           height,
-          background: "#0a0a0a",
+          background: "#fafafa",
           padding: 16,
           fontSize: 12,
           lineHeight: 1.8,
