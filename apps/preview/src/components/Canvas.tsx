@@ -18,7 +18,7 @@ export function Canvas({
 
   return (
     <div
-      className="relative flex flex-1 items-center justify-center overflow-auto"
+      className="relative flex flex-1 overflow-auto"
       style={{
         background: bgColor,
         backgroundImage: dotGrid,
@@ -26,7 +26,10 @@ export function Canvas({
         backgroundPosition: "12px 12px",
       }}
     >
-      <div className={fullWidth ? "w-full" : "flex items-center justify-center p-10"}>
+      <div
+        className={fullWidth ? "w-full" : "w-full p-10"}
+        style={fullWidth ? undefined : { display: "flex", justifyContent: "center", alignItems: "flex-start", minHeight: "100%" }}
+      >
         {children}
       </div>
 

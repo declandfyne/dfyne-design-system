@@ -353,20 +353,22 @@ export function renderComponent(name: string, props: Record<string, unknown>): R
 
     case "Accordion":
       return (
-        <Accordion allowMultiple={props.allowMultiple as boolean | undefined}>
-          <AccordionItem title="Description" defaultOpen>
-            Engineered for high-impact training, this longsleeve top features
-            sweat-wicking fabric and four-way stretch for unrestricted movement.
-          </AccordionItem>
-          <AccordionItem title="Size Guide">
-            Model is 5&apos;9&quot; and wears size S. See full size chart for
-            detailed measurements.
-          </AccordionItem>
-          <AccordionItem title="Delivery &amp; Returns">
-            Free tracked delivery on orders over £30. 100-day hassle-free
-            returns on all orders.
-          </AccordionItem>
-        </Accordion>
+        <div style={{ width: 400, alignSelf: "flex-start" }}>
+          <Accordion allowMultiple={props.allowMultiple as boolean | undefined}>
+            <AccordionItem title="Description" defaultOpen>
+              Engineered for high-impact training, this longsleeve top features
+              sweat-wicking fabric and four-way stretch for unrestricted movement.
+            </AccordionItem>
+            <AccordionItem title="Size Guide">
+              Model is 5&apos;9&quot; and wears size S. See full size chart for
+              detailed measurements.
+            </AccordionItem>
+            <AccordionItem title="Delivery &amp; Returns">
+              Free tracked delivery on orders over £30. 100-day hassle-free
+              returns on all orders.
+            </AccordionItem>
+          </Accordion>
+        </div>
       );
 
     case "Search":
