@@ -3,15 +3,31 @@
 import { useState, useEffect } from "react";
 import { computeLineHeights, type TypographyInput } from "../lib/lineHeight";
 import { client, isSanityConfigured } from "../sanity/client";
+import { Button, Badge, SectionHeading, AnnouncementBar } from "@dfyne/react";
 
 const DEFAULTS: TypographyInput = {
   baseRatio: 1.5,
   multipliers: { body: 1.0, heading: 0.82, ui: 0.75 },
 };
 
+const numInputStyle: React.CSSProperties = {
+  background: "var(--input-bg)",
+  border: "1px solid var(--input-border)",
+  color: "var(--text-primary)",
+  borderRadius: 4,
+  width: 64,
+  textAlign: "center",
+  fontSize: 12,
+  fontFamily: "'SF Mono', monospace",
+  padding: "4px 0",
+  flexShrink: 0,
+};
+
 export function TypographyPreview() {
   const [input, setInput] = useState<TypographyInput>(DEFAULTS);
   const [showAdvanced, setShowAdvanced] = useState(false);
+  const [saving, setSaving] = useState(false);
+  const [saved, setSaved] = useState(false);
   const tokens = computeLineHeights(input);
 
   // Fetch from Sanity on mount
@@ -31,6 +47,25 @@ export function TypographyPreview() {
       });
   }, []);
 
+  const handleSave = async () => {
+    if (!isSanityConfigured) return;
+    setSaving(true);
+    try {
+      await client.createOrReplace({
+        _id: "typographySettings",
+        _type: "typographySettings",
+        baseRatio: input.baseRatio,
+        multipliers: input.multipliers,
+      });
+      setSaved(true);
+      setTimeout(() => setSaved(false), 2000);
+    } catch (err) {
+      console.error("Failed to save typography settings:", err);
+    } finally {
+      setSaving(false);
+    }
+  };
+
   const sampleBody =
     "The quick brown fox jumps over the lazy dog. This paragraph demonstrates body text line-height across multiple lines to show the spacing between them clearly.";
   const sampleHeading = "CAMPAIGN COLLECTION DROP";
@@ -38,6 +73,31 @@ export function TypographyPreview() {
 
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 32 }}>
+      {/* Save button — top right */}
+      <div style={{ display: "flex", justifyContent: "flex-end" }}>
+        <button
+          type="button"
+          onClick={handleSave}
+          disabled={saving || !isSanityConfigured}
+          style={{
+            background: saved ? "#1a7a1a" : "#111111",
+            color: "#ffffff",
+            fontSize: 9,
+            fontWeight: 600,
+            letterSpacing: 2.7,
+            textTransform: "uppercase",
+            padding: "10px 24px",
+            borderRadius: 4,
+            border: "none",
+            cursor: saving || !isSanityConfigured ? "not-allowed" : "pointer",
+            opacity: !isSanityConfigured ? 0.4 : 1,
+            transition: "background 0.2s",
+          }}
+        >
+          {saving ? "SAVING..." : saved ? "SAVED" : "SAVE SETTINGS"}
+        </button>
+      </div>
+
       {/* Base Ratio Slider */}
       <div>
         <label
@@ -51,19 +111,35 @@ export function TypographyPreview() {
             marginBottom: 8,
           }}
         >
-          Base Ratio: {input.baseRatio.toFixed(2)}
+          Base Ratio
         </label>
-        <input
-          type="range"
-          min={1.2}
-          max={2.0}
-          step={0.05}
-          value={input.baseRatio}
-          onChange={(e) =>
-            setInput((prev) => ({ ...prev, baseRatio: parseFloat(e.target.value) }))
-          }
-          style={{ width: "100%" }}
-        />
+        <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+          <input
+            type="range"
+            min={1.2}
+            max={2.0}
+            step={0.05}
+            value={input.baseRatio}
+            onChange={(e) =>
+              setInput((prev) => ({ ...prev, baseRatio: parseFloat(e.target.value) }))
+            }
+            style={{ flex: 1 }}
+          />
+          <input
+            type="number"
+            min={1.2}
+            max={2.0}
+            step={0.05}
+            value={input.baseRatio.toFixed(2)}
+            onChange={(e) => {
+              const val = parseFloat(e.target.value);
+              if (!isNaN(val) && val >= 1.2 && val <= 2.0) {
+                setInput((prev) => ({ ...prev, baseRatio: val }));
+              }
+            }}
+            style={numInputStyle}
+          />
+        </div>
         <div
           style={{
             display: "flex",
@@ -114,25 +190,47 @@ export function TypographyPreview() {
                   marginBottom: 8,
                 }}
               >
-                {key}: {input.multipliers[key].toFixed(2)}x
+                {key}
               </label>
-              <input
-                type="range"
-                min={0.5}
-                max={2.0}
-                step={0.01}
-                value={input.multipliers[key]}
-                onChange={(e) =>
-                  setInput((prev) => ({
-                    ...prev,
-                    multipliers: {
-                      ...prev.multipliers,
-                      [key]: parseFloat(e.target.value),
-                    },
-                  }))
-                }
-                style={{ width: "100%" }}
-              />
+              <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                <input
+                  type="range"
+                  min={0.5}
+                  max={2.0}
+                  step={0.01}
+                  value={input.multipliers[key]}
+                  onChange={(e) =>
+                    setInput((prev) => ({
+                      ...prev,
+                      multipliers: {
+                        ...prev.multipliers,
+                        [key]: parseFloat(e.target.value),
+                      },
+                    }))
+                  }
+                  style={{ flex: 1, minWidth: 0 }}
+                />
+                <input
+                  type="number"
+                  min={0.5}
+                  max={2.0}
+                  step={0.01}
+                  value={input.multipliers[key].toFixed(2)}
+                  onChange={(e) => {
+                    const val = parseFloat(e.target.value);
+                    if (!isNaN(val) && val >= 0.5 && val <= 2.0) {
+                      setInput((prev) => ({
+                        ...prev,
+                        multipliers: {
+                          ...prev.multipliers,
+                          [key]: val,
+                        },
+                      }));
+                    }
+                  }}
+                  style={numInputStyle}
+                />
+              </div>
             </div>
           ))}
         </div>
@@ -245,6 +343,143 @@ export function TypographyPreview() {
           >
             {sampleUi}
           </span>
+        </div>
+      </div>
+
+      {/* Live Components */}
+      <div>
+        <div
+          style={{
+            fontSize: 9,
+            fontWeight: 700,
+            letterSpacing: 2,
+            textTransform: "uppercase",
+            color: "var(--text-muted)",
+            marginBottom: 16,
+          }}
+        >
+          Live Components
+        </div>
+        <div id="typo-live-preview">
+          <style>{`
+            #typo-live-preview {
+              --lh-body: ${tokens["--lh-body"]};
+              --lh-heading: ${tokens["--lh-heading"]};
+              --lh-ui: ${tokens["--lh-ui"]};
+            }
+          `}</style>
+          <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+            {/* Button */}
+            <div
+              style={{
+                padding: 20,
+                border: "1px solid var(--border)",
+                borderRadius: 8,
+                background: "#ffffff",
+              }}
+            >
+              <div
+                style={{
+                  fontSize: 9,
+                  fontWeight: 700,
+                  letterSpacing: 2,
+                  textTransform: "uppercase",
+                  color: "#888",
+                  marginBottom: 12,
+                }}
+              >
+                Button — line-height: {tokens["--lh-ui"].toFixed(3)}
+              </div>
+              <div style={{ lineHeight: tokens["--lh-ui"] }}>
+                <Button variant="primary">ADD TO CART</Button>
+              </div>
+            </div>
+
+            {/* Badge */}
+            <div
+              style={{
+                padding: 20,
+                border: "1px solid var(--border)",
+                borderRadius: 8,
+                background: "#ffffff",
+              }}
+            >
+              <div
+                style={{
+                  fontSize: 9,
+                  fontWeight: 700,
+                  letterSpacing: 2,
+                  textTransform: "uppercase",
+                  color: "#888",
+                  marginBottom: 12,
+                }}
+              >
+                Badge — line-height: {tokens["--lh-ui"].toFixed(3)}
+              </div>
+              <div style={{ lineHeight: tokens["--lh-ui"] }}>
+                <Badge text="NEW" variant="custom" />
+              </div>
+            </div>
+
+            {/* SectionHeading */}
+            <div
+              style={{
+                padding: 20,
+                border: "1px solid var(--border)",
+                borderRadius: 8,
+                background: "#ffffff",
+              }}
+            >
+              <div
+                style={{
+                  fontSize: 9,
+                  fontWeight: 700,
+                  letterSpacing: 2,
+                  textTransform: "uppercase",
+                  color: "#888",
+                  marginBottom: 12,
+                }}
+              >
+                SectionHeading — line-height: {tokens["--lh-heading"].toFixed(3)}
+              </div>
+              <div style={{ lineHeight: tokens["--lh-heading"] }}>
+                <SectionHeading eyebrow="New Collection" title="Summer Essentials" />
+              </div>
+            </div>
+
+            {/* AnnouncementBar */}
+            <div
+              style={{
+                border: "1px solid var(--border)",
+                borderRadius: 8,
+                overflow: "hidden",
+              }}
+            >
+              <div
+                style={{
+                  padding: "12px 20px 8px",
+                  background: "#ffffff",
+                  fontSize: 9,
+                  fontWeight: 700,
+                  letterSpacing: 2,
+                  textTransform: "uppercase",
+                  color: "#888",
+                }}
+              >
+                AnnouncementBar — line-height: {tokens["--lh-ui"].toFixed(3)}
+              </div>
+              <div style={{ lineHeight: tokens["--lh-ui"] }}>
+                <AnnouncementBar
+                  slides={[
+                    {
+                      text: "FREE SHIPPING ON ORDERS OVER £50",
+                      detail: "Standard delivery 3-5 days",
+                    },
+                  ]}
+                />
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
