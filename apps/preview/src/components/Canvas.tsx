@@ -28,7 +28,7 @@ export function Canvas({
     >
       <div
         className={fullWidth ? "w-full" : "w-full p-10"}
-        style={fullWidth ? undefined : { display: "flex", justifyContent: "center", alignItems: "flex-start", minHeight: "100%" }}
+        style={fullWidth ? undefined : { display: "flex", justifyContent: "center", alignItems: "center", minHeight: "100%" }}
       >
         {children}
       </div>

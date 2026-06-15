@@ -83,7 +83,7 @@ export function Sidebar({
           padding: "0 20px",
         }}
       >
-        <img src="/dfyne-logo-white.png" alt="DFYNE" style={{ height: 18, filter: "invert(1)" }} />
+        <img src="/dfyne-logo-white.png" alt="DFYNE" style={{ height: 28, filter: "invert(1)" }} />
       </div>
 
       {/* Separator */}
