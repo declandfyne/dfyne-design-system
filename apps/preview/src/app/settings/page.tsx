@@ -1,9 +1,11 @@
 "use client";
 
 import { useState } from "react";
+import dynamic from "next/dynamic";
 import { Sidebar } from "../../components/Sidebar";
-import { TypographyPreview } from "../../components/TypographyPreview";
-import { ContentPreview } from "../../components/ContentPreview";
+
+const TypographyPreview = dynamic(() => import("../../components/TypographyPreview").then(m => ({ default: m.TypographyPreview })), { ssr: false });
+const ContentPreview = dynamic(() => import("../../components/ContentPreview").then(m => ({ default: m.ContentPreview })), { ssr: false });
 
 type SettingsTab = "content" | "typography" | "studio";
 
@@ -18,6 +20,7 @@ export default function SettingsPage() {
 
   return (
     <div
+      suppressHydrationWarning
       style={{
         display: "grid",
         gridTemplateColumns: "var(--sidebar-width) 1fr",
