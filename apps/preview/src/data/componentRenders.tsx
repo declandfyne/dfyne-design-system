@@ -37,6 +37,11 @@ import {
 } from "@dfyne/react";
 import type { IconName } from "@dfyne/react";
 
+function QuantityInputWrapper({ initial, min, max, disabled }: { initial: number; min: number; max: number; disabled?: boolean }) {
+  const [value, setValue] = useState(initial);
+  return <QuantityInput value={value} onChange={setValue} min={min} max={max} disabled={disabled} />;
+}
+
 function CartDrawerPreview() {
   const [isOpen, setIsOpen] = useState(false);
   return (
@@ -338,9 +343,8 @@ export function renderComponent(name: string, props: Record<string, unknown>): R
 
     case "Quantity Input":
       return (
-        <QuantityInput
-          value={(props.value as number) ?? 1}
-          onChange={() => {}}
+        <QuantityInputWrapper
+          initial={(props.value as number) ?? 1}
           min={(props.min as number) ?? 1}
           max={(props.max as number) ?? 10}
           disabled={props.disabled as boolean | undefined}

@@ -37,7 +37,7 @@ function SearchIcon() {
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
-      style={{ color: "var(--text-muted)", flexShrink: 0 }}
+      style={{ color: "#999", flexShrink: 0 }}
     >
       <circle cx="11" cy="11" r="8" />
       <line x1="21" y1="21" x2="16.65" y2="16.65" />
@@ -70,8 +70,8 @@ export function Sidebar({
         flexDirection: "column",
         height: "100%",
         overflowY: "auto",
-        borderRight: "1px solid var(--border)",
-        background: "var(--panel-bg)",
+        borderRight: "1px solid #e0e0e0",
+        background: "#ffffff",
       }}
     >
       {/* Logo area */}
@@ -83,7 +83,7 @@ export function Sidebar({
           padding: "0 20px",
         }}
       >
-        <img src="/dfyne-logo-white.png" alt="DFYNE" style={{ height: 18 }} />
+        <img src="/dfyne-logo-white.png" alt="DFYNE" style={{ height: 18, filter: "invert(1)" }} />
       </div>
 
       {/* Separator */}
@@ -91,7 +91,7 @@ export function Sidebar({
         style={{
           height: 1,
           margin: "0 16px",
-          background: "linear-gradient(90deg, transparent, var(--border), transparent)",
+          background: "linear-gradient(90deg, transparent, #e0e0e0, transparent)",
         }}
       />
 
@@ -104,8 +104,8 @@ export function Sidebar({
             gap: 8,
             height: 36,
             padding: "0 10px",
-            background: "var(--input-bg)",
-            border: "1px solid var(--input-border)",
+            background: "#f5f5f5",
+            border: "1px solid #e0e0e0",
             borderRadius: 6,
           }}
         >
@@ -120,7 +120,7 @@ export function Sidebar({
               border: "none",
               outline: "none",
               background: "transparent",
-              color: "var(--text-secondary)",
+              color: "#333",
               fontSize: 12,
               fontFamily: "inherit",
             }}
@@ -142,7 +142,7 @@ export function Sidebar({
                 fontWeight: 700,
                 letterSpacing: 2,
                 textTransform: "uppercase" as const,
-                color: "var(--text-muted)",
+                color: "#999",
               }}
             >
               <span>{group.label}</span>
@@ -151,8 +151,7 @@ export function Sidebar({
                   fontSize: 9,
                   fontWeight: 500,
                   letterSpacing: 0,
-                  color: "var(--text-muted)",
-                  opacity: 0.6,
+                  color: "#bbb",
                 }}
               >
                 {group.items.length}
@@ -173,14 +172,14 @@ export function Sidebar({
                   }}
                   onMouseEnter={(e) => {
                     if (!isActive) {
-                      e.currentTarget.style.background = "var(--hover-bg)";
-                      e.currentTarget.style.color = "var(--text-primary)";
+                      e.currentTarget.style.background = "#f5f5f5";
+                      e.currentTarget.style.color = "#111";
                     }
                   }}
                   onMouseLeave={(e) => {
                     if (!isActive) {
                       e.currentTarget.style.background = "transparent";
-                      e.currentTarget.style.color = "var(--text-secondary)";
+                      e.currentTarget.style.color = "#555";
                     }
                   }}
                   style={{
@@ -195,12 +194,13 @@ export function Sidebar({
                     fontSize: 13,
                     fontFamily: "inherit",
                     transition: "color 0.15s ease, background 0.15s ease",
-                    color: isActive ? "var(--text-accent)" : "var(--text-secondary)",
-                    background: isActive ? "rgba(255,255,255,0.04)" : "transparent",
+                    color: isActive ? "#111" : "#555",
+                    background: isActive ? "#f0f0f0" : "transparent",
                     borderLeft: isActive
-                      ? "3px solid #fff"
+                      ? "3px solid #111"
                       : "3px solid transparent",
                     borderRadius: isActive ? "0 4px 4px 0" : "0",
+                    fontWeight: isActive ? 600 : 400,
                   }}
                 >
                   {item}
@@ -215,9 +215,9 @@ export function Sidebar({
       <div
         style={{
           padding: "12px 20px",
-          borderTop: "1px solid var(--border-subtle)",
+          borderTop: "1px solid #e0e0e0",
           fontSize: 10,
-          color: "var(--text-muted)",
+          color: "#999",
           letterSpacing: 0.5,
         }}
       >

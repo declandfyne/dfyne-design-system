@@ -8,14 +8,10 @@ export function Toolbar({
   activeTab,
   onTabChange,
   onCopyJsx,
-  darkCanvas,
-  onToggleCanvas,
 }: {
   activeTab: TabName;
   onTabChange: (tab: TabName) => void;
   onCopyJsx: () => void;
-  darkCanvas: boolean;
-  onToggleCanvas: () => void;
 }) {
   const tabs: { id: TabName; label: string }[] = [
     { id: "canvas", label: "Canvas" },
@@ -85,100 +81,37 @@ export function Toolbar({
         />
       </div>
 
-      <div className="flex items-center gap-3">
-        {/* Separator */}
-        <div style={{ width: 1, height: 20, background: "#e0e0e0" }} />
-
-        {/* Light/Dark pill toggle */}
-        <button
-          type="button"
-          onClick={onToggleCanvas}
-          aria-label={darkCanvas ? "Switch to light canvas" : "Switch to dark canvas"}
-          style={{
-            position: "relative",
-            width: 52,
-            height: 28,
-            borderRadius: 9999,
-            background: darkCanvas ? "#333" : "#e0e0e0",
-            border: "1px solid #d0d0d0",
-            cursor: "pointer",
-            transition: "background 0.2s",
-            flexShrink: 0,
-          }}
-        >
-          <span
-            style={{
-              position: "absolute",
-              top: 4,
-              left: darkCanvas ? 28 : 4,
-              width: 18,
-              height: 18,
-              borderRadius: 9999,
-              background: darkCanvas ? "#fff" : "#111",
-              transition: "left 0.25s cubic-bezier(0.4,0,0.2,1)",
-              boxShadow: "0 1px 3px rgba(0,0,0,0.2)",
-            }}
-          />
-          <span
-            style={{
-              position: "absolute",
-              top: "50%",
-              left: 8,
-              transform: "translateY(-50%)",
-              fontSize: 11,
-              opacity: darkCanvas ? 0.5 : 0,
-              transition: "opacity 0.2s",
-            }}
-          >
-            &#9788;
-          </span>
-          <span
-            style={{
-              position: "absolute",
-              top: "50%",
-              right: 8,
-              transform: "translateY(-50%)",
-              fontSize: 10,
-              opacity: darkCanvas ? 0 : 0.5,
-              transition: "opacity 0.2s",
-            }}
-          >
-            &#9789;
-          </span>
-        </button>
-
-        {/* Copy JSX button */}
-        <button
-          type="button"
-          onClick={onCopyJsx}
-          className="transition-all"
-          style={{
-            background: "transparent",
-            border: "1px solid #d0d0d0",
-            borderRadius: 6,
-            padding: "0 10px",
-            height: 28,
-            fontSize: 11,
-            fontFamily: "Raleway, sans-serif",
-            fontWeight: 500,
-            letterSpacing: "1px",
-            textTransform: "uppercase",
-            color: "#555",
-            cursor: "pointer",
-            whiteSpace: "nowrap",
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.borderColor = "#999";
-            e.currentTarget.style.color = "#111";
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.borderColor = "#d0d0d0";
-            e.currentTarget.style.color = "#555";
-          }}
-        >
-          Copy JSX
-        </button>
-      </div>
+      {/* Copy JSX button */}
+      <button
+        type="button"
+        onClick={onCopyJsx}
+        className="transition-all"
+        style={{
+          background: "transparent",
+          border: "1px solid #d0d0d0",
+          borderRadius: 6,
+          padding: "0 10px",
+          height: 28,
+          fontSize: 11,
+          fontFamily: "Raleway, sans-serif",
+          fontWeight: 500,
+          letterSpacing: "1px",
+          textTransform: "uppercase",
+          color: "#555",
+          cursor: "pointer",
+          whiteSpace: "nowrap",
+        }}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.borderColor = "#999";
+          e.currentTarget.style.color = "#111";
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.borderColor = "#d0d0d0";
+          e.currentTarget.style.color = "#555";
+        }}
+      >
+        Copy JSX
+      </button>
     </div>
   );
 }

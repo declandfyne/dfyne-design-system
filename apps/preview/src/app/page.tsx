@@ -28,7 +28,6 @@ function getInitialItem(): string {
 export default function PreviewPage() {
   const [active, setActive] = useState("Button");
   const [tab, setTab] = useState<TabName>("canvas");
-  const [darkCanvas, setDarkCanvas] = useState(false);
   const [propValues, setPropValues] = useState<Record<string, unknown>>({});
 
   // Initialize from hash on mount
@@ -113,13 +112,11 @@ export default function PreviewPage() {
           activeTab={tab}
           onTabChange={setTab}
           onCopyJsx={handleCopyJsx}
-          darkCanvas={darkCanvas}
-          onToggleCanvas={() => setDarkCanvas(!darkCanvas)}
         />
 
         {tab === "canvas" && (
           <>
-            <Canvas dark={darkCanvas} fullWidth={isFullWidthComponent(active)}>
+            <Canvas dark={false} fullWidth={isFullWidthComponent(active)}>
               {renderComponent(active, propValues)}
             </Canvas>
             {spec && (
@@ -133,15 +130,15 @@ export default function PreviewPage() {
         )}
 
         {tab === "docs" && spec && (
-          <div className="flex-1 overflow-y-auto p-10" style={{ background: "var(--canvas-bg)" }}>
+          <div className="flex-1 overflow-y-auto p-10" style={{ background: "#ffffff" }}>
             <div className="mx-auto max-w-[700px]">
-              <h2 className="mb-6 text-[18px] font-light text-white">{active}</h2>
-              <div className="font-mono rounded-lg border p-4 text-[12px] leading-[1.7]" style={{ borderColor: "var(--border)", background: "var(--panel-bg)", color: "#8b949e" }}>
+              <h2 className="mb-6 text-[18px] font-light" style={{ color: "#111" }}>{active}</h2>
+              <div className="font-mono rounded-lg border p-4 text-[12px] leading-[1.7]" style={{ borderColor: "#e0e0e0", background: "#fafafa", color: "#333" }}>
                 <pre>{highlightCode(spec.reactCode, "react")}</pre>
               </div>
               {spec.liquidCode && (
-                <div className="font-mono mt-4 rounded-lg border p-4 text-[12px] leading-[1.7]" style={{ borderColor: "var(--border)", background: "var(--panel-bg)", color: "#8b949e" }}>
-                  <div className="mb-2 text-[10px] uppercase tracking-wider" style={{ color: "var(--text-muted)" }}>Liquid</div>
+                <div className="font-mono mt-4 rounded-lg border p-4 text-[12px] leading-[1.7]" style={{ borderColor: "#e0e0e0", background: "#fafafa", color: "#333" }}>
+                  <div className="mb-2 text-[10px] uppercase tracking-wider" style={{ color: "#888" }}>Liquid</div>
                   <pre>{highlightCode(spec.liquidCode, "liquid")}</pre>
                 </div>
               )}
@@ -150,7 +147,7 @@ export default function PreviewPage() {
         )}
 
         {tab === "usage" && usage && (
-          <div className="flex-1 overflow-y-auto p-10" style={{ background: "var(--canvas-bg)" }}>
+          <div className="flex-1 overflow-y-auto p-10" style={{ background: "#ffffff" }}>
             <div className="mx-auto max-w-[700px]">
               <UsageCard guideline={usage} />
             </div>
@@ -158,7 +155,7 @@ export default function PreviewPage() {
         )}
 
         {tab === "usage" && !usage && (
-          <div className="flex flex-1 items-center justify-center" style={{ background: "var(--canvas-bg)", color: "var(--text-muted)" }}>
+          <div className="flex flex-1 items-center justify-center" style={{ background: "#ffffff", color: "#888" }}>
             No usage guidelines for {active}
           </div>
         )}

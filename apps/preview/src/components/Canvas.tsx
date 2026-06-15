@@ -1,7 +1,5 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
-
 export function Canvas({
   children,
   dark,
@@ -11,17 +9,6 @@ export function Canvas({
   dark: boolean;
   fullWidth?: boolean;
 }) {
-  const [visible, setVisible] = useState(false);
-  const keyRef = useRef(0);
-
-  /* Re-trigger fade-in whenever children change */
-  useEffect(() => {
-    setVisible(false);
-    keyRef.current += 1;
-    const frame = requestAnimationFrame(() => setVisible(true));
-    return () => cancelAnimationFrame(frame);
-  }, [children]);
-
   const dotColor = dark ? "#111111" : "#e0e0e0";
   const bgColor = dark ? "#080808" : "#f5f5f5";
 
@@ -39,13 +26,7 @@ export function Canvas({
         backgroundPosition: "12px 12px",
       }}
     >
-      <div
-        className={fullWidth ? "w-full" : "flex items-center justify-center p-10"}
-        style={{
-          opacity: visible ? 1 : 0,
-          transition: "opacity 200ms ease-out",
-        }}
-      >
+      <div className={fullWidth ? "w-full" : "flex items-center justify-center p-10"}>
         {children}
       </div>
 

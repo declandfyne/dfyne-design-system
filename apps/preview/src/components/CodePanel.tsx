@@ -20,7 +20,7 @@ export function CodePanel({
 }) {
   const [tab, setTab] = useState<"react" | "liquid" | "tokens">("liquid");
   const [copied, setCopied] = useState(false);
-  const [height, setHeight] = useState(160);
+  const [height, setHeight] = useState(280);
   const dragging = useRef(false);
   const startY = useRef(0);
   const startHeight = useRef(0);
