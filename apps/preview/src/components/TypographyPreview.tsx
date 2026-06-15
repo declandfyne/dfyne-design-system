@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { computeLineHeights, type TypographyInput } from "../lib/lineHeight";
-import { client } from "../sanity/client";
+import { client, isSanityConfigured } from "../sanity/client";
 
 const DEFAULTS: TypographyInput = {
   baseRatio: 1.5,
@@ -16,6 +16,7 @@ export function TypographyPreview() {
 
   // Fetch from Sanity on mount
   useEffect(() => {
+    if (!isSanityConfigured) return;
     client
       .fetch<TypographyInput | null>(
         `*[_type == "typographySettings"][0]{ baseRatio, multipliers }`

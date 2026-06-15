@@ -1,7 +1,7 @@
 "use client";
 
 import { createContext, useContext, useState, useEffect, type ReactNode } from "react";
-import { client } from "../sanity/client";
+import { client, isSanityConfigured } from "../sanity/client";
 import { computeLineHeights, type LineHeightTokens, type TypographyInput } from "../lib/lineHeight";
 
 type SiteContent = Record<string, unknown>;
@@ -29,6 +29,11 @@ export function DfyneProvider({ children }: { children: ReactNode }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    if (!isSanityConfigured) {
+      setTypography(computeLineHeights(TYPOGRAPHY_DEFAULTS));
+      setLoading(false);
+      return;
+    }
     Promise.all([
       client.fetch<SiteContent | null>(`*[_type == "siteContent"][0]`),
       client.fetch<TypographyInput | null>(

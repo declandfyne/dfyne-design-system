@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { client } from "../sanity/client";
+import { client, isSanityConfigured } from "../sanity/client";
 
 type SiteContent = {
   announcements?: Array<{ text?: string; detail?: string; link?: string }>;
@@ -49,6 +49,10 @@ export function ContentPreview() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    if (!isSanityConfigured) {
+      setLoading(false);
+      return;
+    }
     client
       .fetch<SiteContent | null>(`*[_type == "siteContent"][0]`)
       .then((data) => setContent(data))
