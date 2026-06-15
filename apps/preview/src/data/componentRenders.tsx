@@ -373,7 +373,7 @@ export function renderComponent(name: string, props: Record<string, unknown>): R
 
     case "Search":
       return (
-        <div style={{ width: "100%", maxWidth: 800 }}>
+        <div style={{ width: "100%" }}>
           <Search
             value={(props.value as string) ?? ""}
             onChange={() => {}}
