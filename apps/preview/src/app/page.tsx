@@ -14,6 +14,7 @@ import { componentSpecs } from "../data/componentSpecs";
 import { highlightCode } from "../utils/highlightCode";
 import { getControls } from "../data/componentControls";
 import { usageGuidelines } from "../data/usageGuidelines";
+import { getComponentTokens } from "../data/componentTokens";
 
 const tokenPages = ["Colors", "Typography", "Spacing", "Glossary"];
 
@@ -125,6 +126,7 @@ export default function PreviewPage() {
               <CodePanel
                 reactCode={spec.reactCode}
                 liquidCode={spec.liquidCode}
+                cssTokens={getComponentTokens(active)}
               />
             )}
           </>

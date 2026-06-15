@@ -18,7 +18,7 @@ export function CodePanel({
   liquidCode: string;
   cssTokens?: string;
 }) {
-  const [tab, setTab] = useState<"react" | "liquid" | "tokens">("react");
+  const [tab, setTab] = useState<"react" | "liquid" | "tokens">("liquid");
   const [copied, setCopied] = useState(false);
   const [height, setHeight] = useState(160);
   const dragging = useRef(false);
@@ -64,8 +64,8 @@ export function CodePanel({
   );
 
   const tabs = [
-    { id: "react" as const, label: "React" },
     { id: "liquid" as const, label: "Liquid" },
+    { id: "react" as const, label: "React" },
     { id: "tokens" as const, label: "Tokens" },
   ];
 
