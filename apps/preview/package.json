@@ -12,8 +12,11 @@
     "@dfyne/react": "workspace:*",
     "@dfyne/tokens": "workspace:*",
     "next": "^15",
+    "next-sanity": "11",
     "react": "^19",
-    "react-dom": "^19"
+    "react-dom": "^19",
+    "sanity": "^4.22.0",
+    "styled-components": "^6.1"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

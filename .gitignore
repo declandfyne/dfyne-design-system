@@ -5,3 +5,5 @@ dist/
 *.tsbuildinfo
 .superpowers/
 .vercel
+.env.local
+.env*.local
