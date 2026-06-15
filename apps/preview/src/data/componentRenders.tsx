@@ -53,8 +53,8 @@ function CartDrawerPreview() {
         open={isOpen}
         onClose={() => setIsOpen(false)}
         items={[
-          { image: { src: "https://placehold.co/80x100/e8e8e1/111?text=1", alt: "Item" }, name: "Power Seamless Legging", variant: "Black / M", price: "£54.00", quantity: 1 },
-          { image: { src: "https://placehold.co/80x100/e8e8e1/111?text=2", alt: "Item" }, name: "Vital Sports Bra", variant: "White / S", price: "£38.00", quantity: 2 },
+          { image: { src: "https://placehold.co/80x100/e8e8e1/111?text=1&font_size=12", alt: "Item" }, name: "Power Seamless Legging", variant: "Black / M", price: "£54.00", quantity: 1 },
+          { image: { src: "https://placehold.co/80x100/e8e8e1/111?text=2&font_size=12", alt: "Item" }, name: "Vital Sports Bra", variant: "White / S", price: "£38.00", quantity: 2 },
         ]}
         onItemQuantityChange={() => {}}
         onItemRemove={() => {}}
@@ -145,8 +145,8 @@ function QuickAddPreview() {
           variant: "Truffle",
           price: "\u00a375.99",
           images: [
-            { src: "https://placehold.co/400x500/e8e8e1/111?text=Front", alt: "Front" },
-            { src: "https://placehold.co/400x500/e8e8e1/111?text=Back", alt: "Back" },
+            { src: "https://placehold.co/400x500/e8e8e1/111?text=FRONT&font_size=12", alt: "Front" },
+            { src: "https://placehold.co/400x500/e8e8e1/111?text=BACK&font_size=12", alt: "Back" },
           ],
           lengths: ["REGULAR", "TALL"],
           sizes: [
@@ -231,7 +231,7 @@ export function renderComponent(name: string, props: Record<string, unknown>): R
     case "Product Card":
       return (
         <ProductCard
-          image="https://placehold.co/394x492/f2f2f2/1c1d1d?text=Impact+Top"
+          image="https://placehold.co/394x492/f2f2f2/1c1d1d?text=IMPACT+TOP&font_size=12"
           name={(props.name as string) ?? "Impact Longsleeve Top"}
           color={(props.color as string) ?? "Pebble Grey"}
           price={(props.price as number) ?? 52.2}
@@ -245,7 +245,7 @@ export function renderComponent(name: string, props: Record<string, unknown>): R
       return (
         <div style={{ width: 280 }}>
           <CategoryCard
-            image="https://placehold.co/600x781/1c1d1d/ffffff?text=IMPACT"
+            image="https://placehold.co/600x781/1c1d1d/ffffff?text=IMPACT&font_size=12"
             title={(props.title as string) ?? "IMPACT"}
             caption={props.caption as string | undefined}
             href="#"
@@ -267,7 +267,7 @@ export function renderComponent(name: string, props: Record<string, unknown>): R
     case "Cross-Sell Card":
       return (
         <CrossSellCard
-          image="https://placehold.co/246x308/f2f2f2/1c1d1d?text=Shorts"
+          image="https://placehold.co/246x308/f2f2f2/1c1d1d?text=SHORTS&font_size=12"
           name={(props.name as string) ?? "Impact Shorts"}
           color={(props.color as string) ?? "Midnight Black"}
           price={(props.price as number) ?? 49}
@@ -278,7 +278,7 @@ export function renderComponent(name: string, props: Record<string, unknown>): R
       return (
         <div className="w-full">
           <CampaignHero
-            image="https://placehold.co/1920x1080/1c1d1d/ffffff?text=CAMPAIGN+HERO"
+            image="https://placehold.co/1920x1080/1c1d1d/ffffff?text=CAMPAIGN+HERO&font_size=12"
             caption={(props.caption as string) ?? "NEW STYLES, NEW STRENGTH"}
             heading={(props.heading as string) ?? "IMPACT"}
             cta={{ label: "SHOP NOW", href: "#" }}
@@ -381,11 +381,11 @@ export function renderComponent(name: string, props: Record<string, unknown>): R
             loading={props.loading as boolean | undefined}
             popularSearches={["Recently Restocked", "Impact", "Leggings", "Flares", "Tops"]}
             recentlyViewed={[
-              { id: "1", title: "Impact Shorts | 4.5\"", color: "Midnight Black", price: "£52.50", image: "https://placehold.co/160x200/e8e8e1/111?text=Shorts", type: "product" },
-              { id: "2", title: "Charge Training Shorts | 6\"", color: "Burgundy", price: "£49.00", image: "https://placehold.co/160x200/e8e8e1/111?text=Training", type: "product" },
-              { id: "3", title: "Charge Training Shorts | 6\"", color: "Midnight Black", price: "£49.00", image: "https://placehold.co/160x200/e8e8e1/111?text=Charge", type: "product" },
-              { id: "4", title: "Charge Training Shorts | 6\"", color: "Stone", price: "£49.00", image: "https://placehold.co/160x200/e8e8e1/111?text=Stone", type: "product" },
-              { id: "5", title: "Signature Track Jacket", color: "Ink", price: "£85.00", image: "https://placehold.co/160x200/e8e8e1/111?text=Jacket", type: "product" },
+              { id: "1", title: "Impact Shorts | 4.5\"", color: "Midnight Black", price: "£52.50", image: "https://placehold.co/160x200/e8e8e1/111?text=SHORTS&font_size=12", type: "product" },
+              { id: "2", title: "Charge Training Shorts | 6\"", color: "Burgundy", price: "£49.00", image: "https://placehold.co/160x200/e8e8e1/111?text=TRAINING&font_size=12", type: "product" },
+              { id: "3", title: "Charge Training Shorts | 6\"", color: "Midnight Black", price: "£49.00", image: "https://placehold.co/160x200/e8e8e1/111?text=CHARGE&font_size=12", type: "product" },
+              { id: "4", title: "Charge Training Shorts | 6\"", color: "Stone", price: "£49.00", image: "https://placehold.co/160x200/e8e8e1/111?text=STONE&font_size=12", type: "product" },
+              { id: "5", title: "Signature Track Jacket", color: "Ink", price: "£85.00", image: "https://placehold.co/160x200/e8e8e1/111?text=JACKET&font_size=12", type: "product" },
             ]}
           />
         </div>
@@ -396,9 +396,9 @@ export function renderComponent(name: string, props: Record<string, unknown>): R
         <div style={{ maxWidth: 400 }}>
           <ProductGallery
             images={[
-              { src: "https://placehold.co/400x500/e8e8e1/111?text=Front", alt: "Front" },
-              { src: "https://placehold.co/400x500/e8e8e1/111?text=Back", alt: "Back" },
-              { src: "https://placehold.co/400x500/e8e8e1/111?text=Detail", alt: "Detail" },
+              { src: "https://placehold.co/400x500/e8e8e1/111?text=FRONT&font_size=12", alt: "Front" },
+              { src: "https://placehold.co/400x500/e8e8e1/111?text=BACK&font_size=12", alt: "Back" },
+              { src: "https://placehold.co/400x500/e8e8e1/111?text=DETAIL&font_size=12", alt: "Detail" },
             ]}
           />
         </div>
@@ -438,7 +438,7 @@ export function renderComponent(name: string, props: Record<string, unknown>): R
             products={[
               <ProductCard
                 key="1"
-                image="https://placehold.co/394x492/f2f2f2/1c1d1d?text=Power+Legging"
+                image="https://placehold.co/394x492/f2f2f2/1c1d1d?text=POWER+LEGGING&font_size=12"
                 name="Power Seamless Legging"
                 color="Midnight Black"
                 price={54}
@@ -447,7 +447,7 @@ export function renderComponent(name: string, props: Record<string, unknown>): R
               />,
               <ProductCard
                 key="2"
-                image="https://placehold.co/394x492/f2f2f2/1c1d1d?text=Impact+Legging"
+                image="https://placehold.co/394x492/f2f2f2/1c1d1d?text=IMPACT+LEGGING&font_size=12"
                 name="Impact High Rise Legging"
                 color="Storm Grey"
                 price={48}
@@ -456,7 +456,7 @@ export function renderComponent(name: string, props: Record<string, unknown>): R
               />,
               <ProductCard
                 key="3"
-                image="https://placehold.co/394x492/f2f2f2/1c1d1d?text=Adapt+Legging"
+                image="https://placehold.co/394x492/f2f2f2/1c1d1d?text=ADAPT+LEGGING&font_size=12"
                 name="Adapt Seamless Legging"
                 color="Deep Plum"
                 price={52}
@@ -466,7 +466,7 @@ export function renderComponent(name: string, props: Record<string, unknown>): R
               />,
               <ProductCard
                 key="4"
-                image="https://placehold.co/394x492/f2f2f2/1c1d1d?text=Core+Legging"
+                image="https://placehold.co/394x492/f2f2f2/1c1d1d?text=CORE+LEGGING&font_size=12"
                 name="Core Training Legging"
                 color="Black"
                 price={42}
@@ -484,7 +484,7 @@ export function renderComponent(name: string, props: Record<string, unknown>): R
     case "Cart Item":
       return (
         <CartItem
-          image={{ src: "https://placehold.co/80x100/e8e8e1/111?text=Legging", alt: "Legging" }}
+          image={{ src: "https://placehold.co/80x100/e8e8e1/111?text=LEGGING&font_size=12", alt: "Legging" }}
           name={(props.name as string) ?? "Power Seamless Legging"}
           variant={(props.variant as string) ?? "Black / M"}
           price={(props.price as string) ?? "£54.00"}
@@ -613,11 +613,11 @@ export function renderComponent(name: string, props: Record<string, unknown>): R
       return (
         <div className="w-full">
           <CategoryImageCarousel items={[
-            { image: "https://placehold.co/120x150/e8e8e1/111?text=All", alt: "All", label: "ALL PRODUCTS", href: "#", active: true },
-            { image: "https://placehold.co/120x150/ddd/111?text=Flares", alt: "Flares", label: "FLARES", href: "#" },
-            { image: "https://placehold.co/120x150/ccc/111?text=Leggings", alt: "Leggings", label: "LEGGINGS", href: "#" },
-            { image: "https://placehold.co/120x150/bbb/111?text=Shorts", alt: "Shorts", label: "SHORTS", href: "#" },
-            { image: "https://placehold.co/120x150/aaa/111?text=Bras", alt: "Bras", label: "SPORTS BRAS", href: "#" },
+            { image: "https://placehold.co/120x150/e8e8e1/111?text=ALL&font_size=12", alt: "All", label: "ALL PRODUCTS", href: "#", active: true },
+            { image: "https://placehold.co/120x150/ddd/111?text=FLARES&font_size=12", alt: "Flares", label: "FLARES", href: "#" },
+            { image: "https://placehold.co/120x150/ccc/111?text=LEGGINGS&font_size=12", alt: "Leggings", label: "LEGGINGS", href: "#" },
+            { image: "https://placehold.co/120x150/bbb/111?text=SHORTS&font_size=12", alt: "Shorts", label: "SHORTS", href: "#" },
+            { image: "https://placehold.co/120x150/aaa/111?text=BRAS&font_size=12", alt: "Bras", label: "SPORTS BRAS", href: "#" },
           ]} />
         </div>
       );
