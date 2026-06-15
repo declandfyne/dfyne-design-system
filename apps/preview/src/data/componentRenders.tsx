@@ -322,13 +322,19 @@ export function renderComponent(name: string, props: Record<string, unknown>): R
         </div>
       );
 
-    case "Icon":
+    case "Icon": {
+      const allIcons: IconName[] = ["check", "star", "menu", "user", "search", "cart", "arrow-left", "arrow-right", "chevron-right", "chevron-down", "close", "pause", "play", "support", "mail", "package", "reward", "calendar", "instagram"];
       return (
-        <Icon
-          name={(props.name as IconName) ?? "cart"}
-          className="h-8 w-8"
-        />
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: 24, padding: 24, color: "#111111" }}>
+          {allIcons.map((iconName) => (
+            <div key={iconName} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 8 }}>
+              <Icon name={iconName} className="h-7 w-7" />
+              <span style={{ fontSize: 9, fontWeight: 600, letterSpacing: "1.5px", textTransform: "uppercase", color: "#111111" }}>{iconName}</span>
+            </div>
+          ))}
+        </div>
       );
+    }
 
     case "Quantity Input":
       return (
